@@ -87,7 +87,7 @@ export default function HeroSlider({ slides = defaultHeroSlides, season }: Props
                       </p>
                       <div className="flex flex-wrap gap-3 lg:justify-end animate-fade-up">
                         <Link href="/bao-gia" className="btn-main">
-                          Äáº·t Lá»‹ch Ngay
+                          Đặt Lịch Ngay
                         </Link>
                         <a href={PHONE_LINK} className="btn-outline">
                           <Phone size={14} />

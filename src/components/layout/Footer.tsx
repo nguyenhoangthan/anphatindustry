@@ -13,7 +13,6 @@ const serviceLinks = [
 
 const legalLinks = [
   { label: 'Chính Sách Bảo Mật', href: '/chinh-sach-bao-mat' },
-  { label: 'Điều Khoản Dịch Vụ', href: '/dieu-khoan-dich-vu' },
 ]
 
 export default function Footer() {

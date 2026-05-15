@@ -9,7 +9,7 @@ import ServiceCard from '@/components/ui/ServiceCard'
 import { prisma } from '@/lib/prisma'
 import { PHONE_LINK, PHONE_DISPLAY } from '@/lib/constants'
 import { defaultContactCTA } from '@/lib/defaultContent'
-import { serviceCategories } from '@/data/services'
+import { serviceCategories, services as staticServices } from '@/data/services'
 import type { Service } from '@/types'
 
 interface Props {
@@ -53,7 +53,9 @@ export default async function ServiceSlugPage({ params }: Props) {
     const dbServices = await prisma.service
       .findMany({ where: { category: params.slug }, orderBy: { sortOrder: 'asc' } })
       .catch(() => [])
-    const services = dbServices.map(toService)
+    const services = dbServices.length > 0
+      ? dbServices.map(toService)
+      : staticServices.filter((s) => s.category === params.slug).map((s) => ({ ...s, highlights: JSON.stringify(s.highlights) })).map(toService)
 
     return (
       <>
@@ -99,10 +101,19 @@ export default async function ServiceSlugPage({ params }: Props) {
     prisma.service.findMany({ where: { slug: { not: params.slug } }, take: 3, orderBy: { sortOrder: 'asc' } }).catch(() => []),
   ])
 
-  if (!dbService) notFound()
+  // Fallback to static data if DB returns nothing
+  const rawService = dbService ?? (() => {
+    const s = staticServices.find((sv) => sv.slug === params.slug)
+    if (!s) return null
+    return { ...s, highlights: JSON.stringify(s.highlights) }
+  })()
 
-  const service = toService(dbService)
-  const related = dbRelated.map(toService)
+  if (!rawService) notFound()
+
+  const service = toService(rawService)
+  const related = dbRelated.length > 0
+    ? dbRelated.map(toService)
+    : staticServices.filter((s) => s.slug !== params.slug).slice(0, 3).map((s) => ({ ...s, highlights: JSON.stringify(s.highlights) })).map(toService)
 
   return (
     <>

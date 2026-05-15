@@ -17,12 +17,12 @@ interface Props {
 
 const BLOG_CATEGORIES: Record<string, { label: string; description: string }> = {
   'kinh-nghiem': {
-    label: 'Chia Se Kinh Nghiem',
-    description: 'Nhung kinh nghiem thuc te tu doi ngu ky thuat vien An Phat Industry',
+    label: 'Chia Sẻ Kinh Nghiệm',
+    description: 'Những kinh nghiệm thực tế từ đội ngũ kỹ thuật viên An Phát Industry',
   },
   'tin-tuc': {
-    label: 'Tin Tuc O To',
-    description: 'Cap nhat tin tuc xe hoi, cong nghe o to moi nhat',
+    label: 'Tin Tức Ô Tô',
+    description: 'Cập nhật tin tức xe hơi, công nghệ ô tô mới nhất',
   },
 }
 
@@ -37,12 +37,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const blogCat = BLOG_CATEGORIES[params.slug]
   if (blogCat) {
     return {
-      title: `${blogCat.label} | Thu Vien | An Phat Industry`,
+      title: `${blogCat.label} | Thư Viện | An Phát Industry`,
       description: blogCat.description,
     }
   }
   const post = await prisma.blogPost.findUnique({ where: { slug: params.slug } }).catch(() => null)
-  if (!post) return { title: 'Khong tim thay | An Phat Industry' }
+  if (!post) return { title: 'Không tìm thấy | An Phát Industry' }
   return { title: `${post.title} | An Phat Industry`, description: post.excerpt }
 }
 
@@ -62,7 +62,7 @@ export default async function BlogSlugPage({ params }: Props) {
       <>
         <section className="bg-dark-1 border-b border-white/5 section-pt pb-12">
           <div className="site-container">
-            <Breadcrumb items={[{ label: 'Thu Vien', href: '/thu-vien' }, { label: blogCat.label }]} />
+            <Breadcrumb items={[{ label: 'Thư Viện', href: '/thu-vien' }, { label: blogCat.label }]} />
             <h1 className="font-heading font-bold text-white text-3xl lg:text-5xl mt-5 mb-3">
               {blogCat.label}
             </h1>
@@ -80,12 +80,12 @@ export default async function BlogSlugPage({ params }: Props) {
               </div>
             ) : (
               <div className="text-center py-20">
-                <p className="text-white/40 mb-4">Chua co bai viet trong chuyen muc nay.</p>
-                <Link href="/thu-vien" className="btn-main inline-flex">Xem Tat Ca Bai Viet</Link>
+                <p className="text-white/40 mb-4">Chưa có bài viết trong chuyên mục này.</p>
+                <Link href="/thu-vien" className="btn-main inline-flex">Xem Tất Cả Bài Viết</Link>
               </div>
             )}
             <div className="text-center mt-12">
-              <Link href="/thu-vien" className="btn-outline inline-flex">Xem Tat Ca Bai Viet</Link>
+              <Link href="/thu-vien" className="btn-outline inline-flex">← Xem Tất Cả Bài Viết</Link>
             </div>
           </div>
         </section>
@@ -112,7 +112,7 @@ export default async function BlogSlugPage({ params }: Props) {
         <div className="site-container">
           <Breadcrumb
             items={[
-              { label: 'Thu Vien', href: '/thu-vien' },
+              { label: 'Thư Viện', href: '/thu-vien' },
               { label: BLOG_CATEGORIES[post.category]?.label ?? post.category, href: `/thu-vien/${post.category}` },
               { label: post.title },
             ]}
@@ -123,7 +123,7 @@ export default async function BlogSlugPage({ params }: Props) {
           <div className="flex flex-wrap items-center gap-4 text-white/40 text-sm">
             <span className="flex items-center gap-1.5"><User size={14} />{post.author}</span>
             <span className="flex items-center gap-1.5"><Calendar size={14} />{formatDate(post.publishedAt)}</span>
-            <span className="flex items-center gap-1.5"><Clock size={14} />{post.readingTime} phut doc</span>
+            <span className="flex items-center gap-1.5"><Clock size={14} />{post.readingTime} phút đọc</span>
           </div>
         </div>
       </section>
@@ -163,7 +163,7 @@ export default async function BlogSlugPage({ params }: Props) {
             <aside className="lg:col-span-1">
               <div className="sticky top-24 space-y-6">
                 <div className="bg-dark-1 border border-white/10 rounded-card p-6">
-                  <h3 className="font-heading font-bold text-white text-base mb-4">Bai Viet Lien Quan</h3>
+                  <h3 className="font-heading font-bold text-white text-base mb-4">Bài Viết Liên Quan</h3>
                   {related.length > 0 ? (
                     <div className="space-y-4">
                       {related.map((r) => (
@@ -179,14 +179,14 @@ export default async function BlogSlugPage({ params }: Props) {
                       ))}
                     </div>
                   ) : (
-                    <p className="text-white/40 text-sm">Chua co bai viet lien quan.</p>
+                    <p className="text-white/40 text-sm">Chưa có bài viết liên quan.</p>
                   )}
                 </div>
 
                 <div className="bg-primary/10 border border-primary/30 rounded-card p-6 text-white">
-                  <h3 className="font-heading font-bold text-lg mb-2">Can Tu Van?</h3>
-                  <p className="text-white/55 text-sm mb-4">Lien he doi ngu chuyen gia An Phat Industry de duoc ho tro ngay.</p>
-                  <Link href="/lien-he" className="btn-main inline-flex w-full justify-center">Lien He Ngay</Link>
+                  <h3 className="font-heading font-bold text-lg mb-2">Cần Tư Vấn?</h3>
+                  <p className="text-white/55 text-sm mb-4">Liên hệ đội ngũ chuyên gia An Phát Industry để được hỗ trợ ngay.</p>
+                  <Link href="/lien-he" className="btn-main inline-flex w-full justify-center">Liên Hệ Ngay</Link>
                 </div>
               </div>
             </aside>

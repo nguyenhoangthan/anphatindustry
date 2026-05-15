@@ -78,7 +78,7 @@ export default function AboutSection({ data = defaultAboutSection }: Omit<Props,
             </ul>
 
             <Link href="/ve-chung-toi" className="btn-main inline-flex">
-              TÃ¬m Hiá»ƒu ThÃªm
+              Tìm Hiểu Thêm
             </Link>
           </div>
         </div>
