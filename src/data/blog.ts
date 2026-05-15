@@ -1,0 +1,88 @@
+import type { BlogPost } from '@/types'
+
+export const blogPosts: BlogPost[] = [
+  {
+    id: '1',
+    slug: 'bao-duong-xe-o-to-dinh-ky-bao-nhieu-km',
+    title: 'Bảo Dưỡng Xe Ô Tô Định Kỳ Bao Nhiêu Km? Lịch Chuẩn Từng Cấp Độ',
+    excerpt:
+      'Nhiều chủ xe chưa nắm rõ khi nào cần bảo dưỡng định kỳ cho ô tô. Bài viết này cung cấp lịch bảo dưỡng chuẩn từng cấp độ từ 5.000 đến 200.000 km.',
+    content: '',
+    author: 'An Phát Industry',
+    publishedAt: '2026-04-10',
+    category: 'kinh-nghiem',
+    image: 'https://images.unsplash.com/photo-1632823469850-2f77dd9c7f93?w=800&q=80',
+    tags: ['bảo dưỡng', 'định kỳ', 'kinh nghiệm'],
+    readingTime: 6,
+  },
+  {
+    id: '2',
+    slug: 'dau-hieu-nhan-biet-dieu-hoa-o-to-can-bao-duong',
+    title: 'Dấu Hiệu Nhận Biết Điều Hòa Ô Tô Cần Bảo Dưỡng Ngay',
+    excerpt:
+      'Điều hòa yếu, có mùi lạ hay phát tiếng ồn đều là dấu hiệu cảnh báo. Tìm hiểu ngay để tránh hỏng hóc nặng hơn và tốn kém chi phí sửa chữa.',
+    content: '',
+    author: 'An Phát Industry',
+    publishedAt: '2026-03-25',
+    category: 'kinh-nghiem',
+    image: 'https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=800&q=80',
+    tags: ['điều hòa', 'bảo dưỡng', 'điện lạnh'],
+    readingTime: 5,
+  },
+  {
+    id: '3',
+    slug: 'kiem-tra-xe-truoc-khi-di-du-lich-xa',
+    title: 'Checklist Kiểm Tra Xe Ô Tô Trước Khi Đi Du Lịch Xa – Đủ 10 Hạng Mục',
+    excerpt:
+      'Chuẩn bị kỹ lưỡng trước mỗi chuyến đi dài giúp bạn an tâm trên đường. Dưới đây là danh sách 10 hạng mục cần kiểm tra kỹ trước khi xuất phát.',
+    content: '',
+    author: 'An Phát Industry',
+    publishedAt: '2026-03-10',
+    category: 'kinh-nghiem',
+    image: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&q=80',
+    tags: ['kiểm tra xe', 'du lịch', 'an toàn'],
+    readingTime: 7,
+  },
+  {
+    id: '4',
+    slug: 'nen-chon-son-xe-1k-hay-son-2k',
+    title: 'Nên Chọn Sơn Xe 1K Hay 2K? So Sánh Chi Tiết Cho Chủ Xe',
+    excerpt:
+      'Sơn 1K và sơn 2K có sự khác biệt rõ rệt về chất lượng và chi phí. Bài viết giúp bạn hiểu rõ và đưa ra lựa chọn phù hợp nhất cho xe của mình.',
+    content: '',
+    author: 'An Phát Industry',
+    publishedAt: '2026-02-20',
+    category: 'kinh-nghiem',
+    image: 'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?w=800&q=80',
+    tags: ['sơn xe', 'đồng sơn', 'kinh nghiệm'],
+    readingTime: 5,
+  },
+  {
+    id: '5',
+    slug: 'cach-bao-quan-xe-mua-mua-hieu-qua',
+    title: 'Cách Bảo Quản Xe Ô Tô Mùa Mưa Hiệu Quả – Phòng Ngừa Gỉ Sét',
+    excerpt:
+      'Mùa mưa là thời điểm ô tô dễ bị ảnh hưởng nhất. Hãy áp dụng ngay những biện pháp bảo vệ xe đơn giản nhưng hiệu quả dưới đây.',
+    content: '',
+    author: 'An Phát Industry',
+    publishedAt: '2026-02-05',
+    category: 'kinh-nghiem',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    tags: ['mùa mưa', 'bảo quản xe', 'gỉ sét'],
+    readingTime: 4,
+  },
+  {
+    id: '6',
+    slug: 'phan-biet-dau-dong-co-chinh-hang-va-hang-kem-chat-luong',
+    title: 'Phân Biệt Dầu Động Cơ Chính Hãng Và Hàng Kém Chất Lượng',
+    excerpt:
+      'Dầu động cơ giả là mối nguy hiểm tiềm ẩn mà nhiều chủ xe không biết. Bài viết hướng dẫn cách phân biệt và lựa chọn dầu đúng chuẩn cho xe.',
+    content: '',
+    author: 'An Phát Industry',
+    publishedAt: '2026-01-15',
+    category: 'kinh-nghiem',
+    image: 'https://images.unsplash.com/photo-1599912027611-484b9fc447af?w=800&q=80',
+    tags: ['dầu động cơ', 'phụ tùng', 'kinh nghiệm'],
+    readingTime: 6,
+  },
+]

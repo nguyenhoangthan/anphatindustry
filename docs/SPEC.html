@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đặc Tả Dự Án – Website AnPhatIndustry.com</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #0B2447;
+      --accent:  #E63312;
+      --light:   #F8F9FA;
+      --border:  #E2E8F0;
+      --text:    #374151;
+      --muted:   #6B7280;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--text);
+      background: #fff;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 48px;
+    }
+
+    /* ── COVER PAGE ─────────────────────────────────── */
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+      padding-bottom: 48px;
+    }
+    .cover-top { display: flex; align-items: center; gap: 14px; margin-bottom: 64px; }
+    .logo-box {
+      width: 52px; height: 52px;
+      background: var(--accent);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900; font-size: 18px; color: #fff;
+    }
+    .logo-text { line-height: 1.2; }
+    .logo-text strong { display: block; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 15px; color: var(--primary); }
+    .logo-text span { font-size: 11px; color: var(--muted); letter-spacing: .04em; }
+
+    .cover-headline {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .cover-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+    .cover-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 40px;
+      line-height: 1.15;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .cover-title span { color: var(--accent); }
+    .cover-subtitle {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+
+    .cover-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .cover-meta-item {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .cover-meta-item .label { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 4px; }
+    .cover-meta-item .value { font-weight: 700; font-size: 13px; color: var(--primary); }
+
+    .cover-divider { height: 3px; background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%); border-radius: 2px; margin-bottom: 20px; }
+    .cover-footer-text { font-size: 11px; color: var(--muted); }
+
+    /* ── SECTION STRUCTURE ──────────────────────────── */
+    .section { margin-bottom: 48px; }
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--primary);
+      margin-bottom: 6px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title .num {
+      width: 28px; height: 28px;
+      background: var(--accent);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--primary);
+      margin: 20px 0 8px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    p { margin-bottom: 10px; }
+
+    /* ── TABLES ─────────────────────────────────────── */
+    table { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 12.5px; }
+    thead tr { background: var(--primary); color: #fff; }
+    thead th { padding: 9px 12px; text-align: left; font-weight: 600; font-size: 11.5px; letter-spacing: .04em; }
+    tbody tr:nth-child(even) { background: var(--light); }
+    tbody tr:hover { background: #EEF2FF; }
+    td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    td strong { color: var(--primary); font-weight: 600; }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 100px;
+      font-size: 10.5px;
+      font-weight: 600;
+    }
+    .badge-green  { background: #D1FAE5; color: #065F46; }
+    .badge-blue   { background: #DBEAFE; color: #1E40AF; }
+    .badge-yellow { background: #FEF3C7; color: #92400E; }
+    .badge-red    { background: #FEE2E2; color: #991B1B; }
+    .badge-gray   { background: #F3F4F6; color: #374151; }
+
+    /* ── CARDS / BOXES ──────────────────────────────── */
+    .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+    .card-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+    .card {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .card.accent { border-left-color: var(--accent); }
+    .card h4 { font-weight: 700; font-size: 12px; color: var(--primary); margin-bottom: 5px; }
+    .card p  { font-size: 11.5px; color: var(--muted); margin: 0; }
+
+    /* ── CALLOUT ────────────────────────────────────── */
+    .callout {
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      border-left: 4px solid #3B82F6;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin: 14px 0;
+      font-size: 12.5px;
+    }
+    .callout.warning { background: #FFFBEB; border-color: #FCD34D; border-left-color: #F59E0B; }
+    .callout.success { background: #F0FDF4; border-color: #BBF7D0; border-left-color: #22C55E; }
+    .callout strong { display: block; margin-bottom: 4px; color: #1E3A5F; }
+
+    /* ── CODE ───────────────────────────────────────── */
+    code {
+      font-family: 'Courier New', Courier, monospace;
+      background: #F1F5F9;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 1px 6px;
+      font-size: 11.5px;
+      color: var(--accent);
+    }
+    pre {
+      background: var(--primary);
+      color: #E2E8F0;
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin: 12px 0 16px;
+      font-size: 11.5px;
+      font-family: 'Courier New', monospace;
+      overflow-x: auto;
+      line-height: 1.7;
+    }
+    pre .comment { color: #64748B; }
+    pre .key { color: #93C5FD; }
+    pre .val { color: #86EFAC; }
+
+    /* ── TIMELINE ───────────────────────────────────── */
+    .timeline { list-style: none; padding: 0; margin: 14px 0; }
+    .timeline li {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 14px;
+      align-items: flex-start;
+    }
+    .timeline-dot {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800; font-size: 11px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .timeline-dot.accent { background: var(--accent); }
+    .timeline-body h4 { font-weight: 700; font-size: 12.5px; color: var(--primary); margin-bottom: 3px; }
+    .timeline-body p  { font-size: 12px; color: var(--muted); margin: 0; }
+
+    /* ── CHECKLIST ──────────────────────────────────── */
+    .checklist { list-style: none; padding: 0; margin: 10px 0; }
+    .checklist li {
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12.5px;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li::before {
+      content: '☐';
+      color: var(--accent);
+      font-size: 15px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    /* ── PAGE BREAK ─────────────────────────────────── */
+    .page-break { page-break-before: always; padding-top: 8px; }
+
+    /* ── PRINT ──────────────────────────────────────── */
+    @media print {
+      body { padding: 20px 28px; font-size: 12px; }
+      .cover { page-break-after: always; }
+      .page-break { page-break-before: always; }
+      a { color: var(--primary); text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     COVER PAGE
+══════════════════════════════════════════════════════ -->
+<div class="cover">
+  <div>
+    <div class="cover-top">
+      <div class="logo-box">AP</div>
+      <div class="logo-text">
+        <strong>AN PHÁT INDUSTRY</strong>
+        <span>Bảo Dưỡng · Sửa Chữa · Chăm Sóc Ô Tô</span>
+      </div>
+    </div>
+
+    <div class="cover-headline">
+      <span class="cover-badge">Tài Liệu Kỹ Thuật Nội Bộ · Phiên bản 1.0</span>
+      <div class="cover-title">ĐẶC TẢ DỰ ÁN<br/>WEBSITE <span>ANPHATINDUSTRY.COM</span></div>
+      <div class="cover-subtitle">Project Specification & Technical Architecture</div>
+
+      <div class="cover-meta-grid">
+        <div class="cover-meta-item">
+          <div class="label">Domain</div>
+          <div class="value">anphatindustry.com</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="label">Ngày lập</div>
+          <div class="value">14/05/2026 – CMS: 14/05/2026</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="label">Phiên bản</div>
+          <div class="value">v1.1.0 – CMS Ready</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="label">Tech Stack</div>
+          <div class="value">Next.js 14 + Prisma + SQLite</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="label">Hosting</div>
+          <div class="value">Matbao.net (VPS)</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="label">Trạng thái</div>
+          <div class="value" style="color:#22C55E">✓ Build + CMS Live</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="cover-divider"></div>
+    <p class="cover-footer-text">
+      Tài liệu này chứa thông tin kỹ thuật nội bộ của dự án website AnPhatIndustry.com.
+      Soạn bởi đội ngũ phát triển · Phiên bản 1.0 · Tháng 05/2026
+    </p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     1. TỔNG QUAN DỰ ÁN
+══════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title"><span class="num">1</span> Tổng Quan Dự Án</div>
+
+  <p>
+    Website <strong>anphatindustry.com</strong> là trang web doanh nghiệp (corporate website)
+    cho Công ty An Phát Industry – trung tâm bảo dưỡng, sửa chữa và chăm sóc ô tô chuyên nghiệp
+    tại TP. Hồ Chí Minh. Website được xây dựng với mục tiêu:
+  </p>
+
+  <div class="card-grid">
+    <div class="card accent">
+      <h4>🎯 Mục Tiêu Chính</h4>
+      <p>Giới thiệu thương hiệu, dịch vụ và tạo kênh tiếp nhận khách hàng trực tuyến 24/7</p>
+    </div>
+    <div class="card accent">
+      <h4>📈 Mục Tiêu SEO</h4>
+      <p>Xuất hiện top Google cho từ khóa "bảo dưỡng ô tô HCM", "sửa chữa ô tô uy tín"</p>
+    </div>
+    <div class="card">
+      <h4>📱 Thiết Bị Hỗ Trợ</h4>
+      <p>Responsive 100%: Mobile, Tablet, Desktop. Tối ưu cho Chrome, Safari, Firefox, Edge</p>
+    </div>
+    <div class="card">
+      <h4>🚀 Hiệu Năng</h4>
+      <p>Tốc độ tải trang dưới 3 giây. Tất cả 25 trang được render tĩnh (SSG) – cực kỳ nhanh</p>
+    </div>
+  </div>
+
+  <div class="callout success">
+    <strong>✅ Tham Khảo Thiết Kế</strong>
+    Website được xây dựng theo cấu trúc và phong cách của <strong>thanhphongauto.com</strong> –
+    một trong những website garage ô tô uy tín hàng đầu tại TP.HCM.
+    Màu sắc chủ đạo: <strong>Xanh Navy #0B2447</strong> (chuyên nghiệp) và
+    <strong>Đỏ #E63312</strong> (năng động, nổi bật CTA).
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     2. THÔNG TIN CÔNG TY
+══════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title"><span class="num">2</span> Thông Tin Công Ty</div>
+
+  <div class="callout warning">
+    <strong>⚠️ Lưu ý cho chủ công ty</strong>
+    Các thông tin bên dưới là placeholder mẫu. Cần cập nhật lại thông tin chính xác của công ty
+    trong file <code>src/lib/constants.ts</code> trước khi đưa website lên live.
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Thông Tin</th><th>Giá Trị Hiện Tại (Placeholder)</th><th>Cần Cập Nhật</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Tên công ty</strong></td><td>An Phát Industry</td><td><span class="badge badge-green">Đúng</span></td></tr>
+      <tr><td><strong>Website</strong></td><td>https://anphatindustry.com</td><td><span class="badge badge-green">Đúng</span></td></tr>
+      <tr><td><strong>Hotline 1</strong></td><td>0901 234 567</td><td><span class="badge badge-red">Cần sửa</span></td></tr>
+      <tr><td><strong>Hotline 2</strong></td><td>0912 345 678</td><td><span class="badge badge-red">Cần sửa</span></td></tr>
+      <tr><td><strong>Email</strong></td><td>info@anphatindustry.com</td><td><span class="badge badge-yellow">Kiểm tra</span></td></tr>
+      <tr><td><strong>Địa chỉ</strong></td><td>123 Nguyễn Văn Linh, Q7, TP.HCM</td><td><span class="badge badge-red">Cần sửa</span></td></tr>
+      <tr><td><strong>Giờ làm việc</strong></td><td>07:30 – 17:30, Thứ 2 – Chủ Nhật</td><td><span class="badge badge-yellow">Kiểm tra</span></td></tr>
+      <tr><td><strong>Facebook</strong></td><td>facebook.com/anphatindustry</td><td><span class="badge badge-red">Cần sửa</span></td></tr>
+      <tr><td><strong>Zalo</strong></td><td>zalo.me/0901234567</td><td><span class="badge badge-red">Cần sửa</span></td></tr>
+      <tr><td><strong>YouTube</strong></td><td>youtube.com/@anphatindustry</td><td><span class="badge badge-yellow">Tùy chọn</span></td></tr>
+      <tr><td><strong>Mã số DN</strong></td><td>0315XXXXXX</td><td><span class="badge badge-red">Cần sửa</span></td></tr>
+    </tbody>
+  </table>
+
+  <p>File cần chỉnh: <code>src/lib/constants.ts</code> — chỉnh object <code>siteConfig</code> là xong.</p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     3. CẤU TRÚC TRANG WEB
+══════════════════════════════════════════════════════ -->
+<div class="section page-break">
+  <div class="section-title"><span class="num">3</span> Cấu Trúc Các Trang</div>
+
+  <table>
+    <thead>
+      <tr><th>URL</th><th>Tên Trang</th><th>Loại</th><th>Mô Tả</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>/</code></td>
+        <td><strong>Trang Chủ</strong></td>
+        <td><span class="badge badge-green">Static</span></td>
+        <td>Hero slider, dịch vụ, về chúng tôi, quy trình, đối tác, blog, CTA</td>
+      </tr>
+      <tr>
+        <td><code>/ve-chung-toi</code></td>
+        <td><strong>Về Chúng Tôi</strong></td>
+        <td><span class="badge badge-green">Static</span></td>
+        <td>Lịch sử, sứ mệnh, tầm nhìn, đội ngũ, lĩnh vực hoạt động</td>
+      </tr>
+      <tr>
+        <td><code>/dich-vu</code></td>
+        <td><strong>Dịch Vụ</strong></td>
+        <td><span class="badge badge-green">Static</span></td>
+        <td>Tổng hợp 9 dịch vụ phân theo 3 danh mục</td>
+      </tr>
+      <tr>
+        <td><code>/dich-vu/[slug]</code></td>
+        <td><strong>Chi Tiết Dịch Vụ</strong></td>
+        <td><span class="badge badge-blue">SSG x9</span></td>
+        <td>Mô tả, điểm nổi bật, form đặt lịch, dịch vụ liên quan</td>
+      </tr>
+      <tr>
+        <td><code>/bao-gia</code></td>
+        <td><strong>Báo Giá</strong></td>
+        <td><span class="badge badge-green">Static</span></td>
+        <td>3 gói dịch vụ (Cơ Bản / Nâng Cao / Premium) + cam kết vàng</td>
+      </tr>
+      <tr>
+        <td><code>/thu-vien</code></td>
+        <td><strong>Thư Viện / Blog</strong></td>
+        <td><span class="badge badge-green">Static</span></td>
+        <td>Danh sách bài viết chia sẻ kinh nghiệm ô tô</td>
+      </tr>
+      <tr>
+        <td><code>/thu-vien/[slug]</code></td>
+        <td><strong>Chi Tiết Bài Viết</strong></td>
+        <td><span class="badge badge-blue">SSG x6</span></td>
+        <td>Nội dung bài viết, bài liên quan, CTA</td>
+      </tr>
+      <tr>
+        <td><code>/lien-he</code></td>
+        <td><strong>Liên Hệ & Đặt Lịch</strong></td>
+        <td><span class="badge badge-yellow">Dynamic</span></td>
+        <td>Form liên hệ có validation, Google Map, thông tin liên hệ</td>
+      </tr>
+      <tr>
+        <td><code>/chinh-sach-bao-mat</code></td>
+        <td><strong>Chính Sách Bảo Mật</strong></td>
+        <td><span class="badge badge-green">Static</span></td>
+        <td>Chính sách bảo mật thông tin khách hàng</td>
+      </tr>
+      <tr>
+        <td><code>/404</code></td>
+        <td><strong>Trang 404</strong></td>
+        <td><span class="badge badge-gray">System</span></td>
+        <td>Trang không tìm thấy, có điều hướng về trang chủ</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Tổng:</strong> 25 trang được tạo tĩnh, tốc độ tải cực nhanh, thân thiện SEO.</p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     4. DANH SÁCH DỊCH VỤ
+══════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title"><span class="num">4</span> Danh Sách Dịch Vụ Hiện Có</div>
+
+  <table>
+    <thead>
+      <tr><th>Danh Mục</th><th>Tên Dịch Vụ</th><th>URL</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="4"><strong>Sửa Chữa Chung</strong></td>
+        <td>Bảo Dưỡng Định Kỳ</td>
+        <td><code>/dich-vu/bao-duong-dinh-ky</code></td>
+      </tr>
+      <tr>
+        <td>Điện & Điện Lạnh</td>
+        <td><code>/dich-vu/dien-dien-lanh</code></td>
+      </tr>
+      <tr>
+        <td>Sửa Chữa Máy Gầm</td>
+        <td><code>/dich-vu/sua-chua-may-gam</code></td>
+      </tr>
+      <tr>
+        <td>Quy Trình Dịch Vụ</td>
+        <td><code>/dich-vu/quy-trinh-dich-vu</code></td>
+      </tr>
+      <tr>
+        <td rowspan="3"><strong>Chăm Sóc Xe Hơi</strong></td>
+        <td>Chăm Sóc Nội Thất</td>
+        <td><code>/dich-vu/cham-soc-noi-that</code></td>
+      </tr>
+      <tr>
+        <td>Chăm Sóc Ngoại Thất</td>
+        <td><code>/dich-vu/cham-soc-ngoai-that</code></td>
+      </tr>
+      <tr>
+        <td>Vệ Sinh Bảo Dưỡng Phanh</td>
+        <td><code>/dich-vu/ve-sinh-phanh</code></td>
+      </tr>
+      <tr>
+        <td rowspan="2"><strong>Đồng Sơn</strong></td>
+        <td>Sơn Dặm Vá & Toàn Thân</td>
+        <td><code>/dich-vu/son-dam-va</code></td>
+      </tr>
+      <tr>
+        <td>Sửa Chữa Đồng Thân Xe</td>
+        <td><code>/dich-vu/sua-chua-dong</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Để thêm dịch vụ mới: mở file <code>src/data/services.ts</code> và thêm object theo đúng cấu trúc.</p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     5. TECH STACK
+══════════════════════════════════════════════════════ -->
+<div class="section page-break">
+  <div class="section-title"><span class="num">5</span> Công Nghệ Sử Dụng (Tech Stack)</div>
+
+  <div class="card-grid-3">
+    <div class="card">
+      <h4>Next.js 14</h4>
+      <p>Framework React hàng đầu. App Router, SSG, tối ưu SEO tự động</p>
+    </div>
+    <div class="card">
+      <h4>TypeScript</h4>
+      <p>Kiểu dữ liệu tường minh, giảm lỗi, dễ bảo trì lâu dài</p>
+    </div>
+    <div class="card">
+      <h4>Tailwind CSS</h4>
+      <p>Styling utility-first, nhất quán, responsive nhanh chóng</p>
+    </div>
+    <div class="card">
+      <h4>Framer Motion</h4>
+      <p>Animation mượt mà (fade-in, slide-up) khi scroll</p>
+    </div>
+    <div class="card">
+      <h4>Embla Carousel</h4>
+      <p>Hero slider trang chủ – nhẹ, nhanh, hỗ trợ autoplay</p>
+    </div>
+    <div class="card">
+      <h4>React Hook Form + Zod</h4>
+      <p>Form liên hệ có validation đầy đủ, an toàn bảo mật</p>
+    </div>
+    <div class="card">
+      <h4>Lucide React</h4>
+      <p>Bộ icon chuyên nghiệp, nhất quán trên toàn website</p>
+    </div>
+    <div class="card">
+      <h4>next-seo</h4>
+      <p>Tối ưu SEO: meta tags, Open Graph, Twitter Card</p>
+    </div>
+    <div class="card">
+      <h4>Node.js / npm</h4>
+      <p>Môi trường chạy và quản lý dependencies</p>
+    </div>
+  </div>
+
+  <h3>Cấu Trúc Thư Mục Source Code</h3>
+  <pre>
+anphatindustry/
+├── <span class="key">src/</span>
+│   ├── <span class="key">app/</span>               <span class="comment"># Các trang (Next.js App Router)</span>
+│   │   ├── layout.tsx         <span class="comment"># Layout chung + SEO metadata</span>
+│   │   ├── page.tsx           <span class="comment"># Trang chủ</span>
+│   │   ├── globals.css        <span class="comment"># CSS toàn cục + fonts</span>
+│   │   ├── ve-chung-toi/      <span class="comment"># Trang giới thiệu</span>
+│   │   ├── dich-vu/           <span class="comment"># Danh sách & chi tiết dịch vụ</span>
+│   │   ├── bao-gia/           <span class="comment"># Bảng giá</span>
+│   │   ├── thu-vien/          <span class="comment"># Blog & chi tiết bài viết</span>
+│   │   ├── lien-he/           <span class="comment"># Trang liên hệ + form</span>
+│   │   └── chinh-sach-bao-mat/<span class="comment"># Chính sách bảo mật</span>
+│   ├── <span class="key">components/</span>
+│   │   ├── layout/            <span class="comment"># Header, Footer</span>
+│   │   ├── home/              <span class="comment"># 8 sections trang chủ</span>
+│   │   ├── ui/                <span class="comment"># Button, Card, Breadcrumb...</span>
+│   │   └── shared/            <span class="comment"># FloatingContact, ScrollToTop</span>
+│   ├── <span class="key">data/</span>
+│   │   ├── services.ts        <span class="comment"># Dữ liệu 9 dịch vụ</span>
+│   │   └── blog.ts            <span class="comment"># Dữ liệu 6 bài viết mẫu</span>
+│   ├── <span class="key">lib/</span>
+│   │   ├── constants.ts       <span class="comment"># ⚙️ THÔNG TIN CÔNG TY – SỬA Ở ĐÂY</span>
+│   │   └── utils.ts           <span class="comment"># Hàm tiện ích</span>
+│   └── <span class="key">types/index.ts</span>     <span class="comment"># TypeScript interfaces</span>
+├── next.config.mjs            <span class="comment"># Cấu hình Next.js</span>
+├── tailwind.config.ts         <span class="comment"># Cấu hình màu sắc, font</span>
+├── tsconfig.json              <span class="comment"># Cấu hình TypeScript</span>
+└── package.json               <span class="comment"># Dependencies</span></pre>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     6. TÍNH NĂNG
+══════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title"><span class="num">6</span> Tính Năng Đã Hoàn Thành</div>
+
+  <table>
+    <thead>
+      <tr><th>Tính Năng</th><th>Mô Tả</th><th>Trạng Thái</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Hero Slider</strong></td><td>3 slides tự động, có nút prev/next, dots điều hướng</td><td><span class="badge badge-green">✓ Hoàn thành</span></td></tr>
+      <tr><td><strong>Navigation</strong></td><td>Sticky header, dropdown menu, mobile hamburger menu</td><td><span class="badge badge-green">✓ Hoàn thành</span></td></tr>
+      <tr><td><strong>Danh sách dịch vụ</strong></td><td>Grid 9 dịch vụ, phân loại theo danh mục, có trang chi tiết</td><td><span class="badge badge-green">✓ Hoàn thành</span></td></tr>
+      <tr><td><strong>Trang giới thiệu</strong></td><td>Lịch sử, sứ mệnh, đội ngũ, lĩnh vực hoạt động</td><td><span class="badge badge-green">✓ Hoàn thành</span></td></tr>
+      <tr><td><strong>Bảng báo giá</strong></td><td>3 gói dịch vụ, highlight gói khuyến nghị, CTA rõ ràng</td><td><span class="badge badge-green">✓ Hoàn thành</span></td></tr>
+      <tr><td><strong>Blog / Thư viện</strong></td><td>6 bài viết mẫu, có trang danh sách và chi tiết</td><td><span class="badge badge-green">✓ Hoàn thành</span></td></tr>
+      <tr><td><strong>Form liên hệ</strong></td><td>Validation đầy đủ, thông báo thành công, chống spam</td><td><span class="badge badge-green">✓ Hoàn thành</span></td></tr>
+      <tr><td><strong>Google Map</strong></td><td>Nhúng bản đồ trên trang liên hệ</td><td><span class="badge badge-yellow">⚠ Cần cập nhật iframe</span></td></tr>
+      <tr><td><strong>Floating Buttons</strong></td><td>Nút Zalo, Đặt lịch, Gọi điện cố định góc màn hình</td><td><span class="badge badge-green">✓ Hoàn thành</span></td></tr>
+      <tr><td><strong>Scroll to Top</strong></td><td>Nút cuộn về đầu trang khi scroll xuống</td><td><span class="badge badge-green">✓ Hoàn thành</span></td></tr>
+      <tr><td><strong>SEO Metadata</strong></td><td>Title, description, OG tags cho tất cả trang</td><td><span class="badge badge-green">✓ Hoàn thành</span></td></tr>
+      <tr><td><strong>Security Headers</strong></td><td>X-Frame-Options, CSP, XSS Protection, Referrer Policy</td><td><span class="badge badge-green">✓ Hoàn thành</span></td></tr>
+      <tr><td><strong>Responsive Design</strong></td><td>Mobile / Tablet / Desktop 100%</td><td><span class="badge badge-green">✓ Hoàn thành</span></td></tr>
+      <tr><td><strong>Animation</strong></td><td>Fade-in, slide-up khi scroll vào viewport</td><td><span class="badge badge-green">✓ Hoàn thành</span></td></tr>
+      <tr><td><strong>Email form submission</strong></td><td>Kết nối gửi email thực tế</td><td><span class="badge badge-red">⏳ Cần tích hợp</span></td></tr>
+      <tr><td><strong>Google Analytics</strong></td><td>Theo dõi lượt truy cập</td><td><span class="badge badge-red">⏳ Cần tích hợp</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     7. HƯỚNG DẪN CẬP NHẬT NỘI DUNG
+══════════════════════════════════════════════════════ -->
+<div class="section page-break">
+  <div class="section-title"><span class="num">7</span> Hướng Dẫn Cập Nhật Nội Dung</div>
+
+  <div class="callout">
+    <strong>💡 Dành cho quản trị viên không biết code</strong>
+    Tất cả nội dung quan trọng đều tập trung trong các file data. Chỉ cần chỉnh text trong
+    các file đó – không cần hiểu code phức tạp.
+  </div>
+
+  <h3>7.1 Cập Nhật Thông Tin Công Ty</h3>
+  <p>Mở file <code>src/lib/constants.ts</code>, tìm object <code>siteConfig</code> và chỉnh các giá trị:</p>
+  <pre>
+<span class="comment">// src/lib/constants.ts</span>
+<span class="key">export const</span> <span class="val">siteConfig</span> = {
+  name:         <span class="val">'An Phát Industry'</span>,
+  phone:        [<span class="val">'SỐ ĐIỆN THOẠI 1'</span>, <span class="val">'SỐ ĐIỆN THOẠI 2'</span>],
+  email:        <span class="val">'EMAIL CÔNG TY'</span>,
+  address:      <span class="val">'ĐỊA CHỈ ĐẦY ĐỦ'</span>,
+  workingHours: <span class="val">'GIỜ LÀM VIỆC'</span>,
+  social: {
+    facebook: <span class="val">'LINK FACEBOOK'</span>,
+    zalo:     <span class="val">'LINK ZALO'</span>,
+    youtube:  <span class="val">'LINK YOUTUBE'</span>,
+  },
+}</pre>
+
+  <h3>7.2 Thêm / Sửa Dịch Vụ</h3>
+  <p>Mở file <code>src/data/services.ts</code>. Mỗi dịch vụ là 1 object với cấu trúc:</p>
+  <pre>
+{
+  id:               <span class="val">'ten-dich-vu'</span>,          <span class="comment">// ID duy nhất (không dấu, viết liền)</span>
+  slug:             <span class="val">'ten-dich-vu'</span>,          <span class="comment">// Giống id, dùng cho URL</span>
+  title:            <span class="val">'Tên Dịch Vụ'</span>,          <span class="comment">// Hiển thị trên website</span>
+  shortDescription: <span class="val">'Mô tả ngắn'</span>,           <span class="comment">// 1 dòng tóm tắt</span>
+  description:      <span class="val">'Mô tả chi tiết...'</span>,    <span class="comment">// Nội dung trang chi tiết</span>
+  category:         <span class="val">'sua-chua-chung'</span>,       <span class="comment">// 1 trong 3 danh mục</span>
+  categoryLabel:    <span class="val">'Sửa Chữa Chung'</span>,       <span class="comment">// Tên danh mục hiển thị</span>
+  image:            <span class="val">'https://...'</span>,           <span class="comment">// URL ảnh (1200x675px khuyến nghị)</span>
+  highlights:       [<span class="val">'Điểm 1'</span>, <span class="val">'Điểm 2'</span>],   <span class="comment">// Danh sách điểm nổi bật</span>
+}</pre>
+
+  <h3>7.3 Thêm Bài Viết Blog</h3>
+  <p>Mở file <code>src/data/blog.ts</code>. Mỗi bài viết có cấu trúc:</p>
+  <pre>
+{
+  id:          <span class="val">'7'</span>,                          <span class="comment">// Số ID tăng dần</span>
+  slug:        <span class="val">'tieu-de-bai-viet-khong-dau'</span>,  <span class="comment">// Dùng cho URL</span>
+  title:       <span class="val">'Tiêu Đề Bài Viết Đầy Đủ'</span>,    <span class="comment">// Hiển thị trên website</span>
+  excerpt:     <span class="val">'Tóm tắt bài viết 2-3 câu'</span>,  <span class="comment">// Hiển thị ở card</span>
+  author:      <span class="val">'An Phát Industry'</span>,
+  publishedAt: <span class="val">'2026-06-01'</span>,               <span class="comment">// Ngày đăng YYYY-MM-DD</span>
+  category:    <span class="val">'kinh-nghiem'</span>,
+  image:       <span class="val">'https://...'</span>,                <span class="comment">// URL ảnh bài viết</span>
+  tags:        [<span class="val">'tag1'</span>, <span class="val">'tag2'</span>],
+  readingTime: <span class="val">5</span>,                           <span class="comment">// Phút đọc</span>
+}</pre>
+
+  <h3>7.4 Thay Ảnh</h3>
+  <p>
+    Tất cả ảnh hiện tại đang dùng ảnh miễn phí từ <strong>Unsplash</strong>.
+    Để thay bằng ảnh thực tế của xưởng, chụp ảnh rồi upload lên hosting vào folder
+    <code>public/images/</code> và thay URL trong các file data tương ứng.
+  </p>
+  <p>Kích thước ảnh khuyến nghị:</p>
+  <table>
+    <thead><tr><th>Loại Ảnh</th><th>Kích Thước</th><th>Định Dạng</th></tr></thead>
+    <tbody>
+      <tr><td>Hero banner</td><td>1920 × 1080 px</td><td>JPG / WebP</td></tr>
+      <tr><td>Ảnh dịch vụ</td><td>1200 × 675 px</td><td>JPG / WebP</td></tr>
+      <tr><td>Ảnh bài viết</td><td>1200 × 750 px</td><td>JPG / WebP</td></tr>
+      <tr><td>Logo</td><td>Tối thiểu 200 × 200 px</td><td>SVG / PNG</td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     8. HƯỚNG DẪN CHẠY & DEPLOY
+══════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title"><span class="num">8</span> Hướng Dẫn Chạy & Deploy</div>
+
+  <h3>8.1 Yêu Cầu Môi Trường</h3>
+  <div class="card-grid">
+    <div class="card">
+      <h4>Máy phát triển (Dev)</h4>
+      <p>Node.js ≥ 18.17 · npm ≥ 9 · VS Code (khuyến nghị)</p>
+    </div>
+    <div class="card">
+      <h4>Server Hosting (Production)</h4>
+      <p>Node.js ≥ 18 · RAM ≥ 1GB · OS: Ubuntu 22.04 LTS</p>
+    </div>
+  </div>
+
+  <h3>8.2 Chạy Trên Máy Local</h3>
+  <pre>
+<span class="comment"># 1. Cài dependencies (chỉ cần làm 1 lần)</span>
+npm install
+
+<span class="comment"># 2. Chạy dev server</span>
+npm run dev
+<span class="comment"># Mở trình duyệt: http://localhost:3000</span>
+
+<span class="comment"># 3. Build cho production</span>
+npm run build
+
+<span class="comment"># 4. Chạy production build</span>
+npm start</pre>
+
+  <h3>8.3 Deploy Lên Hosting Matbao</h3>
+  <ul class="timeline">
+    <li>
+      <div class="timeline-dot">1</div>
+      <div class="timeline-body">
+        <h4>Đăng ký VPS Matbao</h4>
+        <p>Vào matbao.net, mua gói VPS Ubuntu 22.04. Nhận IP, username, password qua email.</p>
+      </div>
+    </li>
+    <li>
+      <div class="timeline-dot">2</div>
+      <div class="timeline-body">
+        <h4>Đăng ký tên miền</h4>
+        <p>Mua anphatindustry.com + anphatindustry.vn tại matbao.net để bảo vệ thương hiệu.</p>
+      </div>
+    </li>
+    <li>
+      <div class="timeline-dot">3</div>
+      <div class="timeline-body">
+        <h4>Cài môi trường server</h4>
+        <p>SSH vào VPS → cài Node.js 20 → cài PM2 (process manager) → cài Nginx (reverse proxy).</p>
+      </div>
+    </li>
+    <li>
+      <div class="timeline-dot">4</div>
+      <div class="timeline-body">
+        <h4>Upload source code</h4>
+        <p>Clone repo hoặc upload toàn bộ thư mục lên server → chạy <code>npm install</code> → <code>npm run build</code>.</p>
+      </div>
+    </li>
+    <li>
+      <div class="timeline-dot accent">5</div>
+      <div class="timeline-body">
+        <h4>Khởi động ứng dụng với PM2</h4>
+        <p><code>pm2 start npm --name "anphatindustry" -- start</code> → <code>pm2 save</code></p>
+      </div>
+    </li>
+    <li>
+      <div class="timeline-dot accent">6</div>
+      <div class="timeline-body">
+        <h4>Cài SSL miễn phí (Let's Encrypt)</h4>
+        <p>Cài Certbot → <code>certbot --nginx -d anphatindustry.com -d www.anphatindustry.com</code></p>
+      </div>
+    </li>
+    <li>
+      <div class="timeline-dot accent">7</div>
+      <div class="timeline-body">
+        <h4>Trỏ DNS về server</h4>
+        <p>Vào matbao.net quản lý DNS → thêm A record trỏ domain về IP VPS → chờ 1–24h lan truyền.</p>
+      </div>
+    </li>
+  </ul>
+
+  <h3>8.4 Deploy Nhanh Miễn Phí (Vercel – Khuyến Nghị Thử Trước)</h3>
+  <div class="callout success">
+    <strong>💡 Cách nhanh nhất để xem website live</strong>
+    Đăng ký tài khoản tại vercel.com → Import repo → Deploy tự động. Nhận URL dạng
+    <code>anphatindustry.vercel.app</code> miễn phí để test trước khi kết nối domain chính thức.
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     9. SEO & MARKETING
+══════════════════════════════════════════════════════ -->
+<div class="section page-break">
+  <div class="section-title"><span class="num">9</span> SEO & Marketing</div>
+
+  <h3>9.1 Đã Tích Hợp Sẵn</h3>
+  <table>
+    <thead><tr><th>Hạng Mục SEO</th><th>Chi Tiết</th></tr></thead>
+    <tbody>
+      <tr><td>Meta Title & Description</td><td>Mỗi trang có title và description riêng, tối ưu từ khóa</td></tr>
+      <tr><td>Open Graph Tags</td><td>Chia sẻ đẹp trên Facebook, Zalo, Messenger</td></tr>
+      <tr><td>Sitemap tự động</td><td>Next.js tự tạo sitemap cho tất cả trang</td></tr>
+      <tr><td>URL thân thiện</td><td>URL không dấu, có nghĩa: <code>/dich-vu/bao-duong-dinh-ky</code></td></tr>
+      <tr><td>Tốc độ tải trang</td><td>SSG (Static Site Generation) – tải cực nhanh, Google ưu tiên</td></tr>
+      <tr><td>Mobile-first</td><td>Responsive 100%, Google Mobile-Friendly</td></tr>
+      <tr><td>Structured Data</td><td>Có thể thêm JSON-LD cho Local Business (bước tiếp theo)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>9.2 Cần Làm Sau Khi Live</h3>
+  <ul class="checklist">
+    <li>Đăng ký <strong>Google Search Console</strong> → xác minh domain → submit sitemap</li>
+    <li>Đăng ký <strong>Google Business Profile</strong> (Google Maps) – hoàn toàn miễn phí, rất quan trọng</li>
+    <li>Cài <strong>Google Analytics 4</strong> → thêm Measurement ID vào <code>src/app/layout.tsx</code></li>
+    <li>Tích hợp gửi email form liên hệ (dùng <strong>Resend</strong> hoặc <strong>SendGrid</strong>)</li>
+    <li>Thay toàn bộ ảnh Unsplash bằng <strong>ảnh thực tế</strong> của xưởng</li>
+    <li>Đăng ký <strong>Bing Webmaster Tools</strong> (thêm traffic từ Bing)</li>
+    <li>Cập nhật <strong>Google Map iframe</strong> thực tế trong trang liên hệ</li>
+  </ul>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     10. BẢO MẬT
+══════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title"><span class="num">10</span> Bảo Mật Website</div>
+
+  <p>Website đã được tích hợp các biện pháp bảo mật theo chuẩn OWASP:</p>
+
+  <table>
+    <thead><tr><th>Biện Pháp</th><th>Mô Tả</th><th>Trạng Thái</th></tr></thead>
+    <tbody>
+      <tr><td>HTTPS / SSL</td><td>Mã hóa toàn bộ dữ liệu truyền tải</td><td><span class="badge badge-yellow">Cần cài trên server</span></td></tr>
+      <tr><td>X-Frame-Options: DENY</td><td>Chống clickjacking</td><td><span class="badge badge-green">✓ Đã cài</span></td></tr>
+      <tr><td>X-XSS-Protection</td><td>Bảo vệ cross-site scripting</td><td><span class="badge badge-green">✓ Đã cài</span></td></tr>
+      <tr><td>X-Content-Type-Options</td><td>Chống MIME sniffing</td><td><span class="badge badge-green">✓ Đã cài</span></td></tr>
+      <tr><td>Referrer-Policy</td><td>Kiểm soát thông tin referrer</td><td><span class="badge badge-green">✓ Đã cài</span></td></tr>
+      <tr><td>Form Validation (Zod)</td><td>Validate & sanitize dữ liệu form phía server</td><td><span class="badge badge-green">✓ Đã cài</span></td></tr>
+      <tr><td>No SQL Injection</td><td>Không dùng database trực tiếp, dữ liệu static</td><td><span class="badge badge-green">✓ An toàn</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     11. BẢO TRÌ & NÂNG CẤP
+══════════════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title"><span class="num">11</span> Bảo Trì & Nâng Cấp Trong Tương Lai</div>
+
+  <h3>Công Việc Bảo Trì Định Kỳ</h3>
+  <table>
+    <thead><tr><th>Công Việc</th><th>Tần Suất</th><th>Người Thực Hiện</th></tr></thead>
+    <tbody>
+      <tr><td>Cập nhật bài viết blog mới</td><td>2–4 bài/tháng</td><td>Marketing / Kỹ thuật viên</td></tr>
+      <tr><td>Cập nhật ảnh dự án / xe mới sửa chữa</td><td>Khi có dự án mới</td><td>Admin</td></tr>
+      <tr><td>Kiểm tra Google Analytics, Search Console</td><td>Hàng tuần</td><td>Marketing</td></tr>
+      <tr><td>Backup source code</td><td>Hàng tuần</td><td>Dev / Admin</td></tr>
+      <tr><td>Cập nhật dependencies (npm)</td><td>Hàng quý</td><td>Developer</td></tr>
+      <tr><td>Gia hạn domain + hosting</td><td>Hàng năm</td><td>Admin</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Tính Năng Nâng Cấp Đề Xuất (Giai Đoạn 2)</h3>
+  <div class="card-grid">
+    <div class="card">
+      <h4>Hệ Thống Đặt Lịch Online</h4>
+      <p>Chọn ngày giờ, loại dịch vụ, nhận xác nhận SMS/email tự động</p>
+    </div>
+    <div class="card">
+      <h4>Headless CMS (Sanity.io)</h4>
+      <p>Giao diện quản trị nội dung trực quan – không cần biết code</p>
+    </div>
+    <div class="card">
+      <h4>Trang Đánh Giá / Review</h4>
+      <p>Hiển thị đánh giá từ Google Maps, Facebook ngay trên website</td>
+    </div>
+    <div class="card">
+      <h4>Live Chat</h4>
+      <p>Tích hợp Tawk.to hoặc Facebook Messenger chat widget</p>
+    </div>
+    <div class="card">
+      <h4>Multi-language</h4>
+      <p>Thêm phiên bản tiếng Anh phục vụ khách hàng nước ngoài</p>
+    </div>
+    <div class="card">
+      <h4>Trang Mua Bán Xe Ký Gửi</h4>
+      <p>Đăng tin xe cũ cần bán, tìm kiếm theo hãng, giá, năm sản xuất</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     12. CHECKLIST TRƯỚC KHI LAUNCH
+══════════════════════════════════════════════════════ -->
+<div class="section page-break">
+  <div class="section-title"><span class="num">12</span> Hệ Thống Quản Trị Nội Dung (Admin CMS)</div>
+
+  <div class="callout success">
+    <strong>✅ Admin Panel đã được tích hợp hoàn chỉnh</strong>
+    Từ phiên bản v1.1, website có hệ thống quản trị nội dung đầy đủ.
+    Mọi nội dung được lưu trong <strong>SQLite database</strong> và có thể cập nhật ngay lập tức
+    mà không cần biết code.
+  </div>
+
+  <h3>Thông Tin Đăng Nhập Admin</h3>
+  <table>
+    <thead><tr><th>Thông Tin</th><th>Giá Trị</th><th>Ghi Chú</th></tr></thead>
+    <tbody>
+      <tr><td><strong>URL Admin</strong></td><td><code>http://localhost:3000/admin</code></td><td>Thay localhost bằng domain khi live</td></tr>
+      <tr><td><strong>Username</strong></td><td><code>admin</code></td><td><span class="badge badge-yellow">Đổi sau khi live</span></td></tr>
+      <tr><td><strong>Password mặc định</strong></td><td><code>AnPhat@2026</code></td><td><span class="badge badge-red">BẮT BUỘC đổi trước khi live</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Cấu Trúc Admin Panel</h3>
+  <div class="card-grid">
+    <div class="card accent">
+      <h4>📊 Dashboard</h4>
+      <p>Tổng quan: số lượng dịch vụ, bài viết. Nút truy cập nhanh các chức năng.</p>
+    </div>
+    <div class="card accent">
+      <h4>🔧 Quản Lý Dịch Vụ</h4>
+      <p>Thêm, sửa, xóa dịch vụ. Tự động tạo slug URL từ tên. Preview ảnh ngay khi nhập URL.</p>
+    </div>
+    <div class="card accent">
+      <h4>📝 Quản Lý Bài Viết</h4>
+      <p>Đăng bài mới, chỉnh sửa, xóa bài viết. Tự động tạo slug, chọn ngày đăng, tags, danh mục.</p>
+    </div>
+    <div class="card accent">
+      <h4>⚙️ Cài Đặt Website</h4>
+      <p>Chỉnh hotline, email, địa chỉ, giờ làm việc, link mạng xã hội. Lưu ngay lập tức.</p>
+    </div>
+  </div>
+
+  <h3>Quyền Truy Cập & Bảo Mật Admin</h3>
+  <table>
+    <thead><tr><th>Biện Pháp</th><th>Chi Tiết</th></tr></thead>
+    <tbody>
+      <tr><td>JWT Authentication</td><td>Session bảo mật bằng JSON Web Token, hết hạn tự động</td></tr>
+      <tr><td>Bcrypt Password Hashing</td><td>Mật khẩu được mã hóa với salt rounds = 12 (chuẩn industry)</td></tr>
+      <tr><td>Middleware Protection</td><td>Tất cả route /admin/* được chặn tự động nếu chưa đăng nhập</td></tr>
+      <tr><td>Server-side Auth Check</td><td>Mỗi API endpoint đều kiểm tra session trước khi thực thi</td></tr>
+      <tr><td>Input Validation</td><td>Dữ liệu form được validate ở cả client và server</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Cơ Sở Dữ Liệu</h3>
+  <table>
+    <thead><tr><th>Thông Tin</th><th>Chi Tiết</th></tr></thead>
+    <tbody>
+      <tr><td>Loại DB</td><td>SQLite (file-based, không cần server riêng)</td></tr>
+      <tr><td>ORM</td><td>Prisma v5</td></tr>
+      <tr><td>File DB</td><td><code>prisma/dev.db</code> (local) / <code>prisma/prod.db</code> (production)</td></tr>
+      <tr><td>Bảng dữ liệu</td><td>AdminUser, Service, BlogPost, SiteSetting</td></tr>
+      <tr><td>Quản lý migration</td><td>Prisma Migrate – tự động track thay đổi schema</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Lệnh Quản Lý Database</h3>
+  <pre>
+<span class="comment"># Xem dữ liệu qua giao diện web (Prisma Studio)</span>
+npm run db:studio
+
+<span class="comment"># Seed lại dữ liệu mẫu (khi setup server mới)</span>
+npm run db:seed
+
+<span class="comment"># Tạo migration khi thay đổi schema</span>
+npm run db:migrate
+
+<span class="comment"># Reset toàn bộ DB và seed lại (CẢNH BÁO: xóa hết data)</span>
+npm run db:reset</pre>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     13. CHECKLIST TRƯỚC KHI LAUNCH
+══════════════════════════════════════════════════════ -->
+<div class="section page-break">
+  <div class="section-title"><span class="num">13</span> Checklist Trước Khi Đưa Live</div>
+
+  <h3>Admin CMS</h3>
+  <ul class="checklist">
+    <li><strong>ĐỔI MẬT KHẨU ADMIN</strong> ngay sau khi deploy: vào <code>/admin</code> → Đăng nhập → thay password trong DB</li>
+    <li>Copy file <code>prisma/dev.db</code> lên server (hoặc chạy <code>npm run db:seed</code> trên server)</li>
+    <li>Cập nhật <code>NEXTAUTH_SECRET</code> trong <code>.env</code> thành chuỗi random dài 32+ ký tự</li>
+    <li>Cập nhật <code>NEXTAUTH_URL</code> thành domain thực: <code>https://anphatindustry.com</code></li>
+  </ul>
+
+  <h3>Nội Dung</h3>
+  <ul class="checklist">
+    <li>Cập nhật số điện thoại thực trong <code>constants.ts</code></li>
+    <li>Cập nhật địa chỉ công ty thực trong <code>constants.ts</code></li>
+    <li>Cập nhật email công ty thực trong <code>constants.ts</code></li>
+    <li>Thay logo thực của công ty (SVG/PNG)</li>
+    <li>Thay toàn bộ ảnh Unsplash bằng ảnh thực tế</li>
+    <li>Cập nhật nội dung mô tả dịch vụ đúng với thực tế</li>
+    <li>Cập nhật bảng báo giá thực tế</li>
+    <li>Thêm ít nhất 3–5 bài blog thực tế</li>
+    <li>Cập nhật thông tin đội ngũ nhân sự thực</li>
+    <li>Cập nhật Google Map iframe đúng địa chỉ</li>
+    <li>Cập nhật link Facebook, Zalo, YouTube thực</li>
+    <li>Cập nhật mã số doanh nghiệp thực</li>
+  </ul>
+
+  <h3>Kỹ Thuật</h3>
+  <ul class="checklist">
+    <li>Đăng ký domain anphatindustry.com tại Matbao</li>
+    <li>Cài SSL (Let's Encrypt) – HTTPS bắt buộc</li>
+    <li>Kiểm tra tốc độ tải trang tại pagespeed.web.dev</li>
+    <li>Kiểm tra mobile tại search.google.com/test/mobile-friendly</li>
+    <li>Kiểm tra form liên hệ gửi email thành công</li>
+    <li>Đăng ký Google Search Console và submit sitemap</li>
+    <li>Cài Google Analytics 4</li>
+    <li>Test trên Chrome, Safari, Firefox, Edge</li>
+    <li>Test trên iPhone và Android</li>
+  </ul>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════ -->
+<div style="margin-top:48px; padding-top:20px; border-top:2px solid var(--border);">
+  <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px; color:var(--muted);">
+    <div>
+      <strong style="color:var(--primary)">AN PHÁT INDUSTRY</strong> · anphatindustry.com<br/>
+      Tài liệu kỹ thuật nội bộ – Phiên bản 1.0 · Tháng 05/2026
+    </div>
+    <div style="text-align:right;">
+      Tech Stack: Next.js 14 · TypeScript · Tailwind CSS · Prisma + SQLite<br/>
+      Hosting: Matbao.net VPS · Node.js 20 · Admin CMS: /admin
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
