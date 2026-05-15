@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Search } from 'lucide-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
@@ -25,31 +25,32 @@ export default async function BlogPage() {
     publishedAt: p.publishedAt.toISOString().substring(0, 10),
     tags: JSON.parse(p.tags) as string[],
   }))
+
   return (
     <>
       {/* Hero */}
-      <section className="bg-primary-900 py-14 lg:py-20">
-        <div className="container">
+      <section className="bg-dark-1 border-b border-white/5 section-pt pb-12">
+        <div className="site-container">
           <Breadcrumb items={[{ label: 'Thư Viện' }]} />
-          <h1 className="font-heading font-black text-white text-3xl lg:text-5xl mt-5 mb-3">
+          <h1 className="font-heading font-bold text-white text-3xl lg:text-5xl mt-5 mb-3">
             Thư Viện Kiến Thức
           </h1>
-          <p className="text-white/70 text-lg max-w-2xl">
+          <p className="text-white/60 text-lg max-w-2xl">
             Những bài viết chia sẻ kinh nghiệm, kiến thức ô tô hữu ích từ đội ngũ kỹ thuật viên
             An Phát Industry.
           </p>
         </div>
       </section>
 
-      <section className="py-16 lg:py-24 bg-light-gray">
-        <div className="container">
+      <section className="section-py bg-dark-2">
+        <div className="site-container">
           {/* Filter Pills */}
           <div className="flex flex-wrap gap-3 mb-10">
             {categories.map((cat) => (
               <Link
                 key={cat.value}
                 href={cat.href}
-                className="bg-white hover:bg-primary-900 hover:text-white text-primary-900 border border-gray-200 hover:border-primary-900 text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-200 shadow-sm"
+                className="bg-dark-1 hover:bg-primary hover:text-white text-white/60 border border-white/10 hover:border-primary text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-200"
               >
                 {cat.label}
               </Link>
@@ -64,8 +65,8 @@ export default async function BlogPage() {
 
           {blogPosts.length === 0 && (
             <div className="text-center py-20">
-              <Search size={40} className="text-gray-300 mx-auto mb-4" />
-              <p className="text-gray-400">Chưa có bài viết nào.</p>
+              <Search size={40} className="text-white/20 mx-auto mb-4" />
+              <p className="text-white/40">Chưa có bài viết nào.</p>
             </div>
           )}
         </div>

@@ -13,10 +13,10 @@ interface Props extends WithSeason {
 
 // Stats shown beneath the about image
 const defaultStats = [
-  { icon: 'ðŸ”§', value: 65250, suffix: '+', label: 'Giá» cÃ´ng phá»¥c vá»¥' },
-  { icon: 'ðŸ˜Š', value: 5000,  suffix: '+', label: 'KhÃ¡ch hÃ ng hÃ i lÃ²ng' },
-  { icon: 'ðŸ‘¨â€ðŸ”§', value: 45,   suffix: '+', label: 'Ká»¹ thuáº­t viÃªn' },
-  { icon: 'ðŸ†', value: 9,     suffix: '+', label: 'NÄƒm kinh nghiá»‡m' },
+  { icon: '🔧', value: 65250, suffix: '+', label: 'Giờ công phục vụ' },
+  { icon: '😊', value: 5000,  suffix: '+', label: 'Khách hàng hài lòng' },
+  { icon: '👨‍🔧', value: 45,   suffix: '+', label: 'Kỹ thuật viên' },
+  { icon: '🏆', value: 9,     suffix: '+', label: 'Năm kinh nghiệm' },
 ]
 
 export default function AboutSection({ data = defaultAboutSection }: Omit<Props, 'season'>) {

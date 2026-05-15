@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import { siteConfig } from '@/lib/constants'
 
@@ -9,17 +9,17 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <>
-      <section className="bg-primary-900 py-14 lg:py-20">
-        <div className="container">
+      <section className="bg-dark-1 border-b border-white/5 section-pt pb-12">
+        <div className="site-container">
           <Breadcrumb items={[{ label: 'Chính Sách Bảo Mật' }]} />
-          <h1 className="font-heading font-black text-white text-3xl lg:text-4xl mt-5">
+          <h1 className="font-heading font-bold text-white text-3xl lg:text-4xl mt-5">
             Chính Sách Bảo Mật
           </h1>
         </div>
       </section>
-      <section className="py-16 bg-white">
-        <div className="container max-w-3xl">
-          <div className="prose prose-gray max-w-none space-y-6 text-gray-600">
+      <section className="section-py bg-dark-2">
+        <div className="site-container max-w-3xl">
+          <div className="prose max-w-none space-y-6 text-white/55">
             <p>
               {siteConfig.name} cam kết bảo vệ thông tin cá nhân của quý khách hàng. Chính sách
               này mô tả cách chúng tôi thu thập, sử dụng và bảo vệ thông tin của bạn.
@@ -44,7 +44,7 @@ export default function PrivacyPage() {
             <h2>4. Liên Hệ</h2>
             <p>
               Nếu có bất kỳ thắc mắc nào về chính sách bảo mật, vui lòng liên hệ:{' '}
-              <a href={`mailto:${siteConfig.email}`} className="text-accent-500">
+              <a href={`mailto:${siteConfig.email}`} className="text-primary hover:underline">
                 {siteConfig.email}
               </a>
             </p>

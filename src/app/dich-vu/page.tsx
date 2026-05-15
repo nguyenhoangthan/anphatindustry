@@ -1,10 +1,11 @@
-import type { Metadata } from 'next'
+﻿import type { Metadata } from 'next'
 import SectionHeader from '@/components/ui/SectionHeader'
 import ServiceCard from '@/components/ui/ServiceCard'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import ContactCTA from '@/components/home/ContactCTA'
 import { serviceCategories } from '@/data/services'
 import { prisma } from '@/lib/prisma'
+import { defaultContactCTA } from '@/lib/defaultContent'
 import type { Service } from '@/types'
 
 export const metadata: Metadata = {
@@ -14,23 +15,28 @@ export const metadata: Metadata = {
 }
 
 export default async function ServicesPage() {
-  const dbServices = await prisma.service.findMany({ orderBy: { sortOrder: 'asc' } }).catch(() => [])
+  const [dbServices, ctaRaw] = await Promise.all([
+    prisma.service.findMany({ orderBy: { sortOrder: 'asc' } }).catch(() => []),
+    prisma.siteSetting.findUnique({ where: { key: 'section_contact_cta' } }).catch(() => null),
+  ])
   const services: Service[] = dbServices.map((s) => ({
     ...s,
     category: s.category as Service['category'],
     icon: '',
     highlights: JSON.parse(s.highlights) as string[],
   }))
+  const ctaData = ctaRaw ? JSON.parse(ctaRaw.value) as typeof defaultContactCTA : defaultContactCTA
+
   return (
     <>
       {/* Hero */}
-      <section className="bg-primary-900 py-14 lg:py-20">
-        <div className="container">
+      <section className="bg-dark-1 border-b border-white/5 section-pt pb-12">
+        <div className="site-container">
           <Breadcrumb items={[{ label: 'Dịch Vụ' }]} />
-          <h1 className="font-heading font-black text-white text-3xl lg:text-5xl mt-5 mb-3">
+          <h1 className="font-heading font-bold text-white text-3xl lg:text-5xl mt-5 mb-3">
             Dịch Vụ Của Chúng Tôi
           </h1>
-          <p className="text-white/70 text-lg max-w-2xl">
+          <p className="text-white/60 text-lg max-w-2xl">
             Đầy đủ các giải pháp chăm sóc ô tô từ bảo dưỡng định kỳ, sửa chữa máy gầm đến đồng
             sơn và chăm sóc xe chuyên sâu.
           </p>
@@ -38,11 +44,11 @@ export default async function ServicesPage() {
       </section>
 
       {/* Services by Category */}
-      {serviceCategories.map((category) => {
+      {serviceCategories.map((category, idx) => {
         const categoryServices = services.filter((s) => s.category === category.id)
         return (
-          <section key={category.id} className="py-14 lg:py-20 odd:bg-white even:bg-light-gray">
-            <div className="container">
+          <section key={category.id} className={`section-py ${idx % 2 === 0 ? 'bg-dark-2' : 'bg-dark-1'}`}>
+            <div className="site-container">
               <SectionHeader
                 badge={category.label}
                 title={category.label}
@@ -59,7 +65,7 @@ export default async function ServicesPage() {
         )
       })}
 
-      <ContactCTA />
+      <ContactCTA data={ctaData} />
     </>
   )
 }

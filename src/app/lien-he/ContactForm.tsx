@@ -8,24 +8,24 @@ import { CheckCircle2, Send, Loader2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const contactSchema = z.object({
-  name:    z.string().min(2, 'Vui lÃ²ng nháº­p há» tÃªn (Ã­t nháº¥t 2 kÃ½ tá»±)'),
-  phone:   z.string().min(9, 'Sá»‘ Ä‘iá»‡n thoáº¡i khÃ´ng há»£p lá»‡').max(12).regex(/^[0-9+\s-]+$/, 'Chá»‰ gá»“m chá»¯ sá»‘'),
-  email:   z.string().email('Email khÃ´ng há»£p lá»‡').optional().or(z.literal('')),
+  name:    z.string().min(2, 'Vui lòng nhập họ tên (ít nhất 2 ký tự)'),
+  phone:   z.string().min(9, 'Số điện thoại không hợp lệ').max(12).regex(/^[0-9+\s-]+$/, 'Chỉ gồm chữ số'),
+  email:   z.string().email('Email không hợp lệ').optional().or(z.literal('')),
   service: z.string().optional(),
-  message: z.string().min(10, 'Vui lÃ²ng nháº­p ná»™i dung (Ã­t nháº¥t 10 kÃ½ tá»±)'),
+  message: z.string().min(10, 'Vui lòng nhập nội dung (ít nhất 10 ký tự)'),
 })
 
 type ContactFormData = z.infer<typeof contactSchema>
 
 const serviceOptions = [
-  'Báº£o dÆ°á»¡ng Ä‘á»‹nh ká»³',
-  'Sá»­a chá»¯a Ä‘iá»‡n & Ä‘iá»‡n láº¡nh',
-  'Sá»­a chá»¯a mÃ¡y gáº§m',
-  'ChÄƒm sÃ³c ná»™i tháº¥t',
-  'ChÄƒm sÃ³c ngoáº¡i tháº¥t',
-  'Äá»“ng sÆ¡n',
-  'Kiá»ƒm tra tá»•ng quÃ¡t',
-  'Dá»‹ch vá»¥ khÃ¡c',
+  'Bảo dưỡng định kỳ',
+  'Sửa chữa điện & điện lạnh',
+  'Sửa chữa máy gầm',
+  'Chăm sóc nội thất',
+  'Chăm sóc ngoại thất',
+  'Đồng sơn',
+  'Kiểm tra tổng quát',
+  'Dịch vụ khác',
 ]
 
 function FieldError({ msg }: { msg?: string }) {
@@ -51,12 +51,12 @@ export default function ContactForm() {
         <div className="w-16 h-16 bg-primary/15 rounded-full flex items-center justify-center mb-4">
           <CheckCircle2 size={32} className="text-primary" />
         </div>
-        <h3 className="font-heading font-bold text-white text-xl mb-2">Gá»­i ThÃ nh CÃ´ng!</h3>
+        <h3 className="font-heading font-bold text-white text-xl mb-2">Gửi Thành Công!</h3>
         <p className="text-white/50 text-sm max-w-xs">
-          Cáº£m Æ¡n quÃ½ khÃ¡ch. ChÃºng tÃ´i sáº½ liÃªn há»‡ láº¡i trong vÃ²ng 30 phÃºt trong giá» lÃ m viá»‡c.
+          Cảm ơn quý khách. Chúng tôi sẽ liên hệ lại trong vòng 30 phút trong giờ làm việc.
         </p>
         <button onClick={() => setSubmitted(false)} className="mt-6 text-primary font-semibold text-sm hover:underline">
-          Gá»­i yÃªu cáº§u khÃ¡c
+          Gửi yêu cầu khác
         </button>
       </div>
     )
@@ -74,14 +74,14 @@ export default function ContactForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-white/60 text-xs font-semibold mb-1.5 uppercase tracking-wide">
-            Há» vÃ  tÃªn <span className="text-primary">*</span>
+            Họ và tên <span className="text-primary">*</span>
           </label>
-          <input {...register('name')} placeholder="Nguyá»…n VÄƒn A" className={inputCls} />
+          <input {...register('name')} placeholder="Nguyễn Văn A" className={inputCls} />
           <FieldError msg={errors.name?.message} />
         </div>
         <div>
           <label className="block text-white/60 text-xs font-semibold mb-1.5 uppercase tracking-wide">
-            Sá»‘ Ä‘iá»‡n thoáº¡i <span className="text-primary">*</span>
+            Số điện thoại <span className="text-primary">*</span>
           </label>
           <input {...register('phone')} type="tel" placeholder="0901 234 567" className={inputCls} />
           <FieldError msg={errors.phone?.message} />
@@ -91,7 +91,7 @@ export default function ContactForm() {
       {/* Email */}
       <div>
         <label className="block text-white/60 text-xs font-semibold mb-1.5 uppercase tracking-wide">
-          Email (tÃ¹y chá»n)
+          Email (tùy chọn)
         </label>
         <input {...register('email')} type="email" placeholder="example@email.com" className={inputCls} />
         <FieldError msg={errors.email?.message} />
@@ -100,13 +100,13 @@ export default function ContactForm() {
       {/* Service */}
       <div>
         <label className="block text-white/60 text-xs font-semibold mb-1.5 uppercase tracking-wide">
-          Dá»‹ch vá»¥ quan tÃ¢m
+          Dịch vụ quan tâm
         </label>
         <select
           {...register('service')}
           className={cn(inputCls, 'appearance-none cursor-pointer')}
         >
-          <option value="">-- Chá»n dá»‹ch vá»¥ --</option>
+          <option value="">-- Chọn dịch vụ --</option>
           {serviceOptions.map((s) => <option key={s} value={s}>{s}</option>)}
         </select>
       </div>
@@ -114,13 +114,13 @@ export default function ContactForm() {
       {/* Message */}
       <div>
         <label className="block text-white/60 text-xs font-semibold mb-1.5 uppercase tracking-wide">
-          Ná»™i dung <span className="text-primary">*</span>
+          Nội dung <span className="text-primary">*</span>
         </label>
         <textarea
           {...register('message')}
+          placeholder="Mô tả tình trạng xe hoặc yêu cầu của bạn..."
+          className={cn(inputCls, 'min-h-[120px] resize-y')}
           rows={5}
-          placeholder="MÃ´ táº£ váº¥n Ä‘á» xe Ä‘ang gáº·p pháº£i hoáº·c yÃªu cáº§u cá»¥ thá»ƒ..."
-          className={inputCls}
         />
         <FieldError msg={errors.message?.message} />
       </div>
@@ -128,18 +128,14 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="btn-main w-full justify-center py-3.5 text-sm disabled:opacity-60"
+        className="btn-main w-full justify-center py-3.5 disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {isSubmitting ? (
-          <><Loader2 size={16} className="animate-spin" /> Äang gá»­i...</>
+          <><Loader2 size={16} className="animate-spin" /> Đang gửi...</>
         ) : (
-          <><Send size={16} /> Gá»­i YÃªu Cáº§u</>
+          <><Send size={16} /> Gửi Yêu Cầu Tư Vấn</>
         )}
       </button>
-
-      <p className="text-white/25 text-xs text-center">
-        ThÃ´ng tin cá»§a quÃ½ khÃ¡ch Ä‘Æ°á»£c báº£o máº­t tuyá»‡t Ä‘á»‘i.
-      </p>
     </form>
   )
 }

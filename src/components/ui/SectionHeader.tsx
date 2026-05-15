@@ -14,9 +14,8 @@ export default function SectionHeader({
   title,
   subtitle,
   align = 'center',
-  light = false,
   className,
-}: SectionHeaderProps) {
+}: Omit<SectionHeaderProps, 'light'>) {
   return (
     <div
       className={cn(
@@ -35,7 +34,7 @@ export default function SectionHeader({
       <h2
         className={cn(
           'font-heading font-bold text-2xl sm:text-3xl lg:text-4xl leading-tight mb-4',
-          light ? 'text-white' : 'text-heading-text'
+          'text-white'
         )}
       >
         {title}
@@ -45,7 +44,7 @@ export default function SectionHeader({
           className={cn(
             'text-base lg:text-lg leading-relaxed max-w-2xl',
             align === 'center' && 'mx-auto',
-            light ? 'text-white/70' : 'text-gray-500'
+            'text-white/55'
           )}
         >
           {subtitle}
