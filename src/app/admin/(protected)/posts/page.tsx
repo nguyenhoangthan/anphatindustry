@@ -4,8 +4,10 @@ import { prisma } from '@/lib/prisma'
 import DeleteButton from '../services/DeleteButton'
 import { formatDate } from '@/lib/utils'
 
+export const dynamic = 'force-dynamic'
+
 export default async function PostsAdminPage() {
-  const posts = await prisma.blogPost.findMany({ orderBy: { publishedAt: 'desc' } })
+  const posts = await prisma.blogPost.findMany({ orderBy: { publishedAt: 'desc' } }).catch(() => [])
 
   return (
     <div className="p-8">

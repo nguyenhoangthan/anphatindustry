@@ -2,10 +2,12 @@ import Link from 'next/link'
 import { LayoutDashboard, Wrench, BookOpen, Settings, ArrowRight } from 'lucide-react'
 import { prisma } from '@/lib/prisma'
 
+export const dynamic = 'force-dynamic'
+
 export default async function AdminDashboard() {
   const [serviceCount, postCount] = await Promise.all([
-    prisma.service.count(),
-    prisma.blogPost.count(),
+    prisma.service.count().catch(() => 0),
+    prisma.blogPost.count().catch(() => 0),
   ])
 
   const stats = [

@@ -45,8 +45,8 @@ async function getSection<T>(key: string, fallback: T): Promise<T> {
 
 export default async function HomePage() {
   const [dbServices, dbPosts, heroData, aboutData, whyUsData, processData, partnersData, ctaData] = await Promise.all([
-    prisma.service.findMany({ orderBy: { sortOrder: 'asc' } }),
-    prisma.blogPost.findMany({ orderBy: { publishedAt: 'desc' }, take: 3 }),
+    prisma.service.findMany({ orderBy: { sortOrder: 'asc' } }).catch(() => []),
+    prisma.blogPost.findMany({ orderBy: { publishedAt: 'desc' }, take: 3 }).catch(() => []),
     getSection('section_hero', defaultHeroSlides),
     getSection('section_about_home', defaultAboutSection),
     getSection('section_why_us', defaultWhyChooseUs),

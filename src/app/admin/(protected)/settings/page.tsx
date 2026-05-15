@@ -3,9 +3,11 @@ import { prisma } from '@/lib/prisma'
 import SettingsForm from '@/components/admin/SettingsForm'
 import { siteConfig } from '@/lib/constants'
 
+export const dynamic = 'force-dynamic'
+
 export default async function SettingsAdminPage() {
   // Load from DB, fallback to constants
-  const setting = await prisma.siteSetting.findUnique({ where: { key: 'siteConfig' } })
+  const setting = await prisma.siteSetting.findUnique({ where: { key: 'siteConfig' } }).catch(() => null)
   const currentConfig = setting
     ? JSON.parse(setting.value)
     : {

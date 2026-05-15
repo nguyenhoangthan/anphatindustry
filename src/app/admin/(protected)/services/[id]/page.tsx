@@ -3,6 +3,8 @@ import { Pencil } from 'lucide-react'
 import { prisma } from '@/lib/prisma'
 import ServiceForm from '@/components/admin/ServiceForm'
 
+export const dynamic = 'force-dynamic'
+
 interface Props {
   params: { id: string }
 }

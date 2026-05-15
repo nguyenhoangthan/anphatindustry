@@ -3,8 +3,10 @@ import { Plus, Pencil } from 'lucide-react'
 import { prisma } from '@/lib/prisma'
 import DeleteButton from './DeleteButton'
 
+export const dynamic = 'force-dynamic'
+
 export default async function ServicesAdminPage() {
-  const services = await prisma.service.findMany({ orderBy: { sortOrder: 'asc' } })
+  const services = await prisma.service.findMany({ orderBy: { sortOrder: 'asc' } }).catch(() => [])
 
   return (
     <div className="p-8">

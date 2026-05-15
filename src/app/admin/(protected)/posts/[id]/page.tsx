@@ -3,6 +3,8 @@ import { Pencil } from 'lucide-react'
 import { prisma } from '@/lib/prisma'
 import PostForm from '@/components/admin/PostForm'
 
+export const dynamic = 'force-dynamic'
+
 interface Props {
   params: { id: string }
 }

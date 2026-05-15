@@ -19,7 +19,7 @@ const categories = [
 ]
 
 export default async function BlogPage() {
-  const dbPosts = await prisma.blogPost.findMany({ orderBy: { publishedAt: 'desc' } })
+  const dbPosts = await prisma.blogPost.findMany({ orderBy: { publishedAt: 'desc' } }).catch(() => [])
   const blogPosts: BlogPost[] = dbPosts.map((p) => ({
     ...p,
     publishedAt: p.publishedAt.toISOString().substring(0, 10),

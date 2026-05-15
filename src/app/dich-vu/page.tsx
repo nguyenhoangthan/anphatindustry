@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 }
 
 export default async function ServicesPage() {
-  const dbServices = await prisma.service.findMany({ orderBy: { sortOrder: 'asc' } })
+  const dbServices = await prisma.service.findMany({ orderBy: { sortOrder: 'asc' } }).catch(() => [])
   const services: Service[] = dbServices.map((s) => ({
     ...s,
     category: s.category as Service['category'],
