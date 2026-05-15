@@ -1,23 +1,23 @@
 import type { SiteConfig } from '@/types'
 
 export const siteConfig: SiteConfig = {
-  name: 'An Phát Industry',
+  name: 'CÔNG TY CỔ PHẦN SẢN XUẤT THƯƠNG MẠI DỊCH VỤ TƯ VẤN AN PHÁT',
   shortName: 'An Phát',
-  tagline: 'Trung Tâm Bảo Dưỡng – Sửa Chữa Ô Tô Uy Tín, Chuyên Nghiệp',
+  tagline: 'Bảo dưỡng ô tô | Mô hình đào tạo | Tư vấn giải pháp kỹ thuật',
   description:
-    'An Phát Industry – Trung tâm bảo dưỡng, sửa chữa, chăm sóc ô tô chuyên nghiệp tại TP.HCM. Đội ngũ kỹ thuật viên giàu kinh nghiệm, công nghệ hiện đại, cam kết chất lượng.',
+    'AN PHÁT là tâm huyết kết tinh từ sự hợp tác giữa Công ty TNHH TM DV Ô tô Hoàng Phát (chuyên bảo dưỡng, sửa chữa) và Công ty CP SX TM DV Tư vấn An Lạc (chuyên mô hình động cơ và giải pháp đào tạo). Với nền tảng hơn 14 năm kinh nghiệm trong ngành ô tô, chúng tôi không ngừng nỗ lực và sáng tạo để mang đến những dịch vụ đa dạng cùng chất lượng hoàn hảo nhất cho khách hàng.',
   url: 'https://anphatindustry.com',
-  phone: ['0901 234 567', '0912 345 678'],
-  email: 'info@anphatindustry.com',
-  address: '123 Nguyễn Văn Linh, Phường Tân Phong, Quận 7, TP. Hồ Chí Minh',
+  phone: ['0908643528', '0977747178'],
+  email: 'sales@anphatindustry.com',
+  address: '78 Lê Tấn Bê, Phường An Lạc, Quận Bình Tân, TP. Hồ Chí Minh',
   workingHours: '07:30 – 17:30 từ Thứ 2 đến Chủ Nhật',
   social: {
     facebook: 'https://facebook.com/anphatindustry',
-    zalo: 'https://zalo.me/0901234567',
+    zalo: '',
     youtube: 'https://youtube.com/@anphatindustry',
-    tiktok: 'https://tiktok.com/@anphatindustry',
+    tiktok: '',
   },
-  businessNumber: '0315XXXXXX',
+  businessNumber: '0318365059',
 }
 
 export const PHONE_DISPLAY = siteConfig.phone[0]
