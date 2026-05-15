@@ -1,4 +1,4 @@
-import prisma from '@/lib/prisma'
+﻿import { prisma } from '@/lib/prisma'
 import { defaultTeamSection } from '@/lib/defaultContent'
 import TeamForm from '@/components/admin/TeamForm'
 

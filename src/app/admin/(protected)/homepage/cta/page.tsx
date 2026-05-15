@@ -1,4 +1,4 @@
-import prisma from '@/lib/prisma'
+﻿import { prisma } from '@/lib/prisma'
 import { defaultContactCTA } from '@/lib/defaultContent'
 import CTAForm from '@/components/admin/CTAForm'
 

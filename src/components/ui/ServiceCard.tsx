@@ -10,7 +10,7 @@ interface ServiceCardProps extends WithSeason {
   compact?: boolean
 }
 
-export default function ServiceCard({ service, index, compact = false, season }: ServiceCardProps) {
+export default function ServiceCard({ service, index, compact = false }: Omit<ServiceCardProps, 'season'>) {
   const num = String((index ?? 0) + 1).padStart(2, '0')
 
   return (

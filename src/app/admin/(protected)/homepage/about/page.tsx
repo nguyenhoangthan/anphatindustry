@@ -1,4 +1,4 @@
-import prisma from '@/lib/prisma'
+﻿import { prisma } from '@/lib/prisma'
 import { defaultAboutSection } from '@/lib/defaultContent'
 import AboutHomepageForm from '@/components/admin/AboutHomepageForm'
 

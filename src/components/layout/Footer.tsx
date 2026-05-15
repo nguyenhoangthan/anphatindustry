@@ -1,6 +1,6 @@
-import Link from 'next/link'
+﻿import Link from 'next/link'
 import { Phone, Mail, MapPin, Clock, Facebook, Youtube } from 'lucide-react'
-import { siteConfig, NAV_ITEMS, PHONE_LINK } from '@/lib/constants'
+import { siteConfig, NAV_ITEMS } from '@/lib/constants'
 
 const serviceLinks = [
   { label: 'Bảo Dưỡng Định Kỳ', href: '/dich-vu/bao-duong-dinh-ky' },
@@ -21,7 +21,6 @@ export default function Footer() {
 
   return (
     <footer className="bg-dark-1 text-white border-t border-white/5">
-      {/* Main Footer */}
       <div className="site-container py-14 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
 
@@ -40,12 +39,9 @@ export default function Footer() {
                 </div>
               </div>
             </Link>
-
             <p className="text-white/45 text-[13px] leading-relaxed mb-6">
               Trung tâm bảo dưỡng – sửa chữa ô tô chuyên nghiệp tại TP.HCM. Uy tín – Tận tâm – Minh bạch trong từng dịch vụ.
             </p>
-
-            {/* Social icons */}
             <div className="flex items-center gap-2.5">
               {siteConfig.social.facebook && (
                 <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook"
@@ -151,202 +147,6 @@ export default function Footer() {
           <div className="flex items-center gap-5">
             {legalLinks.map((link) => (
               <Link key={link.href} href={link.href} className="text-white/30 text-xs hover:text-white/60 transition-colors">
-                {link.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
-    </footer>
-  )
-}
-
-
-const serviceLinks = [
-  { label: 'Bảo Dưỡng Định Kỳ', href: '/dich-vu/bao-duong-dinh-ky' },
-  { label: 'Điện & Điện Lạnh', href: '/dich-vu/dien-dien-lanh' },
-  { label: 'Sửa Chữa Máy Gầm', href: '/dich-vu/sua-chua-may-gam' },
-  { label: 'Chăm Sóc Nội Thất', href: '/dich-vu/cham-soc-noi-that' },
-  { label: 'Chăm Sóc Ngoại Thất', href: '/dich-vu/cham-soc-ngoai-that' },
-  { label: 'Sơn Dặm Vá & Toàn Thân', href: '/dich-vu/son-dam-va' },
-  { label: 'Sửa Chữa Đồng Thân Xe', href: '/dich-vu/sua-chua-dong' },
-]
-
-const legalLinks = [
-  { label: 'Chính Sách Bảo Mật', href: '/chinh-sach-bao-mat' },
-  { label: 'Điều Khoản Dịch Vụ', href: '/dieu-khoan-dich-vu' },
-  { label: 'Chính Sách Đổi Trả', href: '/chinh-sach-doi-tra' },
-]
-
-export default function Footer() {
-  const currentYear = new Date().getFullYear()
-
-  return (
-    <footer className="bg-primary-950 text-white">
-      {/* Main Footer */}
-      <div className="container py-14 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Col 1 – Brand */}
-          <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-3 mb-5">
-              <div className="w-11 h-11 bg-accent-500 rounded-lg flex items-center justify-center font-heading font-black text-white text-lg">
-                AP
-              </div>
-              <div>
-                <div className="font-heading font-bold text-white text-base leading-tight">
-                  AN PHÁT INDUSTRY
-                </div>
-                <div className="text-white/50 text-[10px] uppercase tracking-wide">
-                  Bảo Dưỡng · Sửa Chữa · Chăm Sóc
-                </div>
-              </div>
-            </Link>
-            <p className="text-white/60 text-sm leading-relaxed mb-5">
-              Trung tâm bảo dưỡng – sửa chữa ô tô chuyên nghiệp tại TP.HCM. Uy tín – Tận tâm –
-              Minh bạch trong từng dịch vụ.
-            </p>
-            {/* Social */}
-            <div className="flex items-center gap-3">
-              {siteConfig.social.facebook && (
-                <a
-                  href={siteConfig.social.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Facebook"
-                  className="w-9 h-9 rounded-lg bg-white/10 hover:bg-accent-500 flex items-center justify-center transition-colors"
-                >
-                  <Facebook size={16} />
-                </a>
-              )}
-              {siteConfig.social.youtube && (
-                <a
-                  href={siteConfig.social.youtube}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="YouTube"
-                  className="w-9 h-9 rounded-lg bg-white/10 hover:bg-accent-500 flex items-center justify-center transition-colors"
-                >
-                  <Youtube size={16} />
-                </a>
-              )}
-              {siteConfig.social.zalo && (
-                <a
-                  href={siteConfig.social.zalo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Zalo"
-                  className="w-9 h-9 rounded-lg bg-white/10 hover:bg-accent-500 flex items-center justify-center transition-colors text-xs font-bold"
-                >
-                  Z
-                </a>
-              )}
-              {siteConfig.social.tiktok && (
-                <a
-                  href={siteConfig.social.tiktok}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="TikTok"
-                  className="w-9 h-9 rounded-lg bg-white/10 hover:bg-accent-500 flex items-center justify-center transition-colors text-xs font-bold"
-                >
-                  TT
-                </a>
-              )}
-            </div>
-          </div>
-
-          {/* Col 2 – Services */}
-          <div>
-            <h3 className="font-heading font-bold text-white text-sm uppercase tracking-wider mb-5 pb-3 border-b border-white/10">
-              Dịch Vụ
-            </h3>
-            <ul className="space-y-2.5">
-              {serviceLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-white/60 text-sm hover:text-accent-400 transition-colors flex items-center gap-2"
-                  >
-                    <span className="w-1 h-1 rounded-full bg-accent-500 flex-shrink-0" />
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Col 3 – Quick Links */}
-          <div>
-            <h3 className="font-heading font-bold text-white text-sm uppercase tracking-wider mb-5 pb-3 border-b border-white/10">
-              Liên Kết Nhanh
-            </h3>
-            <ul className="space-y-2.5">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-white/60 text-sm hover:text-accent-400 transition-colors flex items-center gap-2"
-                  >
-                    <span className="w-1 h-1 rounded-full bg-accent-500 flex-shrink-0" />
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Col 4 – Contact */}
-          <div>
-            <h3 className="font-heading font-bold text-white text-sm uppercase tracking-wider mb-5 pb-3 border-b border-white/10">
-              Thông Tin Liên Hệ
-            </h3>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <MapPin size={16} className="text-accent-400 flex-shrink-0 mt-0.5" />
-                <span className="text-white/60 text-sm leading-relaxed">{siteConfig.address}</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Clock size={16} className="text-accent-400 flex-shrink-0" />
-                <span className="text-white/60 text-sm">{siteConfig.workingHours}</span>
-              </li>
-              {siteConfig.phone.map((phone) => (
-                <li key={phone} className="flex items-center gap-3">
-                  <Phone size={16} className="text-accent-400 flex-shrink-0" />
-                  <a
-                    href={`tel:+84${phone.replace(/^0/, '').replace(/\s/g, '')}`}
-                    className="text-white/60 text-sm hover:text-accent-400 transition-colors"
-                  >
-                    {phone}
-                  </a>
-                </li>
-              ))}
-              <li className="flex items-center gap-3">
-                <Mail size={16} className="text-accent-400 flex-shrink-0" />
-                <a
-                  href={`mailto:${siteConfig.email}`}
-                  className="text-white/60 text-sm hover:text-accent-400 transition-colors"
-                >
-                  {siteConfig.email}
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Bar */}
-      <div className="border-t border-white/10">
-        <div className="container py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-white/40 text-xs text-center sm:text-left">
-            Copyright © {currentYear} {siteConfig.name}. All rights reserved. MSDN:{' '}
-            {siteConfig.businessNumber}
-          </p>
-          <div className="flex items-center gap-4">
-            {legalLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-white/40 text-xs hover:text-white/70 transition-colors"
-              >
                 {link.label}
               </Link>
             ))}

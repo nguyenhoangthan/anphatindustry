@@ -6,7 +6,7 @@ import { SEASON_CONFIGS } from '@/types/season'
 
 interface SeasonContextValue {
   season: Season
-  setSeason: (s: Season) => void
+  setSeason: (_season: Season) => void
 }
 
 const SeasonContext = createContext<SeasonContextValue>({

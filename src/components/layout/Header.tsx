@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
@@ -35,7 +35,6 @@ function TopBar() {
   )
 }
 
-// ─── Main Header ─────────────────────────────────────────────────────────────
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
@@ -84,13 +83,11 @@ export default function Header() {
           isScrolled ? 'shadow-lg shadow-black/40' : 'backdrop-blur-sm'
         )}
       >
-        {/* Primary color underline */}
         <div className="absolute bottom-0 left-0 right-0 h-px bg-primary opacity-20" />
 
         <div className="site-container" ref={navRef}>
           <div className="flex items-center justify-between h-[72px] lg:h-20">
 
-            {/* Logo */}
             <Link href="/" className="flex items-center gap-3 flex-shrink-0">
               <div className="w-10 h-10 lg:w-11 lg:h-11 rounded-card bg-primary flex items-center justify-center font-heading font-black text-white text-lg flex-shrink-0">
                 AP
@@ -105,7 +102,6 @@ export default function Header() {
               </div>
             </Link>
 
-            {/* Desktop Nav */}
             <nav className="hidden lg:flex items-center gap-0.5">
               {NAV_ITEMS.map((item) => {
                 const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
@@ -160,7 +156,6 @@ export default function Header() {
               })}
             </nav>
 
-            {/* CTA + Hamburger */}
             <div className="flex items-center gap-3">
               <Link href="/bao-gia" className="btn-main hidden lg:inline-flex text-[13px] py-2.5 px-5">
                 Đặt Lịch Ngay
@@ -178,7 +173,6 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
       {isMenuOpen && (
         <div className="fixed inset-0 z-40 lg:hidden flex flex-col bg-dark-1">
           <div className="flex items-center justify-between px-5 h-[72px] border-b border-white/5 bg-dark-2 flex-shrink-0">
@@ -232,232 +226,6 @@ export default function Header() {
           </div>
         </div>
       )}
-    </>
-  )
-}
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
-  const pathname = usePathname()
-  const dropdownRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 60)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  useEffect(() => {
-    setIsMenuOpen(false)
-    setOpenDropdown(null)
-  }, [pathname])
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setOpenDropdown(null)
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
-
-  return (
-    <>
-      {/* Top Bar */}
-      <div className="hidden lg:block bg-primary-900 text-white/80 text-sm py-2">
-        <div className="container flex items-center justify-between">
-          <span className="text-xs">{siteConfig.workingHours}</span>
-          <div className="flex items-center gap-6">
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="hover:text-white transition-colors text-xs"
-            >
-              {siteConfig.email}
-            </a>
-            <a
-              href={PHONE_LINK}
-              className="flex items-center gap-1.5 text-accent-400 font-semibold hover:text-accent-300 transition-colors"
-            >
-              <Phone size={13} />
-              {PHONE_DISPLAY}
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Header */}
-      <header
-        className={cn(
-          'sticky top-0 z-50 transition-all duration-300',
-          isScrolled
-            ? 'bg-primary-900 shadow-lg shadow-black/20'
-            : 'bg-primary-900/95 backdrop-blur-sm'
-        )}
-      >
-        <div className="container" ref={dropdownRef}>
-          <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 flex-shrink-0">
-              <div className="w-10 h-10 lg:w-12 lg:h-12 bg-accent-500 rounded-lg flex items-center justify-center font-heading font-black text-white text-lg lg:text-xl">
-                AP
-              </div>
-              <div className="hidden sm:block">
-                <div className="font-heading font-bold text-white text-base lg:text-lg leading-tight">
-                  AN PHÁT INDUSTRY
-                </div>
-                <div className="text-white/60 text-[10px] lg:text-xs font-medium tracking-wide uppercase">
-                  Bảo Dưỡng · Sửa Chữa · Chăm Sóc Ô Tô
-                </div>
-              </div>
-            </Link>
-
-            {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-1">
-              {NAV_ITEMS.map((item) => (
-                <div key={item.href} className="relative">
-                  {item.children ? (
-                    <button
-                      onClick={() =>
-                        setOpenDropdown(openDropdown === item.href ? null : item.href)
-                      }
-                      className={cn(
-                        'flex items-center gap-1 px-3 py-2 text-sm font-semibold tracking-wide rounded transition-colors',
-                        pathname.startsWith(item.href) && item.href !== '/'
-                          ? 'text-accent-400'
-                          : 'text-white/85 hover:text-white',
-                        openDropdown === item.href && 'text-accent-400'
-                      )}
-                    >
-                      {item.label}
-                      <ChevronDown
-                        size={14}
-                        className={cn(
-                          'transition-transform duration-200',
-                          openDropdown === item.href && 'rotate-180'
-                        )}
-                      />
-                    </button>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      className={cn(
-                        'px-3 py-2 text-sm font-semibold tracking-wide rounded transition-colors block',
-                        (pathname === item.href ||
-                          (item.href !== '/' && pathname.startsWith(item.href)))
-                          ? 'text-accent-400'
-                          : 'text-white/85 hover:text-white'
-                      )}
-                    >
-                      {item.label}
-                    </Link>
-                  )}
-
-                  {/* Dropdown */}
-                  {item.children && openDropdown === item.href && (
-                    <AnimatePresence>
-                      <motion.div
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 8 }}
-                        transition={{ duration: 0.15 }}
-                        className="absolute top-full left-0 mt-1 min-w-[220px] bg-white rounded-xl shadow-2xl border border-gray-100 py-2 z-50 overflow-hidden"
-                      >
-                        {item.children.map((child) => (
-                          <Link
-                            key={child.href}
-                            href={child.href}
-                            className={cn(
-                              'block px-4 py-2.5 text-sm font-medium transition-colors',
-                              pathname === child.href
-                                ? 'text-accent-500 bg-accent-50'
-                                : 'text-gray-700 hover:bg-gray-50 hover:text-primary-900'
-                            )}
-                          >
-                            {child.label}
-                          </Link>
-                        ))}
-                      </motion.div>
-                    </AnimatePresence>
-                  )}
-                </div>
-              ))}
-            </nav>
-
-            {/* CTA + Mobile Toggle */}
-            <div className="flex items-center gap-3">
-              <a
-                href={PHONE_LINK}
-                className="hidden lg:flex items-center gap-2 bg-accent-500 hover:bg-accent-600 text-white px-4 py-2 rounded-lg text-sm font-bold transition-colors"
-              >
-                <Phone size={14} />
-                Đặt Lịch Ngay
-              </a>
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="lg:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
-                aria-label="Toggle menu"
-              >
-                {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.25 }}
-              className="lg:hidden bg-primary-950 border-t border-white/10 overflow-hidden"
-            >
-              <nav className="container py-4 flex flex-col gap-1">
-                {NAV_ITEMS.map((item) => (
-                  <div key={item.href}>
-                    <Link
-                      href={item.href}
-                      className={cn(
-                        'block px-4 py-3 rounded-lg text-sm font-semibold tracking-wide transition-colors',
-                        pathname === item.href
-                          ? 'text-accent-400 bg-white/5'
-                          : 'text-white/80 hover:text-white hover:bg-white/5'
-                      )}
-                    >
-                      {item.label}
-                    </Link>
-                    {item.children && (
-                      <div className="pl-4 flex flex-col gap-0.5 mt-0.5">
-                        {item.children.map((child) => (
-                          <Link
-                            key={child.href}
-                            href={child.href}
-                            className="block px-4 py-2 rounded-lg text-sm text-white/60 hover:text-white hover:bg-white/5 transition-colors"
-                          >
-                            {child.label}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-                <div className="pt-3 mt-1 border-t border-white/10">
-                  <a
-                    href={PHONE_LINK}
-                    className="flex items-center justify-center gap-2 bg-accent-500 text-white px-4 py-3 rounded-lg font-bold transition-colors"
-                  >
-                    <Phone size={16} />
-                    Gọi Ngay: {PHONE_DISPLAY}
-                  </a>
-                </div>
-              </nav>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </header>
     </>
   )
 }

@@ -128,6 +128,7 @@ export const defaultPricingPackages = {
       highlight: false,
       price: 'Từ 350.000đ',
       description: 'Phù hợp cho xe mới và bảo dưỡng định kỳ theo cây số',
+      cta: 'Đặt Lịch Ngay',
       items: [
         'Thay dầu động cơ (dầu tiêu chuẩn)',
         'Thay lọc dầu',
@@ -143,6 +144,7 @@ export const defaultPricingPackages = {
       highlight: true,
       price: 'Từ 850.000đ',
       description: 'Gói toàn diện nhất được khách hàng lựa chọn nhiều nhất',
+      cta: 'Chọn Gói Này',
       items: [
         'Thay dầu động cơ cao cấp (Full synthetic)',
         'Thay lọc dầu, lọc gió, lọc cabin',
@@ -159,6 +161,7 @@ export const defaultPricingPackages = {
       highlight: false,
       price: 'Từ 2.500.000đ',
       description: 'Dành cho xe cao cấp hoặc khách hàng cần chăm sóc toàn diện',
+      cta: 'Tư Vấn Thêm',
       items: [
         'Toàn bộ nội dung Gói Nâng Cao',
         'Đánh bóng xe ngoại thất',

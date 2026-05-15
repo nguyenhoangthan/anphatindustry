@@ -19,8 +19,7 @@ export default function BeforeAfterSlider({
   afterSrc  = DEFAULT_AFTER,
   beforeAlt = 'Trước khi xử lý',
   afterAlt  = 'Sau khi xử lý',
-  season,
-}: Props) {
+}: Omit<Props, 'season'>) {
   const [position, setPosition] = useState(50) // percentage 0–100
   const containerRef = useRef<HTMLDivElement>(null)
   const isDragging = useRef(false)

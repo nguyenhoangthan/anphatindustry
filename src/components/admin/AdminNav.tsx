@@ -6,9 +6,10 @@ import { signOut } from 'next-auth/react'
 import {
   LayoutDashboard, Wrench, BookOpen, Settings, LogOut,
   Images, Info, Star, GitBranch, Users, DollarSign, Handshake, Megaphone,
+  type LucideIcon,
 } from 'lucide-react'
 
-const navSections = [
+const navSections: { label: string | null; items: { href: string; label: string; icon: LucideIcon; exact?: boolean }[] }[] = [
   {
     label: null,
     items: [

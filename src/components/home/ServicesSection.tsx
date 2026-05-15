@@ -7,7 +7,7 @@ interface Props extends WithSeason {
   services: Service[]
 }
 
-export default function ServicesSection({ services, season }: Props) {
+export default function ServicesSection({ services }: Omit<Props, 'season'>) {
   return (
     <section className="section-py bg-dark-2">
       <div className="site-container">
@@ -23,7 +23,7 @@ export default function ServicesSection({ services, season }: Props) {
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {services.slice(0, 6).map((service, i) => (
-            <ServiceCard key={service.id} service={service} index={i} season={season} />
+            <ServiceCard key={service.id} service={service} index={i} />
           ))}
         </div>
 

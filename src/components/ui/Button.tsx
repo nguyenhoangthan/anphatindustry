@@ -19,12 +19,12 @@ interface ButtonProps {
 
 const variantStyles: Record<Variant, string> = {
   primary:
-    'bg-primary-900 hover:bg-primary-800 text-white border-transparent shadow-sm hover:shadow-md',
+    'bg-primary hover:bg-primary/80 text-white border-transparent shadow-sm hover:shadow-md',
   accent:
-    'bg-accent-500 hover:bg-accent-600 text-white border-transparent shadow-sm hover:shadow-md',
+    'bg-primary hover:bg-primary/80 text-white border-transparent shadow-sm hover:shadow-md',
   outline:
-    'bg-transparent border-primary-900 text-primary-900 hover:bg-primary-900 hover:text-white',
-  ghost: 'bg-transparent border-transparent text-primary-900 hover:bg-primary-50',
+    'bg-transparent border-primary text-primary hover:bg-primary hover:text-white',
+  ghost: 'bg-transparent border-transparent text-primary hover:bg-primary/10',
 }
 
 const sizeStyles: Record<Size, string> = {
@@ -34,7 +34,7 @@ const sizeStyles: Record<Size, string> = {
 }
 
 const baseStyles =
-  'inline-flex items-center justify-center font-bold border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed'
+  'inline-flex items-center justify-center font-bold border rounded-btn transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed'
 
 export default function Button({
   children,

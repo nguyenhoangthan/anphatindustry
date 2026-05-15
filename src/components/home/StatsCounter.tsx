@@ -54,7 +54,7 @@ function StatItem({ stat, active }: { stat: Stat; active: boolean }) {
   )
 }
 
-export default function StatsCounter({ stats, season }: Props) {
+export default function StatsCounter({ stats }: Omit<Props, 'season'>) {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 })
 
   return (

@@ -22,7 +22,7 @@ export default function ScrollToTop() {
       onClick={scrollToTop}
       aria-label="Scroll to top"
       className={cn(
-        'fixed bottom-24 right-5 z-50 w-11 h-11 bg-primary-900 hover:bg-primary-800 text-white rounded-xl shadow-lg flex items-center justify-center transition-all duration-300',
+        'fixed bottom-24 right-5 z-50 w-11 h-11 bg-primary hover:bg-primary/80 text-white rounded-card shadow-lg shadow-primary/30 flex items-center justify-center transition-all duration-300',
         visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
       )}
     >

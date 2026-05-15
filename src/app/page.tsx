@@ -9,6 +9,7 @@ import BlogSection from '@/components/home/BlogSection'
 import ContactCTA from '@/components/home/ContactCTA'
 import { siteConfig } from '@/lib/constants'
 import { prisma } from '@/lib/prisma'
+import { getActiveSeason } from '@/lib/season'
 import type { Service, BlogPost } from '@/types'
 import {
   defaultHeroSlides, defaultAboutSection, defaultWhyChooseUs,
@@ -54,12 +55,13 @@ export default async function HomePage() {
     getSection('section_contact_cta', defaultContactCTA),
   ])
 
+  const season = getActiveSeason()
   const services = dbServices.map(toService)
   const posts = dbPosts.map(toPost)
 
   return (
     <>
-      <HeroSlider slides={heroData} />
+      <HeroSlider slides={heroData} season={season} />
       <ServicesSection services={services} />
       <AboutSection data={aboutData} />
       <WhyChooseUs data={whyUsData} />

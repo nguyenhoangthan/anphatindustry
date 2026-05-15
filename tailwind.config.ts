@@ -32,32 +32,54 @@ const config: Config = {
     extend: {
       // ── Colors ────────────────────────────────────────────────────────────
       colors: {
-        // Season-aware primary – powered by CSS variable
-        primary: 'rgb(var(--color-primary) / <alpha-value>)',
-        'primary-dim': 'rgb(var(--color-primary) / 0.15)',
+        // ─── Season-aware frontend tokens (CSS variable driven) ───────────
+        // Using DEFAULT + dim so `bg-primary` uses the var, scale shades stay static
+        primary: {
+          DEFAULT: 'rgb(var(--color-primary) / <alpha-value>)',
+          dim:     'rgb(var(--color-primary) / 0.15)',
+          // Static navy scale – kept for admin UI & existing pages
+          50:  '#e8eef8',
+          100: '#c5d4ed',
+          200: '#9eb7e0',
+          300: '#7399d3',
+          400: '#5282c9',
+          500: '#2f6abf',
+          600: '#2460b3',
+          700: '#1a4f9e',
+          800: '#143e8a',
+          900: '#0B2447',
+          950: '#071833',
+        },
+        accent: {
+          DEFAULT: 'rgb(var(--color-accent) / <alpha-value>)',
+          // Static red scale – kept for existing pages
+          50:  '#fff0ee',
+          100: '#ffd8d2',
+          200: '#ffb5aa',
+          300: '#ff8a7a',
+          400: '#ff5a46',
+          500: '#E63312',
+          600: '#d42b0d',
+          700: '#b82309',
+          800: '#9a1c07',
+          900: '#7d1505',
+        },
 
-        // Dark backgrounds (same hierarchy as original)
+        // ─── Dark backgrounds (CSS variable driven) ───────────────────────
         'dark-1': 'rgb(var(--color-dark-1) / <alpha-value>)',
         'dark-2': 'rgb(var(--color-dark-2) / <alpha-value>)',
         'dark-3': 'rgb(var(--color-dark-3) / <alpha-value>)',
 
-        // Season accent (secondary highlight used in Tết / Noël)
-        accent: 'rgb(var(--color-accent) / <alpha-value>)',
-
-        // Static neutrals
-        'body-text': '#8a8a8a',
+        // ─── Static neutrals ──────────────────────────────────────────────
+        'body-text':  '#8a8a8a',
         'heading-text': '#002060',
-        border: '#bbbbbb',
-        'bg-light': '#F8F9FA',
-        'bg-grey': '#eeeeee',
-
-        // Admin palette (kept from previous config)
-        admin: {
-          50:  '#e8eef8',
-          100: '#c5d4ed',
-          500: '#2f6abf',
-          900: '#0B2447',
-        },
+        border:       '#bbbbbb',
+        'bg-light':   '#F8F9FA',
+        'bg-grey':    '#eeeeee',
+        // Legacy aliases kept for existing pages
+        'light-gray': '#F8F9FA',
+        'mid-gray':   '#E9ECEF',
+        dark:         '#1A1A2E',
       },
 
       // ── Typography ────────────────────────────────────────────────────────

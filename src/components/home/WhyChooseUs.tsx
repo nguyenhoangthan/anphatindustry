@@ -1,75 +1,39 @@
-'use client'
-
-import { motion } from 'framer-motion'
-import { ShieldCheck, Heart, Award, HandshakeIcon } from 'lucide-react'
-import SectionHeader from '@/components/ui/SectionHeader'
+﻿import { ShieldCheck, Heart, Award, Handshake } from 'lucide-react'
 import { defaultWhyChooseUs } from '@/lib/defaultContent'
 
-type WhyData = typeof defaultWhyChooseUs
+const icons = [ShieldCheck, Heart, Award, Handshake]
 
-const iconMeta = [
-  { icon: ShieldCheck, color: 'bg-blue-50', iconColor: 'text-blue-600', borderColor: 'border-blue-200' },
-  { icon: Heart, color: 'bg-red-50', iconColor: 'text-accent-500', borderColor: 'border-red-200' },
-  { icon: Award, color: 'bg-yellow-50', iconColor: 'text-yellow-600', borderColor: 'border-yellow-200' },
-  { icon: HandshakeIcon, color: 'bg-green-50', iconColor: 'text-green-600', borderColor: 'border-green-200' },
-]
-
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: 'easeOut' } },
-}
-
-export default function WhyChooseUs({ data = defaultWhyChooseUs }: { data?: WhyData }) {
-  const values = data.values.map((v, i) => ({ ...iconMeta[i % iconMeta.length], ...v }))
+export default function WhyChooseUs({ data = defaultWhyChooseUs }: { data?: typeof defaultWhyChooseUs }) {
   return (
-    <section className="py-16 lg:py-24 bg-primary-900 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-white" />
-        <div className="absolute -bottom-20 -left-20 w-96 h-96 rounded-full bg-white" />
-      </div>
+    <section className="section-py bg-dark-2">
+      <div className="site-container">
+        <div className="text-center mb-12">
+          <div className="section-subtitle">{data.badge}</div>
+          <h2 className="text-white font-heading font-bold text-2xl lg:text-4xl leading-tight mt-3 mb-4">
+            {data.title}
+          </h2>
+          <p className="text-white/45 text-sm lg:text-base max-w-2xl mx-auto">{data.subtitle}</p>
+        </div>
 
-      <div className="container relative z-10">
-        <SectionHeader
-          badge={data.badge}
-          title={data.title}
-          subtitle={data.subtitle}
-          light
-        />
-
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
-          {values.map((value) => {
-            const Icon = value.icon
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {data.values.map((value, i) => {
+            const Icon = icons[i % icons.length]
             return (
-              <motion.div key={value.title} variants={itemVariants}>
-                <div
-                  className={`${value.color} ${value.borderColor} border rounded-2xl p-6 h-full hover:shadow-lg transition-shadow duration-300`}
-                >
-                  <div
-                    className={`w-14 h-14 rounded-xl bg-white shadow-sm flex items-center justify-center mb-4`}
-                  >
-                    <Icon size={26} className={value.iconColor} />
-                  </div>
-                  <h3 className="font-heading font-bold text-primary-900 text-lg mb-3">
-                    {value.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">{value.description}</p>
+              <div
+                key={value.title}
+                className="card-dark rounded-card p-7 flex flex-col gap-5 group hover:border-primary/30 transition-colors duration-300"
+              >
+                <div className="w-12 h-12 rounded-card bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                  <Icon size={22} className="text-primary" />
                 </div>
-              </motion.div>
+                <div>
+                  <h3 className="font-heading font-bold text-white text-lg mb-2">{value.title}</h3>
+                  <p className="text-white/45 text-[13px] leading-relaxed">{value.description}</p>
+                </div>
+              </div>
             )
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

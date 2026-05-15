@@ -1,66 +1,45 @@
-'use client'
-
-import { motion } from 'framer-motion'
-import {
-  ClipboardList,
-  Search,
-  FileText,
-  Wrench,
-  CheckSquare,
-  Car,
+﻿import {
+  Car, Search, FileText, ClipboardList, Wrench, CheckSquare,
 } from 'lucide-react'
-import SectionHeader from '@/components/ui/SectionHeader'
 import { defaultProcessSteps } from '@/lib/defaultContent'
-
-type ProcessData = typeof defaultProcessSteps
 
 const stepIcons = [Car, Search, FileText, ClipboardList, Wrench, CheckSquare]
 
-export default function ProcessSection({ data = defaultProcessSteps }: { data?: ProcessData }) {
+export default function ProcessSection({ data = defaultProcessSteps }: { data?: typeof defaultProcessSteps }) {
   return (
-    <section className="py-16 lg:py-24 bg-white">
-      <div className="container">
-        <SectionHeader
-          badge={data.badge}
-          title={data.title}
-          subtitle={data.subtitle}
-        />
+    <section className="section-py bg-dark-1">
+      <div className="site-container">
+        <div className="text-center mb-12">
+          <div className="section-subtitle">{data.badge}</div>
+          <h2 className="text-white font-heading font-bold text-2xl lg:text-4xl leading-tight mt-3 mb-4">
+            {data.title}
+          </h2>
+          <p className="text-white/45 text-sm lg:text-base max-w-2xl mx-auto">{data.subtitle}</p>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {data.steps.map((step, index) => {
-            const Icon = stepIcons[index] ?? Wrench
+            const Icon = stepIcons[index % stepIcons.length]
             return (
-              <motion.div
-                key={step.step}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="relative group"
-              >
-                {/* Connector Line */}
-                {index < data.steps.length - 1 && index % 3 !== 2 && (
-                  <div className="absolute top-7 left-full w-full h-0.5 bg-gray-200 z-0 hidden lg:block -translate-x-1/2" />
-                )}
-                <div className="bg-light-gray rounded-2xl p-6 lg:p-7 h-full hover:shadow-md transition-shadow duration-300 relative z-10">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="relative flex-shrink-0">
-                      <div className="w-14 h-14 bg-primary-900 rounded-xl flex items-center justify-center shadow-md group-hover:bg-accent-500 transition-colors duration-300">
-                        <Icon size={24} className="text-white" />
-                      </div>
-                      <span className="absolute -top-2 -right-2 w-6 h-6 bg-accent-500 text-white text-xs font-black rounded-full flex items-center justify-center">
-                        {step.step}
-                      </span>
-                    </div>
-                    <div>
-                      <h3 className="font-heading font-bold text-primary-900 text-base lg:text-lg leading-tight">
-                        {step.title}
-                      </h3>
-                    </div>
+              <div key={step.step} className="card-dark rounded-card p-6 flex gap-5 group">
+                {/* Step number + icon */}
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 rounded-card bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <Icon size={20} className="text-primary" />
                   </div>
-                  <p className="text-gray-500 text-sm leading-relaxed">{step.description}</p>
                 </div>
-              </motion.div>
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-primary font-heading font-black text-xs tracking-widest uppercase">
+                      Bước {step.step}
+                    </span>
+                  </div>
+                  <h3 className="font-heading font-bold text-white text-base mb-2 leading-snug">
+                    {step.title}
+                  </h3>
+                  <p className="text-white/45 text-[13px] leading-relaxed">{step.description}</p>
+                </div>
+              </div>
             )
           })}
         </div>

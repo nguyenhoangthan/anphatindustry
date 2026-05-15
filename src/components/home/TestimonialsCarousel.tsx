@@ -1,7 +1,6 @@
 'use client'
 
 import { useRef, useState, useCallback, useEffect } from 'react'
-import Image from 'next/image'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react'
@@ -44,7 +43,7 @@ function StarRating({ rating }: { rating: number }) {
   )
 }
 
-export default function TestimonialsCarousel({ testimonials = defaultTestimonials, season }: Props) {
+export default function TestimonialsCarousel({ testimonials = defaultTestimonials }: Omit<Props, 'season'>) {
   const autoplayRef = useRef(Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true }))
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: true, align: 'start', slidesToScroll: 1 },

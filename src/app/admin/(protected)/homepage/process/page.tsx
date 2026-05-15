@@ -1,4 +1,4 @@
-import prisma from '@/lib/prisma'
+﻿import { prisma } from '@/lib/prisma'
 import { defaultProcessSteps } from '@/lib/defaultContent'
 import ProcessForm from '@/components/admin/ProcessForm'
 

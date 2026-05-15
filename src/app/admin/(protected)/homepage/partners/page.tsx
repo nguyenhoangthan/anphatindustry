@@ -1,4 +1,4 @@
-import prisma from '@/lib/prisma'
+﻿import { prisma } from '@/lib/prisma'
 import { defaultPartnersSection } from '@/lib/defaultContent'
 import PartnersForm from '@/components/admin/PartnersForm'
 

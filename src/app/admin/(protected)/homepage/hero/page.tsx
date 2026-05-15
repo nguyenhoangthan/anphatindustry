@@ -1,4 +1,4 @@
-import prisma from '@/lib/prisma'
+﻿import { prisma } from '@/lib/prisma'
 import { defaultHeroSlides } from '@/lib/defaultContent'
 import HeroForm from '@/components/admin/HeroForm'
 
