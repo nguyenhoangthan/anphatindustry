@@ -15,6 +15,17 @@ interface Props {
   params: { slug: string }
 }
 
+const BLOG_CATEGORIES: Record<string, { label: string; description: string }> = {
+  'kinh-nghiem': {
+    label: 'Chia Se Kinh Nghiem',
+    description: 'Nhung kinh nghiem thuc te tu doi ngu ky thuat vien An Phat Industry',
+  },
+  'tin-tuc': {
+    label: 'Tin Tuc O To',
+    description: 'Cap nhat tin tuc xe hoi, cong nghe o to moi nhat',
+  },
+}
+
 function toPost(p: {
   id: string; slug: string; title: string; excerpt: string; content: string
   author: string; publishedAt: Date; category: string; image: string; tags: string; readingTime: number; featured: boolean
@@ -23,130 +34,163 @@ function toPost(p: {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const blogCat = BLOG_CATEGORIES[params.slug]
+  if (blogCat) {
+    return {
+      title: `${blogCat.label} | Thu Vien | An Phat Industry`,
+      description: blogCat.description,
+    }
+  }
   const post = await prisma.blogPost.findUnique({ where: { slug: params.slug } }).catch(() => null)
-  if (!post) return { title: 'Không tìm thấy | An Phát Industry' }
-  return { title: `${post.title} | An Phát Industry`, description: post.excerpt }
+  if (!post) return { title: 'Khong tim thay | An Phat Industry' }
+  return { title: `${post.title} | An Phat Industry`, description: post.excerpt }
 }
 
-export default async function BlogPostPage({ params }: Props) {
-  const [dbPost, dbRelated, ctaRaw] = await Promise.all([
+export default async function BlogSlugPage({ params }: Props) {
+  const ctaRaw = await prisma.siteSetting.findUnique({ where: { key: 'section_contact_cta' } }).catch(() => null)
+  const ctaData = ctaRaw ? JSON.parse(ctaRaw.value) as typeof defaultContactCTA : defaultContactCTA
+
+  // BLOG CATEGORY VIEW
+  const blogCat = BLOG_CATEGORIES[params.slug]
+  if (blogCat) {
+    const dbPosts = await prisma.blogPost
+      .findMany({ where: { category: params.slug }, orderBy: { publishedAt: 'desc' } })
+      .catch(() => [])
+    const posts = dbPosts.map(toPost)
+
+    return (
+      <>
+        <section className="bg-dark-1 border-b border-white/5 section-pt pb-12">
+          <div className="site-container">
+            <Breadcrumb items={[{ label: 'Thu Vien', href: '/thu-vien' }, { label: blogCat.label }]} />
+            <h1 className="font-heading font-bold text-white text-3xl lg:text-5xl mt-5 mb-3">
+              {blogCat.label}
+            </h1>
+            <p className="text-white/60 text-lg max-w-2xl">{blogCat.description}</p>
+          </div>
+        </section>
+
+        <section className="section-py bg-dark-2">
+          <div className="site-container">
+            {posts.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {posts.map((post) => (
+                  <BlogCard key={post.id} post={post} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-20">
+                <p className="text-white/40 mb-4">Chua co bai viet trong chuyen muc nay.</p>
+                <Link href="/thu-vien" className="btn-main inline-flex">Xem Tat Ca Bai Viet</Link>
+              </div>
+            )}
+            <div className="text-center mt-12">
+              <Link href="/thu-vien" className="btn-outline inline-flex">Xem Tat Ca Bai Viet</Link>
+            </div>
+          </div>
+        </section>
+
+        <ContactCTA data={ctaData} />
+      </>
+    )
+  }
+
+  // BLOG POST DETAIL VIEW
+  const [dbPost, dbRelated] = await Promise.all([
     prisma.blogPost.findUnique({ where: { slug: params.slug } }).catch(() => null),
     prisma.blogPost.findMany({ where: { slug: { not: params.slug } }, take: 3, orderBy: { publishedAt: 'desc' } }).catch(() => []),
-    prisma.siteSetting.findUnique({ where: { key: 'section_contact_cta' } }).catch(() => null),
   ])
 
   if (!dbPost) notFound()
 
   const post = toPost(dbPost)
   const related = dbRelated.map(toPost)
-  const ctaData = ctaRaw ? JSON.parse(ctaRaw.value) as typeof defaultContactCTA : defaultContactCTA
 
   return (
     <>
-      {/* Hero */}
       <section className="bg-dark-1 border-b border-white/5 section-pt pb-12">
         <div className="site-container">
           <Breadcrumb
             items={[
-              { label: 'Thư Viện', href: '/thu-vien' },
+              { label: 'Thu Vien', href: '/thu-vien' },
+              { label: BLOG_CATEGORIES[post.category]?.label ?? post.category, href: `/thu-vien/${post.category}` },
               { label: post.title },
             ]}
           />
+          <h1 className="font-heading font-bold text-white text-3xl lg:text-5xl mt-5 mb-4 max-w-3xl">
+            {post.title}
+          </h1>
+          <div className="flex flex-wrap items-center gap-4 text-white/40 text-sm">
+            <span className="flex items-center gap-1.5"><User size={14} />{post.author}</span>
+            <span className="flex items-center gap-1.5"><Calendar size={14} />{formatDate(post.publishedAt)}</span>
+            <span className="flex items-center gap-1.5"><Clock size={14} />{post.readingTime} phut doc</span>
+          </div>
         </div>
       </section>
 
-      {/* Article */}
       <section className="section-py bg-dark-2">
         <div className="site-container">
-          <div className="max-w-3xl mx-auto">
-            {/* Meta */}
-            <div className="flex flex-wrap items-center gap-4 mb-6 text-sm text-white/40">
-              <span className="bg-primary/10 text-primary font-semibold px-3 py-1 rounded-full capitalize border border-primary/20">
-                {post.category === 'kinh-nghiem' ? 'Kinh nghiệm' : post.category}
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Calendar size={13} />
-                {formatDate(post.publishedAt)}
-              </span>
-              <span className="flex items-center gap-1.5">
-                <User size={13} />
-                {post.author}
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Clock size={13} />
-                {post.readingTime} phút đọc
-              </span>
-            </div>
-
-            <h1 className="font-heading font-bold text-white text-2xl lg:text-4xl leading-tight mb-6">
-              {post.title}
-            </h1>
-
-            <div className="relative rounded-card overflow-hidden aspect-video mb-8">
-              <Image
-                src={post.image}
-                alt={post.title}
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 768px) 100vw, 768px"
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14">
+            <article className="lg:col-span-2">
+              {post.image && (
+                <div className="relative rounded-card overflow-hidden aspect-video mb-8">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    className="object-cover"
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 66vw"
+                  />
+                </div>
+              )}
+              <p className="text-white/55 text-lg leading-relaxed mb-6 italic">{post.excerpt}</p>
+              <div
+                className="prose prose-invert prose-lg max-w-none prose-headings:font-heading prose-a:text-primary"
+                dangerouslySetInnerHTML={{ __html: post.content }}
               />
-            </div>
+              {post.tags.length > 0 && (
+                <div className="mt-10 pt-6 border-t border-white/10 flex flex-wrap gap-2">
+                  {post.tags.map((tag) => (
+                    <span key={tag} className="text-xs bg-white/10 text-white/60 px-3 py-1 rounded-full">
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </article>
 
-            {/* Excerpt as lead */}
-            <p className="text-white/60 text-lg leading-relaxed mb-6 font-medium border-l-4 border-primary pl-5 italic">
-              {post.excerpt}
-            </p>
+            <aside className="lg:col-span-1">
+              <div className="sticky top-24 space-y-6">
+                <div className="bg-dark-1 border border-white/10 rounded-card p-6">
+                  <h3 className="font-heading font-bold text-white text-base mb-4">Bai Viet Lien Quan</h3>
+                  {related.length > 0 ? (
+                    <div className="space-y-4">
+                      {related.map((r) => (
+                        <Link key={r.id} href={`/thu-vien/${r.slug}`} className="flex gap-3 group">
+                          <div className="relative w-20 h-16 flex-shrink-0 rounded overflow-hidden">
+                            <Image src={r.image} alt={r.title} fill className="object-cover group-hover:scale-105 transition-transform" sizes="80px" />
+                          </div>
+                          <div>
+                            <p className="text-white/80 text-sm font-medium group-hover:text-primary transition-colors line-clamp-2">{r.title}</p>
+                            <p className="text-white/40 text-xs mt-1">{formatDate(r.publishedAt)}</p>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-white/40 text-sm">Chua co bai viet lien quan.</p>
+                  )}
+                </div>
 
-            {/* Content */}
-            <div className="prose max-w-none text-white/55 space-y-4">
-              <p>
-                Nội dung bài viết chi tiết sẽ được cập nhật từ hệ thống CMS. Liên hệ nhóm quản trị
-                để thêm nội dung đầy đủ cho bài viết này.
-              </p>
-              <p>
-                Trong thời gian chờ đợi, quý khách có thể gọi đến số hotline hoặc ghé trực tiếp
-                xưởng An Phát Industry để được tư vấn trực tiếp bởi đội ngũ kỹ thuật viên giàu
-                kinh nghiệm.
-              </p>
-            </div>
-
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2 mt-8 pt-6 border-t border-white/5">
-              {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="bg-dark-1 border border-white/10 text-white/50 text-xs font-medium px-3 py-1.5 rounded-full"
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-
-            {/* Back link */}
-            <div className="mt-8">
-              <Link
-                href="/thu-vien"
-                className="inline-flex items-center gap-2 text-primary font-semibold hover:underline text-sm"
-              >
-                ← Quay lại Thư Viện
-              </Link>
-            </div>
-          </div>
-
-          {/* Related posts */}
-          {related.length > 0 && (
-            <div className="mt-16 pt-12 border-t border-white/5">
-              <h2 className="font-heading font-bold text-white text-xl mb-8 text-center">
-                Bài Viết Liên Quan
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {related.map((p) => (
-                  <BlogCard key={p.id} post={p} />
-                ))}
+                <div className="bg-primary/10 border border-primary/30 rounded-card p-6 text-white">
+                  <h3 className="font-heading font-bold text-lg mb-2">Can Tu Van?</h3>
+                  <p className="text-white/55 text-sm mb-4">Lien he doi ngu chuyen gia An Phat Industry de duoc ho tro ngay.</p>
+                  <Link href="/lien-he" className="btn-main inline-flex w-full justify-center">Lien He Ngay</Link>
+                </div>
               </div>
-            </div>
-          )}
+            </aside>
+          </div>
         </div>
       </section>
 

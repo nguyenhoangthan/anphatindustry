@@ -1,4 +1,4 @@
-export type ServiceCategory = 'sua-chua-chung' | 'cham-soc-xe' | 'dong-son'
+export type ServiceCategory = 'sua-chua-chung' | 'cham-soc-xe' | 'dong-son' | 'sua-chua-luu-dong'
 
 export interface Service {
   id: string

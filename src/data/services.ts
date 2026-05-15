@@ -168,6 +168,61 @@ export const services: Service[] = [
       'Xử lý bảo hiểm nhanh chóng',
     ],
   },
+  // ── SỬA CHỮA LƯU ĐỘNG ───────────────────────────────────────────────────────
+  {
+    id: 'cuu-ho-xe',
+    slug: 'cuu-ho-xe',
+    title: 'Cứu Hộ Xe & Kéo Xe',
+    shortDescription: 'Dịch vụ cứu hộ xe 24/7, hỗ trợ kéo xe nhanh chóng tại TP.HCM',
+    description:
+      'An Phát Industry cung cấp dịch vụ cứu hộ xe và kéo xe khẩn cấp 24/7 trong toàn bộ khu vực TP. Hồ Chí Minh và các tỉnh lân cận. Đội ngũ kỹ thuật viên lưu động được trang bị xe cứu hộ chuyên dụng, phản ứng nhanh khi xe gặp sự cố trên đường.',
+    category: 'sua-chua-luu-dong',
+    categoryLabel: 'Sửa Chữa Lưu Động',
+    icon: 'truck',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    highlights: [
+      'Hoạt động 24/7, kể cả ngày lễ',
+      'Phản ứng nhanh trong vòng 30 phút',
+      'Xe cứu hộ chuyên dụng, hiện đại',
+      'Hỗ trợ toàn TP.HCM và vùng lân cận',
+    ],
+  },
+  {
+    id: 'sua-chua-luu-dong',
+    slug: 'sua-chua-luu-dong',
+    title: 'Sửa Chữa Lưu Động Tại Nhà',
+    shortDescription: 'Kỹ thuật viên đến tận nơi sửa chữa các hỏng hóc nhỏ, thay dầu nhanh',
+    description:
+      'Không cần mang xe ra xưởng, đội kỹ thuật viên lưu động An Phát Industry sẽ đến tận nơi để thực hiện các công việc bảo dưỡng và sửa chữa nhỏ. Tiết kiệm thời gian, thuận tiện tối đa cho khách hàng bận rộn.',
+    category: 'sua-chua-luu-dong',
+    categoryLabel: 'Sửa Chữa Lưu Động',
+    icon: 'wrench',
+    image: 'https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=800&q=80',
+    highlights: [
+      'Thay dầu, lọc dầu tại chỗ',
+      'Thay ắc-quy, bơm lốp khẩn cấp',
+      'Kiểm tra sự cố điện, nổ máy',
+      'Phụ tùng chính hãng mang theo xe',
+    ],
+  },
+  {
+    id: 'thay-lop-luu-dong',
+    slug: 'thay-lop-luu-dong',
+    title: 'Thay Lốp & Bơm Lốp Lưu Động',
+    shortDescription: 'Dịch vụ thay lốp, vá lốp, bơm lốp di động tại bất kỳ đâu',
+    description:
+      'Bị xịt lốp giữa đường? Đội kỹ thuật viên lưu động An Phát Industry phản ứng nhanh mang theo đầy đủ dụng cụ thay lốp, vá lốp và bơm lốp đến tận nơi, giúp bạn tiếp tục hành trình an toàn trong thời gian ngắn nhất.',
+    category: 'sua-chua-luu-dong',
+    categoryLabel: 'Sửa Chữa Lưu Động',
+    icon: 'circle',
+    image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80',
+    highlights: [
+      'Vá lốp không ruột chuyên nghiệp',
+      'Thay lốp mới tại chỗ',
+      'Bơm lốp đúng áp suất chuẩn',
+      'Phục vụ ngay trong vòng 20 phút',
+    ],
+  },
 ]
 
 export const serviceCategories = [
@@ -188,5 +243,11 @@ export const serviceCategories = [
     label: 'Đồng Sơn',
     description: 'Sơn dặm vá, sửa chữa đồng và phục hồi thân vỏ xe',
     icon: 'paintbrush',
+  },
+  {
+    id: 'sua-chua-luu-dong',
+    label: 'Sửa Chữa Lưu Động',
+    description: 'Cứu hộ xe, sửa chữa tại chỗ và dịch vụ lưu động 24/7',
+    icon: 'truck',
   },
 ]
