@@ -1,4 +1,3 @@
-
 # THÔNG TIN LIÊN HỆ
 
 
@@ -19,7 +18,7 @@ Với nền tảng hơn 14 năm kinh nghiệm trong ngành ô tô, chúng tôi k
 - **Chức danh:** Giám đốc
 - **Phòng ban:** Giám đốc
 - **Số di động:** 0908643528
-- **Email:** anphatcompany24@gmail.com, info@anphatindustry.com, sales@anphatindustry.com
+- **Email:** anphatcompany24@gmail.com, service@anphatindustry.com, sales@anphatindustry.com
 - **Hotline:** 0977 747 178
 - **Dịch vụ:** Bảo dưỡng ô tô | Mô hình đào tạo | Tư vấn giải pháp kỹ thuật.
 - **Loại chứng thực:** Căn cước công dân
