@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p ${PORT:-3001}",
+    "prestart": "node scripts/kill-port.js",
+    "start": "next start -p 3001",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "db:migrate": "prisma migrate dev --name init",
