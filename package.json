@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "deploy": "git checkout production && git merge main && git push origin production && git checkout main",
     "prestart": "node scripts/kill-port.js",
     "start": "next start -p 3001",
     "setup": "prisma generate",
