@@ -14,32 +14,59 @@
 
 ---
 
+## Kiến trúc deploy
+
+```
+Local machine (Windows)
+  └─ npm run build        → tạo .next/
+  └─ npx prisma generate  → tạo node_modules/.prisma/ (có Linux binaries)
+  └─ git commit + push main
+
+production branch push
+  └─ GitHub Actions (FTP-only, không build trên CI)
+       └─ FTP upload .next/ + source code → /httpdocs/
+       └─ FTP upload node_modules/.prisma/ → /httpdocs/node_modules/.prisma/
+
+Server (Plesk)
+  └─ node server.js (chạy .next/ đã có sẵn, không cần build)
+```
+
+**Tại sao không build trên server hoặc CI?**
+- Shared hosting không đủ resource để build (EAGAIN / SIGABRT)
+- Build trên GitHub Actions (Ubuntu) phức tạp hơn (cần DB mock, env vars)
+- Build local đơn giản, chắc chắn, kiểm soát được
+
 ## Quy trình deploy
+
+### Khi có thay đổi code → deploy
+
+```bash
+# Bước 1: build local
+npm run build
+
+# Bước 2: commit (bao gồm .next/ đã build)
+git add -A
+git add -f .next/ node_modules/.prisma/
+git commit -m "mô tả thay đổi"
+git push origin main
+
+# Bước 3: deploy (1 lệnh)
+npm run deploy
+```
+
+`npm run deploy` tự động:
+1. `git checkout production`
+2. `git merge main`
+3. `git push origin production`  ← trigger GitHub Actions
+4. `git checkout main`
+
+GitHub Actions chỉ FTP upload files lên server (~2–5 phút).  
+Theo dõi tại: https://github.com/nguyenhoangthan/anphatindustry/actions
 
 ### Làm việc bình thường (không deploy)
 ```bash
-git add .
-git commit -m "..."
-git push origin main       # KHÔNG trigger deploy
+git add . && git commit -m "..." && git push origin main
 ```
-
-### Khi muốn deploy lên production
-```bash
-git checkout production
-git merge main
-git push origin production  # trigger GitHub Actions → auto deploy
-git checkout main
-```
-
-GitHub Actions (`ubuntu-latest`) sẽ tự động:
-1. `npm ci --ignore-scripts`
-2. `npx prisma generate` (tạo Linux binary)
-3. `npm run build` (tạo `.next/`)
-4. FTP upload toàn bộ lên `/httpdocs/` (trừ `node_modules/`, `.env`, `*.db`)
-5. FTP upload `node_modules/.prisma/` (Linux Prisma client) lên server
-
-**Thời gian**: ~5–10 phút. Theo dõi tại:  
-https://github.com/nguyenhoangthan/anphatindustry/actions
 
 ---
 
