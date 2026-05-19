@@ -7,13 +7,13 @@
     "build": "next build",
     "prestart": "node scripts/kill-port.js",
     "start": "next start -p 3001",
+    "setup": "prisma generate",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "db:migrate": "prisma migrate dev --name init",
     "db:seed": "tsx prisma/seed.ts",
     "db:studio": "prisma studio",
-    "db:reset": "prisma migrate reset --force && tsx prisma/seed.ts",
-    "postinstall": "prisma generate"
+    "db:reset": "prisma migrate reset --force && tsx prisma/seed.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
