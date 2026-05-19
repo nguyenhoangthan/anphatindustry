@@ -1,0 +1,63 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Generate Prisma client (Linux binary)
+        run: npx prisma generate
+        env:
+          DATABASE_URL: file:./prisma/dev.db
+
+      - name: Build Next.js
+        run: npm run build
+        env:
+          DATABASE_URL: file:./prisma/dev.db
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          NEXTAUTH_URL: https://anphatindustry.com
+
+      - name: Deploy app files to server
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./
+          server-dir: /httpdocs/
+          exclude: |
+            **/.git*/**
+            **/node_modules/**
+            **/.env
+            **/.env.local
+            **/.env*.local
+            **/prisma/prisma/*.db
+            **/prisma/prisma/*.db-shm
+            **/prisma/prisma/*.db-wal
+            **/*.zip
+
+      - name: Deploy Prisma client (Linux binary) to server
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./node_modules/.prisma/
+          server-dir: /httpdocs/node_modules/.prisma/
+          state-name: .ftp-prisma-state.json
