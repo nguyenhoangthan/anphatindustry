@@ -1,12 +1,14 @@
 node_modules/
-# Track Prisma generated client for Linux deployment
-!node_modules/.prisma/
-# .next/ is intentionally NOT ignored - built locally and committed for deployment
+.next/
 out/
 dist/
+.env
 .env.local
 .env.*.local
 *.log
 .DS_Store
 Thumbs.db
 *.zip
+prisma/prisma/*.db
+prisma/prisma/*.db-shm
+prisma/prisma/*.db-wal
