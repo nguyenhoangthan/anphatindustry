@@ -1,4 +1,6 @@
 node_modules/
+# Track Prisma generated client for Linux deployment
+!node_modules/.prisma/
 # .next/ is intentionally NOT ignored - built locally and committed for deployment
 out/
 dist/
