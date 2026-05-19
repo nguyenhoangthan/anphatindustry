@@ -1,5 +1,5 @@
 node_modules/
-.next/
+# .next/ is intentionally NOT ignored - built locally and committed for deployment
 out/
 dist/
 .env.local
