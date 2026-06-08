@@ -101,6 +101,30 @@ Vào: https://github.com/nguyenhoangthan/anphatindustry/settings/secrets/actions
 
 ---
 
+## Quản lý tiến trình (tránh leak nproc) — QUAN TRỌNG
+
+Gói shared hosting có trần ~100 process. App động hoàn toàn nằm gọn trong đó **nếu vận
+hành đúng**. Vài quy tắc bắt buộc:
+
+1. **KHÔNG bao giờ gõ tay `npm start` / `npm restart`** trong tab "Run Node.js commands"
+   của Plesk. Passenger đã chạy `server.js`; gõ `npm start` sẽ dựng **server thứ hai**
+   chồng lên, tranh port và đẻ process rác. Muốn khởi động lại → chỉ dùng nút
+   **Restart App** ở tab Dashboard.
+
+2. **Sau khi đổi code → phải rebuild + redeploy** (`npm run build` local rồi deploy).
+   `server.js` chạy raw nên đổi là ăn ngay sau Restart; nhưng `prisma.ts` và code app
+   nằm trong `.next/` nên cần build lại mới có hiệu lực.
+
+3. **Khi nghi process tăng bất thường:** vào Plesk → **Resource Usage → Snapshot/Current
+   usage** để xem process nào đang chạy.
+   - Nhiều `node`/`next` trùng lặp → có ai đó đã `npm start` thủ công → Stop hết, chỉ
+     giữ 1 instance qua Restart App.
+   - Nhiều `prisma`/`query-engine` → engine bị orphan; bản vá graceful shutdown đã xử,
+     nhưng nếu vẫn còn, Restart App một lần để dọn sạch.
+
+4. **Khởi động lại đúng cách:** **Stop App → đợi ~30s → Start App** (hoặc Restart App),
+   đừng bấm liên tục — mỗi lần bấm dồn dập chỉ làm process chồng thêm.
+
 ## Issues đã gặp và cách giải quyết
 
 ### 1. `npm run build` thất bại — EAGAIN / SIGABRT
@@ -124,8 +148,30 @@ Package script `postinstall: prisma generate` cũng bị xóa khỏi `package.js
 **Nguyên nhân:** Port 3000 đã bị chiếm, hoặc nhiều instance đang chạy.  
 **Giải pháp:**
 - Đổi sang port 3001 cố định.
-- Tạo `scripts/kill-port.js` để free port trước khi start.
-- Thêm `"prestart": "node scripts/kill-port.js"` vào `package.json`.
+- ~~Tạo `scripts/kill-port.js` + `prestart`~~ — **ĐÃ BỎ.** Cách này (bắn `fuser -k`)
+  chỉ chữa triệu chứng và còn tự fork thêm process. Thay bằng **graceful shutdown**
+  trong `server.js` (xem mục "Quản lý tiến trình" bên dưới): app tự đóng cleanly khi
+  bị restart nên không còn instance treo chiếm port.
+
+### 9. Chạm giới hạn process (nproc) — "reached the processes number limit" / `fork: Resource temporarily unavailable`
+**Nguyên nhân (gốc rễ):** `server.js` cũ **không ngắt kết nối Prisma khi bị restart**.
+Mỗi lần Passenger restart (sau deploy/crash) gửi `SIGTERM` → Node chết nhưng **tiến trình
+Prisma Query Engine con bị bỏ rơi (orphan)**. Qua nhiều lần restart, các engine zombie
+tích tụ → leo tới trần 100 process. Cộng thêm: vòng `process.exit(1)` trong request handler
+gây crash→respawn, và việc gõ tay `npm start`/`npm restart` (chạy `next start` chồng lên
+`server.js` của Passenger) → đẻ thêm process xung đột.
+**Giải pháp (đã áp dụng):**
+- `server.js`: bắt `SIGTERM`/`SIGINT` → đóng HTTP server + `prisma.$disconnect()` (kill
+  engine con) rồi exit. Không còn `process.exit(1)` ở tầng request. `uncaughtException`
+  cũng đi qua graceful shutdown.
+- `src/lib/prisma.ts`: cache client lên `globalThis` ở **mọi môi trường** để (a) dev không
+  tạo client mới mỗi lần HMR, (b) `server.js` với tới được client để disconnect lúc shutdown.
+- `package.json`: bỏ `prestart`/kill-port, đổi `start` thành `node server.js` (thống nhất
+  một entry point duy nhất với Passenger).
+- `UV_THREADPOOL_SIZE=2` đặt ở đầu `server.js` để giảm số OS thread tính vào nproc.
+
+> Một app cấu hình đúng chỉ tiêu ~5–15 process. Nếu sau khi vá vẫn thấy process tăng dần,
+> xem mục "Quản lý tiến trình" để kiểm tra.
 
 ### 4. Plesk không tìm thấy startup file
 **Nguyên nhân:** Plesk cần một file cụ thể làm entry point, mặc định là `app.js`.  
@@ -161,9 +207,8 @@ Package script `postinstall: prisma generate` cũng bị xóa khỏi `package.js
 
 ```
 .
-├── server.js                        # Plesk startup file (custom Next.js server)
+├── server.js                        # Plesk startup file (custom Next.js server + graceful shutdown)
 ├── .npmrc                           # ignore-scripts=true (fix EAGAIN)
-├── scripts/kill-port.js             # free port trước khi start
 ├── next.config.mjs                  # workerThreads:false, cpus:1
 ├── prisma/schema.prisma             # binaryTargets cho Linux
 ├── .github/workflows/deploy.yml    # GitHub Actions CI/CD
