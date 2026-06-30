@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Plus, X, Loader2, CheckCircle } from 'lucide-react'
+import ImageUpload from './ImageUpload'
 
 interface Slide {
   id: number
@@ -69,12 +70,8 @@ export default function HeroForm({ initialData }: { initialData: Slide[] }) {
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="lg:col-span-2">
-              <label className="block text-xs font-semibold text-gray-600 mb-1">URL Ảnh Nền *</label>
-              <input type="url" value={slide.image} onChange={(e) => updateSlide(i, 'image', e.target.value)} className={inp} placeholder="https://..." required />
-              {slide.image && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={slide.image} alt="" className="mt-2 h-24 w-full object-cover rounded-xl border border-gray-100" onError={(e) => ((e.target as HTMLImageElement).style.display = 'none')} />
-              )}
+              <label className="block text-xs font-semibold text-gray-600 mb-1">Ảnh Nền *</label>
+              <ImageUpload value={slide.image} onChange={(url) => updateSlide(i, 'image', url)} />
             </div>
             <div>
               <label className="block text-xs font-semibold text-gray-600 mb-1">Badge (nhãn nhỏ)</label>

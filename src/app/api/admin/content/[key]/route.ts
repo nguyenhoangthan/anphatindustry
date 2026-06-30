@@ -12,6 +12,9 @@ const ALLOWED_KEYS = [
   'section_contact_cta',
   'section_pricing',
   'section_team',
+  'section_models',
+  'section_projects',
+  'section_videos',
   'siteConfig',
 ]
 

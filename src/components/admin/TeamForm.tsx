@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Plus, X, Loader2, CheckCircle } from 'lucide-react'
+import ImageUpload from './ImageUpload'
 import type { defaultTeamSection } from '@/lib/defaultContent'
 
 type Data = typeof defaultTeamSection
@@ -59,9 +60,8 @@ export default function TeamForm({ initialData }: { initialData: Data }) {
           <div><label className="block text-xs font-semibold text-gray-600 mb-1">Đoạn Văn 1</label><textarea value={form.intro.body1} onChange={e => setIntro('body1', e.target.value)} rows={3} className={`${inp} resize-y`} /></div>
           <div><label className="block text-xs font-semibold text-gray-600 mb-1">Đoạn Văn 2</label><textarea value={form.intro.body2} onChange={e => setIntro('body2', e.target.value)} rows={3} className={`${inp} resize-y`} /></div>
           <div>
-            <label className="block text-xs font-semibold text-gray-600 mb-1">URL Ảnh</label>
-            <input type="url" value={form.intro.image} onChange={e => setIntro('image', e.target.value)} className={inp} />
-            {form.intro.image && <img src={form.intro.image} alt="" className="mt-2 h-24 w-full object-cover rounded-xl border border-gray-100" onError={e => ((e.target as HTMLImageElement).style.display='none')} />}
+            <label className="block text-xs font-semibold text-gray-600 mb-1">Ảnh</label>
+            <ImageUpload value={form.intro.image} onChange={(url) => setIntro('image', url)} />
           </div>
         </div>
         <div className="mt-4">

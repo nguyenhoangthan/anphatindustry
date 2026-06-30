@@ -1,12 +1,15 @@
 ﻿import type { Metadata } from 'next'
 import Breadcrumb from '@/components/ui/Breadcrumb'
-import { siteConfig } from '@/lib/constants'
+import { getSiteConfig } from '@/lib/getSiteConfig'
+
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Chính Sách Bảo Mật | An Phát Industry',
 }
 
-export default function PrivacyPage() {
+export default async function PrivacyPage() {
+  const siteConfig = await getSiteConfig()
   return (
     <>
       <section className="bg-dark-1 border-b border-border section-pt pb-12">

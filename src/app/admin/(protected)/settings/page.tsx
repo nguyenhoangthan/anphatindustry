@@ -6,27 +6,27 @@ import { siteConfig } from '@/lib/constants'
 export const dynamic = 'force-dynamic'
 
 export default async function SettingsAdminPage() {
-  // Load from DB, fallback to constants
+  // Load from DB, merge over constants (đảm bảo luôn đủ field kể cả khi DB cũ thiếu)
   const setting = await prisma.siteSetting.findUnique({ where: { key: 'siteConfig' } }).catch(() => null)
-  const currentConfig = setting
-    ? JSON.parse(setting.value)
-    : {
-        name: siteConfig.name,
-        shortName: siteConfig.shortName,
-        tagline: siteConfig.tagline,
-        description: siteConfig.description,
-        url: siteConfig.url,
-        phone: siteConfig.phone,
-        email: siteConfig.email,
-        address: siteConfig.address,
-        workingHours: siteConfig.workingHours,
-        businessNumber: siteConfig.businessNumber,
-        social: {
-          facebook: siteConfig.social.facebook ?? '',
-          zalo: siteConfig.social.zalo ?? '',
-          youtube: siteConfig.social.youtube ?? '',
-        },
-      }
+  const db = setting ? JSON.parse(setting.value) : {}
+  const currentConfig = {
+    name: db.name ?? siteConfig.name,
+    shortName: db.shortName ?? siteConfig.shortName,
+    tagline: db.tagline ?? siteConfig.tagline,
+    description: db.description ?? siteConfig.description,
+    url: db.url ?? siteConfig.url,
+    phone: Array.isArray(db.phone) && db.phone.length ? db.phone : siteConfig.phone,
+    email: db.email ?? siteConfig.email,
+    address: db.address ?? siteConfig.address,
+    locations: Array.isArray(db.locations) && db.locations.length ? db.locations : siteConfig.locations,
+    workingHours: db.workingHours ?? siteConfig.workingHours,
+    businessNumber: db.businessNumber ?? siteConfig.businessNumber,
+    social: {
+      facebook: db.social?.facebook ?? siteConfig.social.facebook ?? '',
+      zalo: db.social?.zalo ?? siteConfig.social.zalo ?? '',
+      youtube: db.social?.youtube ?? siteConfig.social.youtube ?? '',
+    },
+  }
 
   return (
     <div className="p-8">

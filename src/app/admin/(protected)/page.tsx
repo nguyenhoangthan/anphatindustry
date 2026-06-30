@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { LayoutDashboard, Wrench, BookOpen, Settings, ArrowRight } from 'lucide-react'
+import { LayoutDashboard, Wrench, BookOpen, Settings, ArrowRight, GraduationCap, Building2, Video } from 'lucide-react'
 import { prisma } from '@/lib/prisma'
 
 export const dynamic = 'force-dynamic'
@@ -30,6 +30,9 @@ export default async function AdminDashboard() {
   const quickLinks = [
     { label: 'Thêm Dịch Vụ Mới', href: '/admin/services/new', icon: Wrench },
     { label: 'Đăng Bài Viết Mới', href: '/admin/posts/new', icon: BookOpen },
+    { label: 'Quản Lý Mô Hình Đào Tạo', href: '/admin/models', icon: GraduationCap },
+    { label: 'Quản Lý Dự Án & Đối Tác', href: '/admin/projects', icon: Building2 },
+    { label: 'Quản Lý Video Clip', href: '/admin/videos', icon: Video },
     { label: 'Cài Đặt Công Ty', href: '/admin/settings', icon: Settings },
   ]
 

@@ -8,7 +8,8 @@ import BlogCard from '@/components/ui/BlogCard'
 import ContactCTA from '@/components/home/ContactCTA'
 import { prisma } from '@/lib/prisma'
 import { formatDate } from '@/lib/utils'
-import { defaultContactCTA } from '@/lib/defaultContent'
+import { defaultContactCTA, defaultVideos } from '@/lib/defaultContent'
+import { parseVideo } from '@/lib/video'
 import type { BlogPost } from '@/types'
 
 interface Props {
@@ -57,6 +58,60 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function BlogSlugPage({ params }: Props) {
   const ctaRaw = await prisma.siteSetting.findUnique({ where: { key: 'section_contact_cta' } }).catch(() => null)
   const ctaData = ctaRaw ? JSON.parse(ctaRaw.value) as typeof defaultContactCTA : defaultContactCTA
+
+  // VIDEO LIBRARY VIEW
+  if (params.slug === 'video') {
+    const vidRaw = await prisma.siteSetting.findUnique({ where: { key: 'section_videos' } }).catch(() => null)
+    const vid = (vidRaw ? JSON.parse(vidRaw.value) : defaultVideos) as typeof defaultVideos
+    const items = (vid.items ?? []).filter((v) => v.url)
+    return (
+      <>
+        <section className="bg-dark-1 border-b border-border section-pt pb-12">
+          <div className="site-container">
+            <Breadcrumb items={[{ label: 'Thư Viện', href: '/thu-vien' }, { label: vid.intro?.title || 'Video Clip Phổ Biến' }]} />
+            <h1 className="font-heading font-bold text-heading text-3xl lg:text-5xl mt-5 mb-3">
+              {vid.intro?.title || 'Video Clip Phổ Biến'}
+            </h1>
+            <p className="text-body text-lg max-w-2xl">{vid.intro?.subtitle}</p>
+          </div>
+        </section>
+        <section className="section-py bg-dark-2">
+          <div className="site-container">
+            {items.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {items.map((v, i) => {
+                  const pv = parseVideo(v.url)
+                  return (
+                    <div key={i} className="bg-dark-1 rounded-card border border-border overflow-hidden">
+                      <div className="relative aspect-video bg-black">
+                        {pv.type === 'youtube' ? (
+                          <iframe src={pv.src} title={v.title} className="absolute inset-0 w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+                        ) : pv.type === 'file' ? (
+                          <video src={pv.src} controls className="absolute inset-0 w-full h-full object-cover" />
+                        ) : null}
+                      </div>
+                      {(v.title || v.description) && (
+                        <div className="p-5">
+                          {v.title && <h3 className="font-heading font-bold text-heading text-base mb-1">{v.title}</h3>}
+                          {v.description && <p className="text-body text-sm leading-relaxed">{v.description}</p>}
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            ) : (
+              <div className="text-center py-20">
+                <p className="text-muted mb-4">Video đang được cập nhật.</p>
+                <Link href="/thu-vien" className="btn-outline inline-flex">← Về Thư Viện</Link>
+              </div>
+            )}
+          </div>
+        </section>
+        <ContactCTA data={ctaData} />
+      </>
+    )
+  }
 
   // BLOG CATEGORY VIEW
   const blogCat = BLOG_CATEGORIES[params.slug]

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Plus, X, Loader2 } from 'lucide-react'
+import ImageUpload from './ImageUpload'
 
 const CATEGORIES = [
   { value: 'bao-duong-sua-chua', label: 'Bảo Dưỡng & Sửa Chữa' },
@@ -225,23 +226,7 @@ export default function ServiceForm({ initialData, mode }: Props) {
           <label className="block text-sm font-semibold text-gray-700 mb-1.5">
             URL Ảnh <span className="text-red-500">*</span>
           </label>
-          <input
-            type="url"
-            value={form.image}
-            onChange={(e) => setForm((prev) => ({ ...prev, image: e.target.value }))}
-            required
-            className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#0B2447]/30 focus:border-[#0B2447]"
-            placeholder="https://..."
-          />
-          {form.image && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={form.image}
-              alt="preview"
-              className="mt-2 h-28 w-full object-cover rounded-xl border border-gray-100"
-              onError={(e) => ((e.target as HTMLImageElement).style.display = 'none')}
-            />
-          )}
+          <ImageUpload value={form.image} onChange={(url) => setForm((prev) => ({ ...prev, image: url }))} />
         </div>
 
         {/* Highlights */}

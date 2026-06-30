@@ -28,6 +28,7 @@ jobs:
             **/.git*/**
             **/node_modules/**
             **/.next/cache/**
+            **/public/uploads/**
             **/.env
             **/.env.local
             **/.env*.local

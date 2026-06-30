@@ -5,11 +5,17 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X, Phone, ChevronDown, Mail, Clock } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { siteConfig, PHONE_DISPLAY, PHONE_LINK, NAV_ITEMS } from '@/lib/constants'
+import { NAV_ITEMS } from '@/lib/constants'
+import type { SiteConfig } from '@/types'
 import Logo from './Logo'
 
+function telLink(phone: string) {
+  return `tel:+84${phone.replace(/^0/, '').replace(/\s/g, '')}`
+}
+
 // ─── TopBar ──────────────────────────────────────────────────────────────────
-function TopBar() {
+function TopBar({ config }: { config: SiteConfig }) {
+  const phone = config.phone[0]
   return (
     <div className="hidden lg:block border-b border-border bg-dark-2">
       <div className="site-container flex items-center justify-between py-2.5">
@@ -20,28 +26,32 @@ function TopBar() {
         <div className="flex items-center gap-6 text-xs text-body">
           <span className="flex items-center gap-1.5">
             <Clock size={11} className="text-primary" />
-            {siteConfig.workingHours}
+            {config.workingHours}
           </span>
-          <a href={`mailto:${siteConfig.email}`} className="flex items-center gap-1.5 hover:text-heading transition-colors">
+          <a href={`mailto:${config.email}`} className="flex items-center gap-1.5 hover:text-heading transition-colors">
             <Mail size={11} className="text-primary" />
-            {siteConfig.email}
+            {config.email}
           </a>
-          <a href={PHONE_LINK} className="flex items-center gap-1.5 text-primary font-semibold hover:text-accent transition-colors">
-            <Phone size={11} />
-            {PHONE_DISPLAY}
-          </a>
+          {phone && (
+            <a href={telLink(phone)} className="flex items-center gap-1.5 text-primary font-semibold hover:text-accent transition-colors">
+              <Phone size={11} />
+              {phone}
+            </a>
+          )}
         </div>
       </div>
     </div>
   )
 }
 
-export default function Header() {
+export default function Header({ config }: { config: SiteConfig }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const pathname = usePathname()
   const navRef = useRef<HTMLDivElement>(null)
+
+  const phone = config.phone[0]
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 50)
@@ -76,7 +86,7 @@ export default function Header() {
 
   return (
     <>
-      <TopBar />
+      <TopBar config={config} />
 
       <header
         className={cn(
@@ -219,9 +229,11 @@ export default function Header() {
             <Link href="/lien-he" onClick={() => setIsMenuOpen(false)} className="btn-main w-full justify-center py-3.5 text-sm">
               Đặt Lịch Ngay
             </Link>
-            <a href={PHONE_LINK} className="btn-outline w-full justify-center py-3 text-sm">
-              <Phone size={15} /> Gọi: {PHONE_DISPLAY}
-            </a>
+            {phone && (
+              <a href={telLink(phone)} className="btn-outline w-full justify-center py-3 text-sm">
+                <Phone size={15} /> Gọi: {phone}
+              </a>
+            )}
           </div>
         </div>
       )}

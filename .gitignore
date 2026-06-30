@@ -3,6 +3,8 @@ node_modules/
 !node_modules/.prisma/
 # .next/ tracked — built locally and committed (trừ cache runtime/build)
 .next/cache/
+# Ảnh/video admin tải lên (sinh ở runtime trên server, không commit)
+/public/uploads/
 out/
 dist/
 .env

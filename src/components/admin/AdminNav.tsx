@@ -5,7 +5,8 @@ import { usePathname } from 'next/navigation'
 import { signOut } from 'next-auth/react'
 import {
   LayoutDashboard, Wrench, BookOpen, Settings, LogOut,
-  Images, Info, Star, GitBranch, Users, DollarSign, Handshake, Megaphone,
+  Images, Info, Star, GitBranch, Users, Handshake, Megaphone,
+  GraduationCap, Building2, Video,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -27,8 +28,10 @@ const navSections: { label: string | null; items: { href: string; label: string;
       { href: '/admin/homepage/process', label: 'Quy Trình Dịch Vụ', icon: GitBranch },
       { href: '/admin/homepage/partners', label: 'Đối Tác & Số Liệu', icon: Handshake },
       { href: '/admin/homepage/cta', label: 'Cam Kết & CTA', icon: Megaphone },
-      { href: '/admin/pricing', label: 'Báo Giá', icon: DollarSign },
       { href: '/admin/team', label: 'Đội Ngũ & Về Chúng Tôi', icon: Users },
+      { href: '/admin/models', label: 'Mô Hình Đào Tạo', icon: GraduationCap },
+      { href: '/admin/projects', label: 'Dự Án & Đối Tác', icon: Building2 },
+      { href: '/admin/videos', label: 'Video Clip (Thư Viện)', icon: Video },
     ],
   },
   {

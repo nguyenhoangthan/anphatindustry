@@ -1,7 +1,11 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
-import { Building2, Handshake, ArrowRight } from 'lucide-react'
+import Image from 'next/image'
+import { Clock } from 'lucide-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import { defaultProjects } from '@/lib/defaultContent'
+import { getSection } from '@/lib/content'
+
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Dự Án & Đối Tác | An Phát Industry',
@@ -9,24 +13,13 @@ export const metadata: Metadata = {
     'Các dự án đã thực hiện cùng mạng lưới đối tác và khách hàng của An Phát Industry trong lĩnh vực bảo dưỡng, sửa chữa ô tô và mô hình đào tạo kỹ thuật.',
 }
 
-const blocks = [
-  {
-    slug: 'du-an-da-thuc-hien',
-    label: 'Dự Án Đã Thực Hiện',
-    description:
-      'Các dự án cung cấp dịch vụ, mô hình đào tạo và giải pháp kỹ thuật mà An Phát Industry đã triển khai.',
-    Icon: Building2,
-  },
-  {
-    slug: 'doi-tac-khach-hang',
-    label: 'Đối Tác & Khách Hàng',
-    description:
-      'Mạng lưới đối tác, doanh nghiệp và khách hàng đồng hành cùng An Phát Industry.',
-    Icon: Handshake,
-  },
-]
+type ProjectsData = typeof defaultProjects
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const data = await getSection<ProjectsData>('section_projects', defaultProjects)
+  const projects = (data.projects ?? []).filter((p) => p.title && p.title !== 'Đang cập nhật')
+  const partners = data.partners ?? []
+
   return (
     <>
       {/* Page Hero */}
@@ -34,39 +27,62 @@ export default function ProjectsPage() {
         <div className="site-container">
           <Breadcrumb items={[{ label: 'Dự Án & Đối Tác' }]} />
           <h1 className="font-heading font-bold text-heading text-3xl lg:text-5xl mt-5 mb-3">
-            Dự Án & Đối Tác
+            {data.intro?.title || 'Dự Án & Đối Tác'}
           </h1>
-          <p className="text-body text-lg max-w-2xl">
-            Hành trình đồng hành cùng khách hàng và đối tác qua các dự án dịch vụ,
-            mô hình đào tạo và giải pháp kỹ thuật.
-          </p>
+          <p className="text-body text-lg max-w-2xl">{data.intro?.subtitle}</p>
         </div>
       </section>
 
-      {/* Blocks */}
-      <section className="section-py bg-dark-2">
+      {/* Dự án đã thực hiện */}
+      <section id="du-an-da-thuc-hien" className="section-py bg-dark-2 scroll-mt-24">
         <div className="site-container">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {blocks.map(({ slug, label, description, Icon }) => (
-              <Link
-                key={slug}
-                href={`/du-an/${slug}`}
-                className="group bg-dark-1 rounded-card border border-border p-8 hover:shadow-card-hover transition-all"
-              >
-                <div className="w-14 h-14 rounded-card bg-primary/10 flex items-center justify-center mb-5">
-                  <Icon size={26} className="text-primary" />
+          <div className="section-subtitle">Dự Án</div>
+          <h2 className="font-heading font-bold text-heading text-2xl lg:text-3xl mb-8">Dự Án Đã Thực Hiện</h2>
+          {projects.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projects.map((p, i) => (
+                <article key={i} className="bg-dark-1 rounded-card border border-border overflow-hidden">
+                  {p.image && (
+                    <div className="relative aspect-[16/10]">
+                      <Image src={p.image} alt={p.title} fill className="object-cover" sizes="(max-width:1024px) 100vw, 33vw" />
+                    </div>
+                  )}
+                  <div className="p-5">
+                    {p.year && <span className="text-xs font-semibold text-primary">{p.year}</span>}
+                    <h3 className="font-heading font-bold text-heading text-lg mt-1 mb-2">{p.title}</h3>
+                    <p className="text-body text-sm leading-relaxed">{p.description}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="bg-dark-1 border border-border rounded-card p-10 text-center">
+              <Clock size={26} className="text-primary mx-auto mb-3" />
+              <p className="text-body text-sm">Danh sách dự án <strong className="text-heading">đang được cập nhật</strong>.</p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Đối tác & khách hàng */}
+      <section id="doi-tac-khach-hang" className="section-py bg-dark-1 scroll-mt-24">
+        <div className="site-container">
+          <div className="section-subtitle">Đối Tác</div>
+          <h2 className="font-heading font-bold text-heading text-2xl lg:text-3xl mb-8">Đối Tác & Khách Hàng</h2>
+          {partners.length > 0 ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+              {partners.map((p, i) => (
+                <div key={i} className="bg-dark-2 border border-border rounded-card p-5 flex flex-col items-center justify-center gap-3 aspect-[4/3]">
+                  <div className="w-12 h-12 rounded-card bg-accent flex items-center justify-center text-white font-bold text-sm">{p.abbr || p.name.slice(0, 3).toUpperCase()}</div>
+                  <span className="text-body text-sm font-medium text-center">{p.name}</span>
                 </div>
-                <h2 className="font-heading font-bold text-heading text-xl lg:text-2xl mb-3">
-                  {label}
-                </h2>
-                <p className="text-body text-sm leading-relaxed mb-5">{description}</p>
-                <span className="inline-flex items-center gap-2 text-primary font-semibold text-sm">
-                  Xem chi tiết
-                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Link>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="bg-dark-2 border border-border rounded-card p-10 text-center">
+              <p className="text-body text-sm">Danh sách đối tác <strong className="text-heading">đang được cập nhật</strong>.</p>
+            </div>
+          )}
         </div>
       </section>
     </>

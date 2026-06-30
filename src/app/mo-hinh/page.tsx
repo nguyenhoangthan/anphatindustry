@@ -3,7 +3,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
-import { modelCategories } from '@/data/models'
+import { modelCategories, type ModelCategory } from '@/data/models'
+import { getSection } from '@/lib/content'
+
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Mô Hình Đào Tạo | An Phát Industry',
@@ -11,7 +14,9 @@ export const metadata: Metadata = {
     'Mô hình thiết bị đào tạo kỹ thuật và thiết bị kiểm tra chẩn đoán ô tô của An Phát Industry – phục vụ giảng dạy, thực hành và chuyển giao công nghệ.',
 }
 
-export default function ModelsPage() {
+export default async function ModelsPage() {
+  const categories = await getSection<ModelCategory[]>('section_models', modelCategories)
+
   return (
     <>
       {/* Page Hero */}
@@ -32,20 +37,22 @@ export default function ModelsPage() {
       <section className="section-py bg-dark-2">
         <div className="site-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {modelCategories.map((cat) => (
+            {categories.map((cat) => (
               <Link
                 key={cat.slug}
                 href={`/mo-hinh/${cat.slug}`}
                 className="group bg-dark-1 rounded-card border border-border overflow-hidden hover:shadow-card-hover transition-all"
               >
-                <div className="relative aspect-[16/9] overflow-hidden">
-                  <Image
-                    src={cat.image}
-                    alt={cat.label}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
+                <div className="relative aspect-[16/9] overflow-hidden bg-dark-3">
+                  {cat.image && (
+                    <Image
+                      src={cat.image}
+                      alt={cat.label}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                  )}
                 </div>
                 <div className="p-7">
                   <h2 className="font-heading font-bold text-heading text-xl lg:text-2xl mb-3">

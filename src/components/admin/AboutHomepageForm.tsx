@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Plus, X, Loader2, CheckCircle } from 'lucide-react'
+import ImageUpload from './ImageUpload'
 import type { defaultAboutSection } from '@/lib/defaultContent'
 
 type Data = typeof defaultAboutSection
@@ -52,9 +53,8 @@ export default function AboutHomepageForm({ initialData }: { initialData: Data }
         <h3 className="text-sm font-bold text-[#0B2447] uppercase tracking-wide mb-4 pb-2 border-b border-gray-100">Ảnh & Số Liệu Nổi Bật</h3>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="lg:col-span-2">
-            <label className="block text-xs font-semibold text-gray-600 mb-1">URL Ảnh</label>
-            <input type="url" value={form.image} onChange={e => set('image', e.target.value)} className={inp} />
-            {form.image && <img src={form.image} alt="" className="mt-2 h-24 w-full object-cover rounded-xl border border-gray-100" onError={e => ((e.target as HTMLImageElement).style.display='none')} />}
+            <label className="block text-xs font-semibold text-gray-600 mb-1">Ảnh</label>
+            <ImageUpload value={form.image} onChange={(url) => set('image', url)} />
           </div>
           <div>
             <label className="block text-xs font-semibold text-gray-600 mb-1">Số liệu 1 (giá trị)</label>

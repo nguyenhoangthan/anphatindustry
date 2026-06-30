@@ -217,3 +217,41 @@ export const defaultTeamSection = {
     { name: 'Đang cập nhật', role: 'Trưởng Xưởng Đồng Sơn', description: 'Thông tin nhân sự đang được cập nhật.' },
   ],
 }
+
+// ── DỰ ÁN & ĐỐI TÁC ──────────────────────────────────────────────────────────
+export const defaultProjects = {
+  intro: {
+    badge: 'Dự Án & Đối Tác',
+    title: 'Dự Án & Đối Tác',
+    subtitle:
+      'Hành trình đồng hành cùng khách hàng và đối tác qua các dự án dịch vụ, mô hình đào tạo và giải pháp kỹ thuật.',
+  },
+  // Dự án đã thực hiện
+  projects: [
+    {
+      title: 'Đang cập nhật',
+      description: 'Thông tin dự án sẽ được cập nhật sớm.',
+      image: '',
+      year: '',
+    },
+  ],
+  // Đối tác & khách hàng
+  partners: [
+    { name: 'Toyota', abbr: 'TYT' },
+    { name: 'Honda', abbr: 'HND' },
+    { name: 'Mazda', abbr: 'MZD' },
+    { name: 'Mercedes-Benz', abbr: 'MB' },
+    { name: 'VinFast', abbr: 'VFS' },
+  ],
+}
+
+// ── VIDEO CLIP (Thư Viện) ────────────────────────────────────────────────────
+// Mỗi video: dán link YouTube (khuyên dùng) hoặc URL file video đã tải lên.
+export const defaultVideos = {
+  intro: {
+    title: 'Video Clip Phổ Biến',
+    subtitle: 'Video hướng dẫn, chia sẻ kỹ thuật và giới thiệu dịch vụ của An Phát Industry.',
+  },
+  items: [] as { title: string; url: string; description: string }[],
+}
+

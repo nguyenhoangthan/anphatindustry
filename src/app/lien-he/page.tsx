@@ -2,7 +2,9 @@
 import { Phone, Mail, MapPin, Clock } from 'lucide-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import ContactForm from './ContactForm'
-import { siteConfig } from '@/lib/constants'
+import { getSiteConfig } from '@/lib/getSiteConfig'
+
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Liên Hệ & Đặt Lịch | An Phát Industry',
@@ -10,32 +12,14 @@ export const metadata: Metadata = {
     'Liên hệ An Phát Industry để đặt lịch bảo dưỡng, sửa chữa ô tô. Hotline hỗ trợ 7 ngày/tuần. Kiểm tra xe miễn phí.',
 }
 
-const contactInfo = [
-  {
-    icon: MapPin,
-    title: 'Địa Chỉ',
-    lines: siteConfig.locations.map((l) => `${l.name}: ${l.address}`),
-  },
-  {
-    icon: Phone,
-    title: 'Hotline',
-    lines: siteConfig.phone,
-    isPhone: true,
-  },
-  {
-    icon: Mail,
-    title: 'Email',
-    lines: [siteConfig.email],
-    isEmail: true,
-  },
-  {
-    icon: Clock,
-    title: 'Giờ Làm Việc',
-    lines: [siteConfig.workingHours],
-  },
-]
-
-export default function ContactPage() {
+export default async function ContactPage() {
+  const siteConfig = await getSiteConfig()
+  const contactInfo = [
+    { icon: MapPin, title: 'Địa Chỉ', lines: siteConfig.locations.map((l) => `${l.name}: ${l.address}`) },
+    { icon: Phone, title: 'Hotline', lines: siteConfig.phone, isPhone: true },
+    { icon: Mail, title: 'Email', lines: [siteConfig.email], isEmail: true },
+    { icon: Clock, title: 'Giờ Làm Việc', lines: [siteConfig.workingHours] },
+  ]
   return (
     <>
       {/* Hero */}

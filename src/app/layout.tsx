@@ -1,11 +1,9 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
-import FloatingContact from '@/components/shared/FloatingContact'
-import ScrollToTop from '@/components/shared/ScrollToTop'
+import SiteChrome from '@/components/layout/SiteChrome'
 import SeasonProvider from '@/components/shared/SeasonProvider'
 import { siteConfig } from '@/lib/constants'
+import { getSiteConfig } from '@/lib/getSiteConfig'
 import { getActiveSeason } from '@/lib/season'
 
 export const metadata: Metadata = {
@@ -61,6 +59,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const season = getActiveSeason()
+  const config = await getSiteConfig()
 
   return (
     <html lang="vi" data-season={season}>
@@ -74,11 +73,7 @@ export default async function RootLayout({
       </head>
       <body>
         <SeasonProvider initialSeason={season}>
-          <Header />
-          <main>{children}</main>
-          <Footer />
-          <FloatingContact />
-          <ScrollToTop />
+          <SiteChrome config={config}>{children}</SiteChrome>
         </SeasonProvider>
       </body>
     </html>

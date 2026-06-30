@@ -4,14 +4,18 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ChevronRight } from 'lucide-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
-import { modelCategories, getModelCategory } from '@/data/models'
+import { modelCategories, type ModelCategory } from '@/data/models'
+import { getSection } from '@/lib/content'
 
-export function generateStaticParams() {
-  return modelCategories.map((c) => ({ slug: c.slug }))
+export const dynamic = 'force-dynamic'
+
+async function findCategory(slug: string) {
+  const cats = await getSection<ModelCategory[]>('section_models', modelCategories)
+  return cats.find((c) => c.slug === slug)
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const cat = getModelCategory(params.slug)
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const cat = await findCategory(params.slug)
   if (!cat) return { title: 'Không tìm thấy | An Phát Industry' }
   return {
     title: `${cat.label} | An Phát Industry`,
@@ -19,8 +23,8 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   }
 }
 
-export default function ModelCategoryPage({ params }: { params: { slug: string } }) {
-  const cat = getModelCategory(params.slug)
+export default async function ModelCategoryPage({ params }: { params: { slug: string } }) {
+  const cat = await findCategory(params.slug)
   if (!cat) notFound()
 
   return (

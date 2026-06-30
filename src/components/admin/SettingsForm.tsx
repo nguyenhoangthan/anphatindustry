@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Loader2, CheckCircle } from 'lucide-react'
+import { Loader2, CheckCircle, Plus, X } from 'lucide-react'
 
 interface SettingsData {
   name: string
@@ -12,6 +12,7 @@ interface SettingsData {
   phone: string[]
   email: string
   address: string
+  locations: { name: string; address: string }[]
   workingHours: string
   businessNumber: string
   social: {
@@ -45,6 +46,18 @@ export default function SettingsForm({ initialData }: Props) {
     const phones = [...form.phone]
     phones[index] = value
     setField('phone', phones)
+  }
+
+  function setLocation(index: number, key: 'name' | 'address', value: string) {
+    const locations = [...(form.locations ?? [])]
+    locations[index] = { ...locations[index], [key]: value }
+    setField('locations', locations)
+  }
+  function addLocation() {
+    setField('locations', [...(form.locations ?? []), { name: '', address: '' }])
+  }
+  function removeLocation(index: number) {
+    setField('locations', (form.locations ?? []).filter((_, i) => i !== index))
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -214,6 +227,40 @@ export default function SettingsForm({ initialData }: Props) {
               className={inputClass}
             />
           </div>
+        </div>
+      </div>
+
+      {/* Locations / Branches */}
+      <div>
+        <h3 className="text-base font-bold text-[#0B2447] mb-4 pb-2 border-b border-gray-100">
+          Cơ Sở (Địa Điểm & Bản Đồ)
+        </h3>
+        <p className="text-xs text-gray-500 mb-4">Mỗi cơ sở hiển thị ở footer và có một bản đồ riêng trên trang Liên hệ.</p>
+        <div className="space-y-3">
+          {(form.locations ?? []).map((loc, i) => (
+            <div key={i} className="flex flex-col sm:flex-row gap-2 sm:items-center border border-gray-100 rounded-xl p-3 bg-gray-50/50">
+              <input
+                type="text"
+                value={loc.name}
+                onChange={(e) => setLocation(i, 'name', e.target.value)}
+                className={`${inputClass} sm:w-48`}
+                placeholder="Tên cơ sở (VD: Trụ Sở Chính)"
+              />
+              <input
+                type="text"
+                value={loc.address}
+                onChange={(e) => setLocation(i, 'address', e.target.value)}
+                className={`${inputClass} flex-1`}
+                placeholder="Địa chỉ đầy đủ"
+              />
+              <button type="button" onClick={() => removeLocation(i)} className="p-2 text-gray-400 hover:text-red-500 self-end sm:self-auto">
+                <X size={16} />
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={addLocation} className="flex items-center gap-1.5 text-[#0B2447] text-sm font-medium hover:text-[#E63312]">
+            <Plus size={15} /> Thêm cơ sở
+          </button>
         </div>
       </div>
 
