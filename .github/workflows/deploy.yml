@@ -27,6 +27,7 @@ jobs:
           exclude: |
             **/.git*/**
             **/node_modules/**
+            **/.next/cache/**
             **/.env
             **/.env.local
             **/.env*.local

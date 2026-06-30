@@ -1,7 +1,8 @@
 node_modules/
 # Prisma generated client (Linux binaries included) — tracked for deployment
 !node_modules/.prisma/
-# .next/ tracked — built locally and committed
+# .next/ tracked — built locally and committed (trừ cache runtime/build)
+.next/cache/
 out/
 dist/
 .env
