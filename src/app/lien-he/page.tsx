@@ -14,7 +14,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: 'Địa Chỉ',
-    lines: [siteConfig.address],
+    lines: siteConfig.locations.map((l) => `${l.name}: ${l.address}`),
   },
   {
     icon: Phone,
@@ -39,13 +39,13 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-dark-1 border-b border-white/5 section-pt pb-12">
+      <section className="bg-dark-1 border-b border-border section-pt pb-12">
         <div className="site-container">
           <Breadcrumb items={[{ label: 'Liên Hệ' }]} />
-          <h1 className="font-heading font-bold text-white text-3xl lg:text-5xl mt-5 mb-3">
+          <h1 className="font-heading font-bold text-heading text-3xl lg:text-5xl mt-5 mb-3">
             Liên Hệ & Đặt Lịch
           </h1>
-          <p className="text-white/60 text-lg max-w-2xl">
+          <p className="text-body text-lg max-w-2xl">
             Chúng tôi luôn sẵn sàng hỗ trợ. Hãy để lại thông tin và chúng tôi sẽ liên hệ trong
             vòng 30 phút.
           </p>
@@ -62,13 +62,13 @@ export default function ContactPage() {
                 return (
                   <div
                     key={info.title}
-                    className="bg-dark-1 rounded-card p-5 border border-white/5 flex items-start gap-4"
+                    className="bg-dark-1 rounded-card p-5 border border-border flex items-start gap-4"
                   >
                     <div className="w-11 h-11 bg-primary/10 border border-primary/20 rounded-xl flex items-center justify-center flex-shrink-0">
                       <Icon size={18} className="text-primary" />
                     </div>
                     <div>
-                      <div className="font-semibold text-white text-sm mb-1">
+                      <div className="font-semibold text-heading text-sm mb-1">
                         {info.title}
                       </div>
                       {info.lines.map((line) => (
@@ -76,19 +76,19 @@ export default function ContactPage() {
                           {info.isPhone ? (
                             <a
                               href={`tel:+84${line.replace(/^0/, '').replace(/\s/g, '')}`}
-                              className="text-white/55 text-sm hover:text-primary transition-colors"
+                              className="text-body text-sm hover:text-primary transition-colors"
                             >
                               {line}
                             </a>
                           ) : info.isEmail ? (
                             <a
                               href={`mailto:${line}`}
-                              className="text-white/55 text-sm hover:text-primary transition-colors"
+                              className="text-body text-sm hover:text-primary transition-colors"
                             >
                               {line}
                             </a>
                           ) : (
-                            <span className="text-white/55 text-sm">{line}</span>
+                            <span className="text-body text-sm">{line}</span>
                           )}
                         </div>
                       ))}
@@ -97,31 +97,36 @@ export default function ContactPage() {
                 )
               })}
 
-              {/* Map Embed */}
-              <div className="bg-dark-1 rounded-card overflow-hidden border border-white/5">
-                <div className="px-4 py-3 border-b border-white/5">
-                  <span className="font-semibold text-white/60 text-sm">Bản Đồ</span>
+              {/* Map Embeds – một bản đồ cho mỗi cơ sở */}
+              {siteConfig.locations.map((loc) => (
+                <div key={loc.address} className="bg-dark-1 rounded-card overflow-hidden border border-border">
+                  <div className="px-4 py-3 border-b border-border flex items-center gap-2">
+                    <MapPin size={14} className="text-primary flex-shrink-0" />
+                    <span className="font-semibold text-body text-sm">
+                      {loc.name} – {loc.address}
+                    </span>
+                  </div>
+                  <iframe
+                    src={`https://www.google.com/maps?q=${encodeURIComponent(loc.address)}&output=embed`}
+                    width="100%"
+                    height="220"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title={`Bản đồ ${loc.name} – An Phát Industry`}
+                  />
                 </div>
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.2!2d106.7!3d10.73!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDQzJzQ4LjAiTiAxMDbCsDQyJzAwLjAiRQ!5e0!3m2!1svi!2svn!4v1234567890"
-                  width="100%"
-                  height="220"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Bản đồ An Phát Industry"
-                />
-              </div>
+              ))}
             </div>
 
             {/* Form */}
             <div className="lg:col-span-3">
-              <div className="bg-dark-1 rounded-card border border-white/5 p-6 lg:p-8">
-                <h2 className="font-heading font-bold text-white text-xl lg:text-2xl mb-2">
+              <div className="bg-dark-1 rounded-card border border-border p-6 lg:p-8">
+                <h2 className="font-heading font-bold text-heading text-xl lg:text-2xl mb-2">
                   Gửi Yêu Cầu Tư Vấn
                 </h2>
-                <p className="text-white/45 text-sm mb-6">
+                <p className="text-muted text-sm mb-6">
                   Điền thông tin bên dưới, chúng tôi sẽ liên hệ tư vấn miễn phí trong vòng 30
                   phút.
                 </p>

@@ -34,7 +34,7 @@ export default function SectionHeader({
       <h2
         className={cn(
           'font-heading font-bold text-2xl sm:text-3xl lg:text-4xl leading-tight mb-4',
-          'text-white'
+          'text-heading'
         )}
       >
         {title}
@@ -44,7 +44,7 @@ export default function SectionHeader({
           className={cn(
             'text-base lg:text-lg leading-relaxed max-w-2xl',
             align === 'center' && 'mx-auto',
-            'text-white/55'
+            'text-body'
           )}
         >
           {subtitle}

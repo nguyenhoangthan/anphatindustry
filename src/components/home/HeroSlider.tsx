@@ -62,7 +62,7 @@ export default function HeroSlider({ slides = defaultHeroSlides, season }: Props
               {/* Dark gradient overlays */}
               <div className="absolute inset-0 gradient-edge-bottom" />
               <div className="absolute inset-0 gradient-edge-top opacity-60" />
-              <div className="absolute inset-0 bg-dark-1/50" />
+              <div className="absolute inset-0 bg-black/30" />
 
               {/* Slide Content â€“ bottom-anchored */}
               <div className="absolute inset-0 flex items-end">
@@ -86,7 +86,7 @@ export default function HeroSlider({ slides = defaultHeroSlides, season }: Props
                         {slide.description}
                       </p>
                       <div className="flex flex-wrap gap-3 lg:justify-end animate-fade-up">
-                        <Link href="/bao-gia" className="btn-main">
+                        <Link href="/lien-he" className="btn-main">
                           Đặt Lịch Ngay
                         </Link>
                         <a href={PHONE_LINK} className="btn-outline">
@@ -106,14 +106,14 @@ export default function HeroSlider({ slides = defaultHeroSlides, season }: Props
       {/* Prev / Next arrows */}
       <button
         onClick={scrollPrev}
-        className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-card bg-dark-2/70 hover:bg-primary border border-white/10 flex items-center justify-center text-white transition-all duration-200 backdrop-blur-sm"
+        className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-card bg-black/35 hover:bg-primary border border-white/20 flex items-center justify-center text-white transition-all duration-200 backdrop-blur-sm"
         aria-label="Previous slide"
       >
         <ChevronLeft size={20} />
       </button>
       <button
         onClick={scrollNext}
-        className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-card bg-dark-2/70 hover:bg-primary border border-white/10 flex items-center justify-center text-white transition-all duration-200 backdrop-blur-sm"
+        className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-card bg-black/35 hover:bg-primary border border-white/20 flex items-center justify-center text-white transition-all duration-200 backdrop-blur-sm"
         aria-label="Next slide"
       >
         <ChevronRight size={20} />
@@ -136,7 +136,7 @@ export default function HeroSlider({ slides = defaultHeroSlides, season }: Props
 
       {/* Season greeting banner (Táº¿t / NoÃ«l) */}
       {season && season !== 'normal' && (
-        <div className="absolute top-6 right-6 z-10 bg-dark-2/80 backdrop-blur-sm border border-primary/30 text-white text-xs font-semibold px-4 py-2 rounded-card">
+        <div className="absolute top-6 right-6 z-10 bg-black/50 backdrop-blur-sm border border-primary/30 text-white text-xs font-semibold px-4 py-2 rounded-card">
           {season === 'tet' ? 'Chúc Mừng Năm Mới 🧧' : 'Merry Christmas 🎄'}
         </div>
       )}

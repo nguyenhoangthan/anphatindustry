@@ -9,17 +9,17 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <>
-      <section className="bg-dark-1 border-b border-white/5 section-pt pb-12">
+      <section className="bg-dark-1 border-b border-border section-pt pb-12">
         <div className="site-container">
           <Breadcrumb items={[{ label: 'Chính Sách Bảo Mật' }]} />
-          <h1 className="font-heading font-bold text-white text-3xl lg:text-4xl mt-5">
+          <h1 className="font-heading font-bold text-heading text-3xl lg:text-4xl mt-5">
             Chính Sách Bảo Mật
           </h1>
         </div>
       </section>
       <section className="section-py bg-dark-2">
         <div className="site-container max-w-3xl">
-          <div className="prose max-w-none space-y-6 text-white/55">
+          <div className="prose max-w-none space-y-6 text-body">
             <p>
               {siteConfig.name} cam kết bảo vệ thông tin cá nhân của quý khách hàng. Chính sách
               này mô tả cách chúng tôi thu thập, sử dụng và bảo vệ thông tin của bạn.

@@ -5,9 +5,11 @@ import { useRouter } from 'next/navigation'
 import { Plus, X, Loader2 } from 'lucide-react'
 
 const CATEGORIES = [
-  { value: 'sua-chua-chung', label: 'Sửa Chữa Chung' },
-  { value: 'cham-soc-xe', label: 'Chăm Sóc Xe Hơi' },
+  { value: 'bao-duong-sua-chua', label: 'Bảo Dưỡng & Sửa Chữa' },
   { value: 'dong-son', label: 'Đồng Sơn' },
+  { value: 'cham-soc-lam-dep', label: 'Chăm Sóc & Làm Đẹp Xe' },
+  { value: 'ho-tro', label: 'Hỗ Trợ' },
+  { value: 'xe-dien', label: 'Xe Điện' },
 ]
 
 interface ServiceFormData {
@@ -39,8 +41,8 @@ export default function ServiceForm({ initialData, mode }: Props) {
     title: '',
     shortDescription: '',
     description: '',
-    category: 'sua-chua-chung',
-    categoryLabel: 'Sửa Chữa Chung',
+    category: 'bao-duong-sua-chua',
+    categoryLabel: 'Bảo Dưỡng & Sửa Chữa',
     image: '',
     highlights: [''],
     featured: false,

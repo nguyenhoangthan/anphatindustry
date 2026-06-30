@@ -36,7 +36,7 @@ function StarRating({ rating }: { rating: number }) {
         <Star
           key={i}
           size={13}
-          className={i < rating ? 'text-yellow-400 fill-yellow-400' : 'text-white/20 fill-white/20'}
+          className={i < rating ? 'text-yellow-400 fill-yellow-400' : 'text-muted fill-white/20'}
         />
       ))}
     </div>
@@ -71,7 +71,7 @@ export default function TestimonialsCarousel({ testimonials = defaultTestimonial
       <div className="site-container">
         <div className="text-center mb-10">
           <div className="section-subtitle">Khách Hàng Nói Gì</div>
-          <h2 className="text-white font-heading font-bold">Đánh Giá Từ Khách Hàng</h2>
+          <h2 className="text-heading font-heading font-bold">Đánh Giá Từ Khách Hàng</h2>
         </div>
 
         <div className="relative">
@@ -91,12 +91,12 @@ export default function TestimonialsCarousel({ testimonials = defaultTestimonial
                           {t.name.charAt(0)}
                         </div>
                         <div>
-                          <div className="text-white font-semibold text-sm leading-tight">{t.name}</div>
-                          <div className="text-white/35 text-xs mt-0.5">{t.date}</div>
+                          <div className="text-heading font-semibold text-sm leading-tight">{t.name}</div>
+                          <div className="text-muted text-xs mt-0.5">{t.date}</div>
                         </div>
                       </div>
                       {/* Google icon placeholder */}
-                      <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center text-[10px] font-bold text-white/50">
+                      <div className="w-6 h-6 rounded-full bg-dark-2 flex items-center justify-center text-[10px] font-bold text-body">
                         G
                       </div>
                     </div>
@@ -104,11 +104,11 @@ export default function TestimonialsCarousel({ testimonials = defaultTestimonial
                     {/* Stars */}
                     <div className="flex items-center gap-2">
                       <StarRating rating={t.rating} />
-                      <span className="text-white font-semibold text-xs">{t.rating}.0</span>
+                      <span className="text-heading font-semibold text-xs">{t.rating}.0</span>
                     </div>
 
                     {/* Text */}
-                    <p className="text-white/50 text-[13px] leading-relaxed flex-1">
+                    <p className="text-body text-[13px] leading-relaxed flex-1">
                       &ldquo;{t.text}&rdquo;
                     </p>
                   </div>
@@ -120,14 +120,14 @@ export default function TestimonialsCarousel({ testimonials = defaultTestimonial
           {/* Navigation */}
           <button
             onClick={scrollPrev}
-            className="absolute -left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-dark-3 hover:bg-primary border border-white/10 flex items-center justify-center text-white transition-all duration-200 z-10"
+            className="absolute -left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-dark-3 hover:bg-primary border border-border flex items-center justify-center text-heading hover:text-white transition-all duration-200 z-10"
             aria-label="Previous testimonial"
           >
             <ChevronLeft size={18} />
           </button>
           <button
             onClick={scrollNext}
-            className="absolute -right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-dark-3 hover:bg-primary border border-white/10 flex items-center justify-center text-white transition-all duration-200 z-10"
+            className="absolute -right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-dark-3 hover:bg-primary border border-border flex items-center justify-center text-heading hover:text-white transition-all duration-200 z-10"
             aria-label="Next testimonial"
           >
             <ChevronRight size={18} />
@@ -143,7 +143,7 @@ export default function TestimonialsCarousel({ testimonials = defaultTestimonial
               aria-label={`Go to testimonial ${i + 1}`}
               className={cn(
                 'h-1.5 rounded-full transition-all duration-300',
-                i === selectedIndex ? 'w-6 bg-primary' : 'w-1.5 bg-white/20 hover:bg-white/40'
+                i === selectedIndex ? 'w-6 bg-primary' : 'w-1.5 bg-dark-2 hover:bg-white/40'
               )}
             />
           ))}

@@ -17,7 +17,7 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
         <li>
           <Link
             href="/"
-            className="flex items-center gap-1 text-white/60 hover:text-white transition-colors"
+            className="flex items-center gap-1 text-body hover:text-heading transition-colors"
           >
             <Home size={13} />
             <span>Trang chủ</span>
@@ -25,13 +25,13 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
         </li>
         {items.map((item, index) => (
           <li key={index} className="flex items-center gap-1.5">
-            <ChevronRight size={12} className="text-white/40" />
+            <ChevronRight size={12} className="text-muted" />
             {item.href && index < items.length - 1 ? (
-              <Link href={item.href} className="text-white/60 hover:text-white transition-colors">
+              <Link href={item.href} className="text-body hover:text-heading transition-colors">
                 {item.label}
               </Link>
             ) : (
-              <span className="text-white/90 font-medium">{item.label}</span>
+              <span className="text-heading font-medium">{item.label}</span>
             )}
           </li>
         ))}

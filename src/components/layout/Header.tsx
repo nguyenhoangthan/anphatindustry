@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
@@ -6,26 +6,27 @@ import { usePathname } from 'next/navigation'
 import { Menu, X, Phone, ChevronDown, Mail, Clock } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { siteConfig, PHONE_DISPLAY, PHONE_LINK, NAV_ITEMS } from '@/lib/constants'
+import Logo from './Logo'
 
 // ─── TopBar ──────────────────────────────────────────────────────────────────
 function TopBar() {
   return (
-    <div className="hidden lg:block border-b border-white/5 bg-dark-2">
+    <div className="hidden lg:block border-b border-border bg-dark-2">
       <div className="site-container flex items-center justify-between py-2.5">
-        <div className="flex items-center gap-2 text-white/40 text-xs">
+        <div className="flex items-center gap-2 text-body text-xs">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
           <span>Chuyên nghiệp – Uy tín – Tận tâm tại TP. Hồ Chí Minh</span>
         </div>
-        <div className="flex items-center gap-6 text-xs text-white/40">
+        <div className="flex items-center gap-6 text-xs text-body">
           <span className="flex items-center gap-1.5">
             <Clock size={11} className="text-primary" />
             {siteConfig.workingHours}
           </span>
-          <a href={`mailto:${siteConfig.email}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
+          <a href={`mailto:${siteConfig.email}`} className="flex items-center gap-1.5 hover:text-heading transition-colors">
             <Mail size={11} className="text-primary" />
             {siteConfig.email}
           </a>
-          <a href={PHONE_LINK} className="flex items-center gap-1.5 text-primary font-semibold hover:text-white transition-colors">
+          <a href={PHONE_LINK} className="flex items-center gap-1.5 text-primary font-semibold hover:text-accent transition-colors">
             <Phone size={11} />
             {PHONE_DISPLAY}
           </a>
@@ -80,24 +81,22 @@ export default function Header() {
       <header
         className={cn(
           'sticky top-0 z-50 transition-all duration-300 bg-dark-1',
-          isScrolled ? 'shadow-lg shadow-black/40' : 'backdrop-blur-sm'
+          isScrolled ? 'shadow-card-dark' : ''
         )}
       >
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-primary opacity-20" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-border" />
 
         <div className="site-container" ref={navRef}>
           <div className="flex items-center justify-between h-[72px] lg:h-20">
 
             <Link href="/" className="flex items-center gap-3 flex-shrink-0">
-              <div className="w-10 h-10 lg:w-11 lg:h-11 rounded-card bg-primary flex items-center justify-center font-heading font-black text-white text-lg flex-shrink-0">
-                AP
-              </div>
-              <div className="hidden sm:block">
-                <div className="font-heading font-bold text-white text-sm lg:text-base leading-tight tracking-wide uppercase">
+              <Logo />
+              <div className="hidden sm:block border-l border-border pl-3">
+                <div className="font-heading font-bold text-heading text-sm lg:text-base leading-tight tracking-wide uppercase">
                   An Phát Industry
                 </div>
-                <div className="text-white/35 text-[10px] font-medium tracking-widest uppercase">
-                  Bảo Dưỡng · Sửa Chữa · Chăm Sóc
+                <div className="text-muted text-[10px] font-medium tracking-widest uppercase">
+                  Bảo Dưỡng · Mô Hình · Đào Tạo
                 </div>
               </div>
             </Link>
@@ -113,22 +112,22 @@ export default function Header() {
                         <button
                           onClick={() => toggleDropdown(item.href)}
                           className={cn(
-                            'flex items-center gap-1 px-4 py-2.5 text-[13px] font-semibold tracking-wide transition-colors rounded-btn',
-                            isActive || isOpen ? 'text-primary' : 'text-white/65 hover:text-white'
+                            'flex items-center gap-1 px-3 py-2.5 text-[13px] font-semibold tracking-wide transition-colors rounded-btn whitespace-nowrap',
+                            isActive || isOpen ? 'text-primary' : 'text-body hover:text-heading'
                           )}
                         >
                           {item.label}
                           <ChevronDown size={13} className={cn('transition-transform duration-200 mt-px', isOpen && 'rotate-180')} />
                         </button>
                         {isOpen && (
-                          <div className="absolute top-full left-0 mt-2 min-w-[200px] rounded-card py-2 z-50 shadow-card-dark border border-white/5 bg-dark-2">
+                          <div className="absolute top-full left-0 mt-2 min-w-[230px] rounded-card py-2 z-50 shadow-card-hover border border-border bg-white">
                             {item.children.map((child) => (
                               <Link
                                 key={child.href}
                                 href={child.href}
                                 className={cn(
                                   'block px-5 py-2.5 text-[13px] font-medium transition-colors',
-                                  pathname === child.href ? 'text-primary' : 'text-white/55 hover:text-white hover:bg-white/5'
+                                  pathname === child.href ? 'text-primary' : 'text-body hover:text-heading hover:bg-dark-2'
                                 )}
                               >
                                 {child.label}
@@ -141,15 +140,15 @@ export default function Header() {
                       <Link
                         href={item.href}
                         className={cn(
-                          'block px-4 py-2.5 text-[13px] font-semibold tracking-wide transition-colors rounded-btn',
-                          isActive ? 'text-primary' : 'text-white/65 hover:text-white'
+                          'block px-3 py-2.5 text-[13px] font-semibold tracking-wide transition-colors rounded-btn whitespace-nowrap',
+                          isActive ? 'text-primary' : 'text-body hover:text-heading'
                         )}
                       >
                         {item.label}
                       </Link>
                     )}
                     {isActive && (
-                      <span className="absolute bottom-0 left-4 right-4 h-0.5 rounded-full bg-primary" />
+                      <span className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-primary" />
                     )}
                   </div>
                 )
@@ -157,12 +156,12 @@ export default function Header() {
             </nav>
 
             <div className="flex items-center gap-3">
-              <Link href="/bao-gia" className="btn-main hidden lg:inline-flex text-[13px] py-2.5 px-5">
+              <Link href="/lien-he" className="btn-main hidden lg:inline-flex text-[13px] py-2.5 px-5">
                 Đặt Lịch Ngay
               </Link>
               <button
                 onClick={() => setIsMenuOpen((v) => !v)}
-                className="lg:hidden w-10 h-10 rounded-card bg-dark-3 flex items-center justify-center text-white/65 hover:text-white transition-colors"
+                className="lg:hidden w-10 h-10 rounded-card bg-dark-2 flex items-center justify-center text-heading transition-colors"
                 aria-label="Toggle mobile menu"
                 aria-expanded={isMenuOpen}
               >
@@ -175,11 +174,11 @@ export default function Header() {
 
       {isMenuOpen && (
         <div className="fixed inset-0 z-40 lg:hidden flex flex-col bg-dark-1">
-          <div className="flex items-center justify-between px-5 h-[72px] border-b border-white/5 bg-dark-2 flex-shrink-0">
-            <span className="font-heading font-bold text-white text-sm uppercase tracking-wide">An Phát Industry</span>
+          <div className="flex items-center justify-between px-5 h-[72px] border-b border-border bg-dark-2 flex-shrink-0">
+            <span className="font-heading font-bold text-heading text-sm uppercase tracking-wide">An Phát Industry</span>
             <button
               onClick={() => setIsMenuOpen(false)}
-              className="w-9 h-9 rounded-card bg-dark-3 flex items-center justify-center text-white/65 hover:text-white transition-colors"
+              className="w-9 h-9 rounded-card bg-white border border-border flex items-center justify-center text-heading transition-colors"
             >
               <X size={18} />
             </button>
@@ -193,7 +192,7 @@ export default function Header() {
                   onClick={() => setIsMenuOpen(false)}
                   className={cn(
                     'block px-4 py-3.5 rounded-card text-sm font-semibold tracking-wide transition-colors',
-                    pathname === item.href ? 'text-primary bg-primary-dim' : 'text-white/65 hover:text-white hover:bg-white/5'
+                    pathname === item.href ? 'text-primary bg-primary-dim' : 'text-body hover:text-heading hover:bg-dark-2'
                   )}
                 >
                   {item.label}
@@ -205,7 +204,7 @@ export default function Header() {
                         key={child.href}
                         href={child.href}
                         onClick={() => setIsMenuOpen(false)}
-                        className="block px-4 py-2.5 rounded-card text-[13px] text-white/45 hover:text-white hover:bg-white/5 transition-colors"
+                        className="block px-4 py-2.5 rounded-card text-[13px] text-muted hover:text-heading hover:bg-dark-2 transition-colors"
                       >
                         {child.label}
                       </Link>
@@ -216,9 +215,9 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="flex-shrink-0 p-5 border-t border-white/5 space-y-3">
-            <Link href="/bao-gia" onClick={() => setIsMenuOpen(false)} className="btn-main w-full justify-center py-3.5 text-sm">
-              Đặt Lịch Bảo Dưỡng
+          <div className="flex-shrink-0 p-5 border-t border-border space-y-3">
+            <Link href="/lien-he" onClick={() => setIsMenuOpen(false)} className="btn-main w-full justify-center py-3.5 text-sm">
+              Đặt Lịch Ngay
             </Link>
             <a href={PHONE_LINK} className="btn-outline w-full justify-center py-3 text-sm">
               <Phone size={15} /> Gọi: {PHONE_DISPLAY}

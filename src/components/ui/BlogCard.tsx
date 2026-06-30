@@ -26,17 +26,17 @@ export default function BlogCard({ post }: BlogCardProps) {
             <Tag size={10} />
             {post.category === 'kinh-nghiem' ? 'Kinh nghiệm' : post.category}
           </span>
-          <div className="flex items-center gap-1 text-white/30 text-xs">
+          <div className="flex items-center gap-1 text-muted text-xs">
             <Clock size={10} />
             <span>{post.readingTime} phút đọc</span>
           </div>
         </div>
-        <h3 className="font-heading font-bold text-white text-base lg:text-[15px] leading-snug mb-2 line-clamp-2 group-hover:text-primary transition-colors flex-1">
+        <h3 className="font-heading font-bold text-heading text-base lg:text-[15px] leading-snug mb-2 line-clamp-2 group-hover:text-primary transition-colors flex-1">
           <Link href={`/thu-vien/${post.slug}`}>{post.title}</Link>
         </h3>
-        <p className="text-white/40 text-[13px] leading-relaxed line-clamp-2 mb-4">{post.excerpt}</p>
-        <div className="flex items-center justify-between pt-4 border-t border-white/5">
-          <span className="text-white/30 text-xs">{formatDate(post.publishedAt)}</span>
+        <p className="text-muted text-[13px] leading-relaxed line-clamp-2 mb-4">{post.excerpt}</p>
+        <div className="flex items-center justify-between pt-4 border-t border-border">
+          <span className="text-muted text-xs">{formatDate(post.publishedAt)}</span>
           <Link
             href={`/thu-vien/${post.slug}`}
             className="flex items-center gap-1 text-primary text-sm font-semibold hover:gap-2 transition-all"

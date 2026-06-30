@@ -3,7 +3,7 @@ import SectionHeader from '@/components/ui/SectionHeader'
 import ServiceCard from '@/components/ui/ServiceCard'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import ContactCTA from '@/components/home/ContactCTA'
-import { serviceCategories } from '@/data/services'
+import { serviceCategories, normalizeCategory } from '@/data/services'
 import { prisma } from '@/lib/prisma'
 import { defaultContactCTA } from '@/lib/defaultContent'
 import type { Service } from '@/types'
@@ -21,7 +21,7 @@ export default async function ServicesPage() {
   ])
   const services: Service[] = dbServices.map((s) => ({
     ...s,
-    category: s.category as Service['category'],
+    category: normalizeCategory(s.category),
     icon: '',
     highlights: JSON.parse(s.highlights) as string[],
   }))
@@ -30,15 +30,15 @@ export default async function ServicesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-dark-1 border-b border-white/5 section-pt pb-12">
+      <section className="bg-dark-1 border-b border-border section-pt pb-12">
         <div className="site-container">
           <Breadcrumb items={[{ label: 'Dịch Vụ' }]} />
-          <h1 className="font-heading font-bold text-white text-3xl lg:text-5xl mt-5 mb-3">
+          <h1 className="font-heading font-bold text-heading text-3xl lg:text-5xl mt-5 mb-3">
             Dịch Vụ Của Chúng Tôi
           </h1>
-          <p className="text-white/60 text-lg max-w-2xl">
-            Đầy đủ các giải pháp chăm sóc ô tô từ bảo dưỡng định kỳ, sửa chữa máy gầm đến đồng
-            sơn và chăm sóc xe chuyên sâu.
+          <p className="text-body text-lg max-w-2xl">
+            Đầy đủ các giải pháp cho ô tô: bảo dưỡng & sửa chữa, đồng sơn, chăm sóc – làm đẹp xe,
+            hỗ trợ và dịch vụ cho xe điện.
           </p>
         </div>
       </section>
@@ -55,11 +55,19 @@ export default async function ServicesPage() {
                 subtitle={category.description}
                 align="left"
               />
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {categoryServices.map((service) => (
-                  <ServiceCard key={service.id} service={service} />
-                ))}
-              </div>
+              {categoryServices.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {categoryServices.map((service) => (
+                    <ServiceCard key={service.id} service={service} />
+                  ))}
+                </div>
+              ) : (
+                <div className="bg-dark-1 border border-border rounded-card p-10 text-center">
+                  <p className="text-body text-sm">
+                    Nội dung dịch vụ cho hạng mục này <strong className="text-heading">đang được cập nhật</strong>.
+                  </p>
+                </div>
+              )}
             </div>
           </section>
         )

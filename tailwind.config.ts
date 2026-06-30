@@ -37,32 +37,33 @@ const config: Config = {
         primary: {
           DEFAULT: 'rgb(var(--color-primary) / <alpha-value>)',
           dim:     'rgb(var(--color-primary) / 0.15)',
-          // Static navy scale – kept for admin UI & existing pages
-          50:  '#e8eef8',
-          100: '#c5d4ed',
-          200: '#9eb7e0',
-          300: '#7399d3',
-          400: '#5282c9',
-          500: '#2f6abf',
-          600: '#2460b3',
-          700: '#1a4f9e',
-          800: '#143e8a',
-          900: '#0B2447',
-          950: '#071833',
+          // Static coral scale – matches --color-primary (#FB5A5A)
+          50:  '#fff1f1',
+          100: '#ffdede',
+          200: '#ffc2c2',
+          300: '#ff9b9b',
+          400: '#fd7676',
+          500: '#fb5a5a',
+          600: '#ec3b3b',
+          700: '#c72727',
+          800: '#a52424',
+          900: '#882424',
+          950: '#4b0e0e',
         },
         accent: {
           DEFAULT: 'rgb(var(--color-accent) / <alpha-value>)',
-          // Static red scale – kept for existing pages
-          50:  '#fff0ee',
-          100: '#ffd8d2',
-          200: '#ffb5aa',
-          300: '#ff8a7a',
-          400: '#ff5a46',
-          500: '#E63312',
-          600: '#d42b0d',
-          700: '#b82309',
-          800: '#9a1c07',
-          900: '#7d1505',
+          // Static indigo scale – matches --color-accent (#2E2A8F)
+          50:  '#eeeefb',
+          100: '#e0e0f7',
+          200: '#c6c6f0',
+          300: '#a3a2e4',
+          400: '#807dd6',
+          500: '#635ec7',
+          600: '#4f47b8',
+          700: '#3f38a0',
+          800: '#2e2a8f',
+          900: '#282573',
+          950: '#191643',
         },
 
         // ─── Dark backgrounds (CSS variable driven) ───────────────────────
@@ -71,9 +72,9 @@ const config: Config = {
         'dark-3': 'rgb(var(--color-dark-3) / <alpha-value>)',
 
         // ─── Static neutrals ──────────────────────────────────────────────
-        'body-text':  '#8a8a8a',
-        'heading-text': '#002060',
-        border:       '#bbbbbb',
+        'body-text':  '#5b6080',
+        'heading-text': '#2e2a8f',
+        border:       '#e4e5f2',
         'bg-light':   '#F8F9FA',
         'bg-grey':    '#eeeeee',
         // Legacy aliases kept for existing pages
@@ -173,8 +174,8 @@ const config: Config = {
 
       // ── Box Shadow ────────────────────────────────────────────────────────
       boxShadow: {
-        'card-dark':  '0 4px 24px 0 rgba(0,0,0,0.4)',
-        'card-hover': '0 8px 40px 0 rgba(0,0,0,0.55)',
+        'card-dark':  '0 4px 24px 0 rgba(46,42,143,0.08)',
+        'card-hover': '0 12px 40px 0 rgba(46,42,143,0.16)',
         'primary':    '0 4px 20px 0 rgb(var(--color-primary) / 0.35)',
       },
     },

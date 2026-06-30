@@ -12,7 +12,7 @@ export default function BlogSection({ posts }: { posts: BlogPost[] }) {
         <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-10">
           <div>
             <div className="section-subtitle mb-3">Chia Sẻ Kinh Nghiệm</div>
-            <h2 className="text-white font-heading font-bold text-2xl lg:text-3xl leading-tight">
+            <h2 className="text-heading font-heading font-bold text-2xl lg:text-3xl leading-tight">
               Kiến Thức Hữu Ích Cho Chủ Xe
             </h2>
           </div>

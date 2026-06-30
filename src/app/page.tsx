@@ -11,6 +11,7 @@ import { siteConfig } from '@/lib/constants'
 import { prisma } from '@/lib/prisma'
 import { getActiveSeason } from '@/lib/season'
 import type { Service, BlogPost } from '@/types'
+import { normalizeCategory } from '@/data/services'
 import {
   defaultHeroSlides, defaultAboutSection, defaultWhyChooseUs,
   defaultProcessSteps, defaultPartnersSection, defaultContactCTA,
@@ -26,7 +27,7 @@ function toService(s: {
   id: string; slug: string; title: string; shortDescription: string
   description: string; category: string; categoryLabel: string; image: string; highlights: string
 }): Service {
-  return { ...s, category: s.category as Service['category'], icon: '', highlights: JSON.parse(s.highlights) as string[] }
+  return { ...s, category: normalizeCategory(s.category), icon: '', highlights: JSON.parse(s.highlights) as string[] }
 }
 
 function toPost(p: {

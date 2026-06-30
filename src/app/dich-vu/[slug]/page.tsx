@@ -9,7 +9,7 @@ import ServiceCard from '@/components/ui/ServiceCard'
 import { prisma } from '@/lib/prisma'
 import { PHONE_LINK, PHONE_DISPLAY } from '@/lib/constants'
 import { defaultContactCTA } from '@/lib/defaultContent'
-import { serviceCategories, services as staticServices } from '@/data/services'
+import { serviceCategories, services as staticServices, normalizeCategory } from '@/data/services'
 import type { Service } from '@/types'
 
 interface Props {
@@ -20,7 +20,7 @@ function toService(s: {
   id: string; slug: string; title: string; shortDescription: string
   description: string; category: string; categoryLabel: string; image: string; highlights: string
 }): Service {
-  return { ...s, category: s.category as Service['category'], icon: '', highlights: JSON.parse(s.highlights) as string[] }
+  return { ...s, category: normalizeCategory(s.category), icon: '', highlights: JSON.parse(s.highlights) as string[] }
 }
 
 const CATEGORY_IDS = serviceCategories.map((c) => c.id)
@@ -50,22 +50,23 @@ export default async function ServiceSlugPage({ params }: Props) {
   // ── CATEGORY VIEW ─────────────────────────────────────────────────────────
   if (CATEGORY_IDS.includes(params.slug)) {
     const category = serviceCategories.find((c) => c.id === params.slug)!
-    const dbServices = await prisma.service
-      .findMany({ where: { category: params.slug }, orderBy: { sortOrder: 'asc' } })
+    const allDbServices = await prisma.service
+      .findMany({ orderBy: { sortOrder: 'asc' } })
       .catch(() => [])
+    const dbServices = allDbServices.filter((s) => normalizeCategory(s.category) === params.slug)
     const services = dbServices.length > 0
       ? dbServices.map(toService)
       : staticServices.filter((s) => s.category === params.slug).map((s) => ({ ...s, highlights: JSON.stringify(s.highlights) })).map(toService)
 
     return (
       <>
-        <section className="bg-dark-1 border-b border-white/5 section-pt pb-12">
+        <section className="bg-dark-1 border-b border-border section-pt pb-12">
           <div className="site-container">
             <Breadcrumb items={[{ label: 'Dịch Vụ', href: '/dich-vu' }, { label: category.label }]} />
-            <h1 className="font-heading font-bold text-white text-3xl lg:text-5xl mt-5 mb-3">
+            <h1 className="font-heading font-bold text-heading text-3xl lg:text-5xl mt-5 mb-3">
               {category.label}
             </h1>
-            <p className="text-white/60 text-lg max-w-2xl">{category.description}</p>
+            <p className="text-body text-lg max-w-2xl">{category.description}</p>
           </div>
         </section>
 
@@ -79,7 +80,7 @@ export default async function ServiceSlugPage({ params }: Props) {
               </div>
             ) : (
               <div className="text-center py-20">
-                <p className="text-white/40">Dịch vụ đang được cập nhật. Vui lòng quay lại sau.</p>
+                <p className="text-muted">Dịch vụ đang được cập nhật. Vui lòng quay lại sau.</p>
                 <Link href="/lien-he" className="btn-main mt-6 inline-flex">Liên hệ tư vấn trực tiếp</Link>
               </div>
             )}
@@ -118,7 +119,7 @@ export default async function ServiceSlugPage({ params }: Props) {
   return (
     <>
       {/* Hero */}
-      <section className="bg-dark-1 border-b border-white/5 section-pt pb-12">
+      <section className="bg-dark-1 border-b border-border section-pt pb-12">
         <div className="site-container">
           <Breadcrumb
             items={[
@@ -127,10 +128,10 @@ export default async function ServiceSlugPage({ params }: Props) {
               { label: service.title },
             ]}
           />
-          <h1 className="font-heading font-bold text-white text-3xl lg:text-5xl mt-5 mb-3">
+          <h1 className="font-heading font-bold text-heading text-3xl lg:text-5xl mt-5 mb-3">
             {service.title}
           </h1>
-          <p className="text-white/60 text-lg max-w-2xl">{service.shortDescription}</p>
+          <p className="text-body text-lg max-w-2xl">{service.shortDescription}</p>
         </div>
       </section>
 
@@ -151,24 +152,24 @@ export default async function ServiceSlugPage({ params }: Props) {
                 />
               </div>
 
-              <h2 className="font-heading font-bold text-white text-2xl mb-4">Mô Tả Dịch Vụ</h2>
-              <p className="text-white/55 leading-relaxed mb-8 text-base lg:text-lg">
+              <h2 className="font-heading font-bold text-heading text-2xl mb-4">Mô Tả Dịch Vụ</h2>
+              <p className="text-body leading-relaxed mb-8 text-base lg:text-lg">
                 {service.description}
               </p>
 
-              <h2 className="font-heading font-bold text-white text-2xl mb-4">Điểm Nổi Bật</h2>
+              <h2 className="font-heading font-bold text-heading text-2xl mb-4">Điểm Nổi Bật</h2>
               <ul className="space-y-3 mb-8">
                 {service.highlights.map((highlight) => (
                   <li key={highlight} className="flex items-start gap-3">
                     <CheckCircle size={18} className="text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-white/60">{highlight}</span>
+                    <span className="text-body">{highlight}</span>
                   </li>
                 ))}
               </ul>
 
               <div className="bg-primary/10 border border-primary/20 rounded-card p-6">
-                <h3 className="font-heading font-bold text-white text-lg mb-2">Cam Kết Chất Lượng</h3>
-                <p className="text-white/55 text-sm leading-relaxed">
+                <h3 className="font-heading font-bold text-heading text-lg mb-2">Cam Kết Chất Lượng</h3>
+                <p className="text-body text-sm leading-relaxed">
                   Tất cả dịch vụ tại An Phát Industry đều được thực hiện bởi kỹ thuật viên có
                   chứng chỉ, sử dụng phụ tùng chính hãng và bảo hành đầy đủ. Nếu quý khách chưa
                   hài lòng, chúng tôi cam kết hoàn tiền 100%.
@@ -178,7 +179,7 @@ export default async function ServiceSlugPage({ params }: Props) {
 
             {/* Sidebar */}
             <aside className="lg:col-span-1">
-              <div className="bg-dark-1 border border-white/10 rounded-card p-6 text-white sticky top-24">
+              <div className="bg-accent border border-white/20 rounded-card p-6 text-white sticky top-24">
                 <h3 className="font-heading font-bold text-xl mb-3">Đặt Lịch Dịch Vụ</h3>
                 <p className="text-white/55 text-sm mb-5">
                   Liên hệ ngay để được tư vấn miễn phí và đặt lịch phục vụ nhanh nhất.
@@ -199,7 +200,7 @@ export default async function ServiceSlugPage({ params }: Props) {
                 </a>
 
                 {related.length > 0 && (
-                  <div className="mt-6 pt-6 border-t border-white/10">
+                  <div className="mt-6 pt-6 border-t border-white/20">
                     <h3 className="font-heading font-bold text-white text-base mb-4">Dịch Vụ Liên Quan</h3>
                     <div className="space-y-4">
                       {related.map((s) => (

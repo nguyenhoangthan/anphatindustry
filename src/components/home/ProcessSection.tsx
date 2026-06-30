@@ -11,10 +11,10 @@ export default function ProcessSection({ data = defaultProcessSteps }: { data?: 
       <div className="site-container">
         <div className="text-center mb-12">
           <div className="section-subtitle">{data.badge}</div>
-          <h2 className="text-white font-heading font-bold text-2xl lg:text-4xl leading-tight mt-3 mb-4">
+          <h2 className="text-heading font-heading font-bold text-2xl lg:text-4xl leading-tight mt-3 mb-4">
             {data.title}
           </h2>
-          <p className="text-white/45 text-sm lg:text-base max-w-2xl mx-auto">{data.subtitle}</p>
+          <p className="text-muted text-sm lg:text-base max-w-2xl mx-auto">{data.subtitle}</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -34,10 +34,10 @@ export default function ProcessSection({ data = defaultProcessSteps }: { data?: 
                       Bước {step.step}
                     </span>
                   </div>
-                  <h3 className="font-heading font-bold text-white text-base mb-2 leading-snug">
+                  <h3 className="font-heading font-bold text-heading text-base mb-2 leading-snug">
                     {step.title}
                   </h3>
-                  <p className="text-white/45 text-[13px] leading-relaxed">{step.description}</p>
+                  <p className="text-muted text-[13px] leading-relaxed">{step.description}</p>
                 </div>
               </div>
             )

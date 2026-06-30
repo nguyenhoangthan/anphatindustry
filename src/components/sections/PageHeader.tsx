@@ -23,7 +23,7 @@ export default function PageHeader({
   season,
 }: Props) {
   return (
-    <section className="relative overflow-hidden bg-dark-1 py-20 text-white">
+    <section className="relative overflow-hidden bg-accent py-20 text-white">
       {/* Background image */}
       <div className="absolute inset-0">
         <Image

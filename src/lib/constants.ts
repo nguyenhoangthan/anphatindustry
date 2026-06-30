@@ -7,9 +7,19 @@ export const siteConfig: SiteConfig = {
   description:
     'AN PHÁT là tâm huyết kết tinh từ sự hợp tác giữa Công ty TNHH TM DV Ô tô Hoàng Phát (chuyên bảo dưỡng, sửa chữa) và Công ty CP SX TM DV Tư vấn An Lạc (chuyên mô hình động cơ và giải pháp đào tạo). Với nền tảng hơn 14 năm kinh nghiệm trong ngành ô tô, chúng tôi không ngừng nỗ lực và sáng tạo để mang đến những dịch vụ đa dạng cùng chất lượng hoàn hảo nhất cho khách hàng.',
   url: 'https://anphatindustry.com',
-  phone: ['0908643528', '0977747178'],
-  email: 'sales@anphatindustry.com',
+  phone: ['0977747178'],
+  email: 'anphatcompany24@gmail.com',
   address: '78 Lê Tấn Bê, Phường An Lạc, Quận Bình Tân, TP. Hồ Chí Minh',
+  locations: [
+    {
+      name: 'Trụ Sở Chính',
+      address: '78 Lê Tấn Bê, Phường An Lạc, Quận Bình Tân, TP. Hồ Chí Minh',
+    },
+    {
+      name: 'Chi Nhánh 1',
+      address: '08 Nguyễn Ảnh Thủ, Phường Trung Mỹ Tây, TP. Hồ Chí Minh',
+    },
+  ],
   workingHours: '07:30 – 17:30 từ Thứ 2 đến Chủ Nhật',
   social: {
     facebook: 'https://facebook.com/anphatindustry',
@@ -36,24 +46,50 @@ export interface NavItem {
 
 export const NAV_ITEMS: NavItem[] = [
   { label: 'TRANG CHỦ', href: '/' },
-  { label: 'GIỚI THIỆU', href: '/ve-chung-toi' },
+  {
+    label: 'GIỚI THIỆU',
+    href: '/ve-chung-toi',
+    children: [
+      { label: 'Về Chúng Tôi', href: '/ve-chung-toi#gioi-thieu' },
+      { label: 'Sơ Đồ Tổ Chức & Nhân Sự', href: '/ve-chung-toi#to-chuc' },
+      { label: 'Năng Lực Công Ty', href: '/ve-chung-toi#nang-luc' },
+    ],
+  },
   {
     label: 'DỊCH VỤ',
     href: '/dich-vu',
     children: [
-      { label: 'Sửa Chữa Chung', href: '/dich-vu/sua-chua-chung' },
-      { label: 'Chăm Sóc Xe Hơi', href: '/dich-vu/cham-soc-xe' },
+      { label: 'Bảo Dưỡng & Sửa Chữa', href: '/dich-vu/bao-duong-sua-chua' },
       { label: 'Đồng Sơn', href: '/dich-vu/dong-son' },
-      { label: 'Sửa Chữa Lưu Động', href: '/dich-vu/sua-chua-luu-dong' },
+      { label: 'Chăm Sóc & Làm Đẹp Xe', href: '/dich-vu/cham-soc-lam-dep' },
+      { label: 'Hỗ Trợ', href: '/dich-vu/ho-tro' },
+      { label: 'Xe Điện', href: '/dich-vu/xe-dien' },
     ],
   },
-  { label: 'BÁO GIÁ', href: '/bao-gia' },
+  {
+    label: 'MÔ HÌNH',
+    href: '/mo-hinh',
+    children: [
+      { label: 'Thiết Bị Đào Tạo Kỹ Thuật', href: '/mo-hinh/thiet-bi-dao-tao' },
+      { label: 'Thiết Bị Kiểm Tra Chẩn Đoán', href: '/mo-hinh/thiet-bi-chan-doan' },
+    ],
+  },
+  {
+    label: 'DỰ ÁN & ĐỐI TÁC',
+    href: '/du-an',
+    children: [
+      { label: 'Dự Án Đã Thực Hiện', href: '/du-an/du-an-da-thuc-hien' },
+      { label: 'Đối Tác & Khách Hàng', href: '/du-an/doi-tac-khach-hang' },
+    ],
+  },
   {
     label: 'THƯ VIỆN',
     href: '/thu-vien',
     children: [
       { label: 'Chia Sẻ Kinh Nghiệm', href: '/thu-vien/kinh-nghiem' },
-      { label: 'Tin Tức Ô Tô', href: '/thu-vien/tin-tuc' },
+      { label: 'Video Clip Phổ Biến', href: '/thu-vien/video' },
+      { label: 'Bảng Tin Kỹ Thuật', href: '/thu-vien/bang-tin' },
+      { label: 'Tuyển Dụng', href: '/thu-vien/tuyen-dung' },
     ],
   },
   { label: 'LIÊN HỆ', href: '/lien-he' },

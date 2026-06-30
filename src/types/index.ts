@@ -1,4 +1,4 @@
-export type ServiceCategory = 'sua-chua-chung' | 'cham-soc-xe' | 'dong-son' | 'sua-chua-luu-dong'
+export type ServiceCategory = 'bao-duong-sua-chua' | 'dong-son' | 'cham-soc-lam-dep' | 'ho-tro' | 'xe-dien'
 
 export interface Service {
   id: string
@@ -66,6 +66,7 @@ export interface SiteConfig {
   phone: string[]
   email: string
   address: string
+  locations: { name: string; address: string }[]
   workingHours: string
   social: {
     facebook?: string

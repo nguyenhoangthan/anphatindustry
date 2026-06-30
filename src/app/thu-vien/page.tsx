@@ -14,8 +14,10 @@ export const metadata: Metadata = {
 
 const categories = [
   { label: 'Tất Cả', href: '/thu-vien', value: '' },
-  { label: 'Kinh Nghiệm', href: '/thu-vien/kinh-nghiem', value: 'kinh-nghiem' },
-  { label: 'Tin Tức', href: '/thu-vien/tin-tuc', value: 'tin-tuc' },
+  { label: 'Chia Sẻ Kinh Nghiệm', href: '/thu-vien/kinh-nghiem', value: 'kinh-nghiem' },
+  { label: 'Video Clip Phổ Biến', href: '/thu-vien/video', value: 'video' },
+  { label: 'Bảng Tin Kỹ Thuật', href: '/thu-vien/bang-tin', value: 'bang-tin' },
+  { label: 'Tuyển Dụng', href: '/thu-vien/tuyen-dung', value: 'tuyen-dung' },
 ]
 
 export default async function BlogPage() {
@@ -50,7 +52,7 @@ export default async function BlogPage() {
               <Link
                 key={cat.value}
                 href={cat.href}
-                className="bg-dark-1 hover:bg-primary hover:text-white text-white/60 border border-white/10 hover:border-primary text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-200"
+                className="bg-dark-1 hover:bg-primary hover:text-white text-body border border-border hover:border-primary text-sm font-semibold px-5 py-2.5 rounded-full transition-all duration-200"
               >
                 {cat.label}
               </Link>

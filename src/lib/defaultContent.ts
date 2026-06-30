@@ -30,19 +30,19 @@ export const defaultHeroSlides = [
 
 export const defaultAboutSection = {
   badge: 'Về Chúng Tôi',
-  title: 'Công Ty TNHH An Phát Industry',
-  subtitle: 'Trung tâm bảo dưỡng – sửa chữa ô tô chuyên nghiệp hàng đầu tại TP. Hồ Chí Minh.',
-  body: 'An Phát Industry được thành lập với sứ mệnh cung cấp dịch vụ bảo dưỡng và sửa chữa ô tô đạt chuẩn quốc tế tại Việt Nam. Chúng tôi quy tụ đội ngũ kỹ sư, kỹ thuật viên giàu kinh nghiệm, được đào tạo bài bản, luôn cập nhật công nghệ mới nhất để phục vụ quý khách ngày một tốt hơn.',
+  title: 'Công Ty Cổ Phần An Phát',
+  subtitle: 'Bảo dưỡng – sửa chữa ô tô, mô hình đào tạo kỹ thuật và tư vấn giải pháp tại TP. Hồ Chí Minh.',
+  body: 'An Phát là tâm huyết kết tinh từ sự hợp tác giữa Công ty TNHH TM DV Ô tô Hoàng Phát (chuyên bảo dưỡng, sửa chữa) và Công ty CP SX TM DV Tư vấn An Lạc (chuyên mô hình động cơ và giải pháp đào tạo). Với nền tảng hơn 14 năm kinh nghiệm trong ngành ô tô, chúng tôi không ngừng nỗ lực và sáng tạo để mang đến dịch vụ đa dạng cùng chất lượng hoàn hảo nhất cho khách hàng.',
   image: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=800&q=80',
   highlights: [
-    'Thành lập năm 2015 với hơn 9 năm kinh nghiệm trong ngành',
+    'Thành lập đầu năm 2024, kế thừa hơn 14 năm kinh nghiệm ngành ô tô',
     'Đội ngũ kỹ sư và kỹ thuật viên được đào tạo bài bản',
     'Thiết bị chẩn đoán và sửa chữa hiện đại, chuẩn châu Âu',
     'Sử dụng phụ tùng chính hãng, có nguồn gốc rõ ràng',
-    'Quy trình dịch vụ 12 bước minh bạch, rõ ràng',
+    'Mô hình đào tạo kỹ thuật và tư vấn giải pháp chuyên sâu',
     'Cam kết bảo hành dịch vụ, hoàn tiền nếu không hài lòng',
   ],
-  stat1Value: '9+',
+  stat1Value: '14+',
   stat1Label: 'Năm kinh nghiệm',
   stat2Value: '5K+',
   stat2Label: 'Khách hàng tin tưởng',
@@ -91,7 +91,7 @@ export const defaultPartnersSection = {
   title: 'Các Thương Hiệu Chúng Tôi Phục Vụ',
   subtitle: 'An Phát Industry có đội ngũ kỹ thuật viên chuyên biệt cho từng dòng xe của các thương hiệu uy tín.',
   stats: [
-    { value: '9+', label: 'Năm kinh nghiệm' },
+    { value: '14+', label: 'Năm kinh nghiệm' },
     { value: '5.000+', label: 'Khách hàng' },
     { value: '20.000+', label: 'Xe đã phục vụ' },
     { value: '98%', label: 'Khách hài lòng' },
@@ -184,13 +184,13 @@ export const defaultPricingPackages = {
 
 export const defaultTeamSection = {
   intro: {
-    badge: 'Công Ty TNHH An Phát Industry',
-    title: 'Trung Tâm Bảo Dưỡng – Sửa Chữa Ô Tô Chuyên Nghiệp',
-    body1: 'An Phát Industry được thành lập với mục tiêu mang lại dịch vụ bảo dưỡng và sửa chữa ô tô đạt chuẩn kỹ thuật cao nhất tại TP. Hồ Chí Minh. Chúng tôi hiểu rằng chiếc xe không chỉ là phương tiện đi lại mà còn là tài sản giá trị và người bạn đồng hành đáng tin cậy.',
-    body2: 'Qua nhiều năm hoạt động, An Phát Industry đã xây dựng được đội ngũ kỹ sư và kỹ thuật viên tay nghề cao, hệ thống thiết bị chẩn đoán hiện đại và quy trình dịch vụ chuẩn hóa.',
+    badge: 'Công Ty Cổ Phần An Phát',
+    title: 'Bảo Dưỡng – Sửa Chữa Ô Tô & Mô Hình Đào Tạo Kỹ Thuật',
+    body1: 'An Phát là tâm huyết kết tinh từ sự hợp tác giữa Công ty TNHH TM DV Ô tô Hoàng Phát (chuyên bảo dưỡng, sửa chữa) và Công ty CP SX TM DV Tư vấn An Lạc (chuyên mô hình động cơ và giải pháp đào tạo). Chúng tôi hiểu rằng chiếc xe không chỉ là phương tiện đi lại mà còn là tài sản giá trị và người bạn đồng hành đáng tin cậy.',
+    body2: 'Với nền tảng hơn 14 năm kinh nghiệm trong ngành ô tô, An Phát sở hữu đội ngũ kỹ sư và kỹ thuật viên tay nghề cao, hệ thống thiết bị chẩn đoán hiện đại và quy trình dịch vụ chuẩn hóa.',
     image: 'https://images.unsplash.com/photo-1615906655593-ad0386982a0f?w=800&q=80',
     stats: [
-      { value: '9+', label: 'Năm kinh nghiệm' },
+      { value: '14+', label: 'Năm kinh nghiệm' },
       { value: '5K+', label: 'Khách hàng' },
       { value: '20K+', label: 'Xe đã phục vụ' },
       { value: '98%', label: 'Hài lòng' },
@@ -212,8 +212,8 @@ export const defaultTeamSection = {
     'Cứu hộ xe, xử lý bảo hiểm ô tô',
   ],
   team: [
-    { name: 'Nguyễn Văn An', role: 'Giám Đốc / Kỹ Sư Trưởng', description: 'Hơn 15 năm kinh nghiệm trong ngành ô tô, tốt nghiệp ĐH Bách Khoa TP.HCM.' },
-    { name: 'Trần Thị Phát', role: 'Quản Lý Xưởng Dịch Vụ', description: 'Chuyên gia bảo dưỡng và sửa chữa máy gầm với 10 năm kinh nghiệm thực chiến.' },
-    { name: 'Lê Hoàng Nam', role: 'Trưởng Xưởng Đồng Sơn', description: 'Tay nghề pha màu và sơn xe điêu luyện, chuyên gia phục hồi xe sau tai nạn.' },
+    { name: 'Hoàng Anh Tuấn', role: 'Giám Đốc', description: 'Người đứng đầu An Phát, dẫn dắt đội ngũ với hơn 14 năm kinh nghiệm trong ngành ô tô.' },
+    { name: 'Đang cập nhật', role: 'Quản Lý Xưởng Dịch Vụ', description: 'Thông tin nhân sự đang được cập nhật.' },
+    { name: 'Đang cập nhật', role: 'Trưởng Xưởng Đồng Sơn', description: 'Thông tin nhân sự đang được cập nhật.' },
   ],
 }

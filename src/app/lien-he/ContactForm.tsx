@@ -51,8 +51,8 @@ export default function ContactForm() {
         <div className="w-16 h-16 bg-primary/15 rounded-full flex items-center justify-center mb-4">
           <CheckCircle2 size={32} className="text-primary" />
         </div>
-        <h3 className="font-heading font-bold text-white text-xl mb-2">Gửi Thành Công!</h3>
-        <p className="text-white/50 text-sm max-w-xs">
+        <h3 className="font-heading font-bold text-heading text-xl mb-2">Gửi Thành Công!</h3>
+        <p className="text-body text-sm max-w-xs">
           Cảm ơn quý khách. Chúng tôi sẽ liên hệ lại trong vòng 30 phút trong giờ làm việc.
         </p>
         <button onClick={() => setSubmitted(false)} className="mt-6 text-primary font-semibold text-sm hover:underline">
@@ -64,7 +64,7 @@ export default function ContactForm() {
 
   const inputCls = cn(
     'form-control',
-    'bg-dark-3 text-white border-white/10',
+    'bg-dark-2 text-heading border-border',
     'focus:border-primary focus:ring-0'
   )
 
@@ -73,14 +73,14 @@ export default function ContactForm() {
       {/* Name + Phone */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-white/60 text-xs font-semibold mb-1.5 uppercase tracking-wide">
+          <label className="block text-body text-xs font-semibold mb-1.5 uppercase tracking-wide">
             Họ và tên <span className="text-primary">*</span>
           </label>
           <input {...register('name')} placeholder="Nguyễn Văn A" className={inputCls} />
           <FieldError msg={errors.name?.message} />
         </div>
         <div>
-          <label className="block text-white/60 text-xs font-semibold mb-1.5 uppercase tracking-wide">
+          <label className="block text-body text-xs font-semibold mb-1.5 uppercase tracking-wide">
             Số điện thoại <span className="text-primary">*</span>
           </label>
           <input {...register('phone')} type="tel" placeholder="0901 234 567" className={inputCls} />
@@ -90,7 +90,7 @@ export default function ContactForm() {
 
       {/* Email */}
       <div>
-        <label className="block text-white/60 text-xs font-semibold mb-1.5 uppercase tracking-wide">
+        <label className="block text-body text-xs font-semibold mb-1.5 uppercase tracking-wide">
           Email (tùy chọn)
         </label>
         <input {...register('email')} type="email" placeholder="example@email.com" className={inputCls} />
@@ -99,7 +99,7 @@ export default function ContactForm() {
 
       {/* Service */}
       <div>
-        <label className="block text-white/60 text-xs font-semibold mb-1.5 uppercase tracking-wide">
+        <label className="block text-body text-xs font-semibold mb-1.5 uppercase tracking-wide">
           Dịch vụ quan tâm
         </label>
         <select
@@ -113,7 +113,7 @@ export default function ContactForm() {
 
       {/* Message */}
       <div>
-        <label className="block text-white/60 text-xs font-semibold mb-1.5 uppercase tracking-wide">
+        <label className="block text-body text-xs font-semibold mb-1.5 uppercase tracking-wide">
           Nội dung <span className="text-primary">*</span>
         </label>
         <textarea

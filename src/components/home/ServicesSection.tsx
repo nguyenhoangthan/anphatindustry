@@ -14,8 +14,8 @@ export default function ServicesSection({ services }: Omit<Props, 'season'>) {
         {/* Header */}
         <div className="text-center mb-10">
           <div className="section-subtitle">Dịch Vụ Của Chúng Tôi</div>
-          <h2 className="text-white font-heading font-bold">Giải Pháp Toàn Diện Cho Xe Ô Tô</h2>
-          <p className="text-white/45 text-sm lg:text-base mt-3 max-w-2xl mx-auto">
+          <h2 className="text-heading font-heading font-bold">Giải Pháp Toàn Diện Cho Xe Ô Tô</h2>
+          <p className="text-muted text-sm lg:text-base mt-3 max-w-2xl mx-auto">
             An Phát Industry cung cấp đầy đủ các dịch vụ bảo dưỡng, sửa chữa và chăm sóc ô tô với quy trình chuẩn và đội ngũ chuyên nghiệp.
           </p>
         </div>

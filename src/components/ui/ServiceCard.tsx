@@ -41,7 +41,7 @@ export default function ServiceCard({ service, index, compact = false }: Omit<Se
       </div>
 
       {/* Hover overlay */}
-      <div className="absolute inset-0 bg-dark-1/80 backdrop-blur-sm flex flex-col items-center justify-center px-5 text-center z-20 opacity-0 group-hover:opacity-100 transition-all duration-300">
+      <div className="absolute inset-0 bg-accent/90 backdrop-blur-sm flex flex-col items-center justify-center px-5 text-center z-20 opacity-0 group-hover:opacity-100 transition-all duration-300">
         {!compact && (
           <p className="text-white/70 text-[13px] leading-relaxed mb-5">
             {service.shortDescription}

@@ -20,9 +20,17 @@ const BLOG_CATEGORIES: Record<string, { label: string; description: string }> = 
     label: 'Chia Sẻ Kinh Nghiệm',
     description: 'Những kinh nghiệm thực tế từ đội ngũ kỹ thuật viên An Phát Industry',
   },
-  'tin-tuc': {
-    label: 'Tin Tức Ô Tô',
-    description: 'Cập nhật tin tức xe hơi, công nghệ ô tô mới nhất',
+  'video': {
+    label: 'Video Clip Phổ Biến',
+    description: 'Video hướng dẫn, chia sẻ kỹ thuật và giới thiệu dịch vụ của An Phát Industry',
+  },
+  'bang-tin': {
+    label: 'Bảng Tin Kỹ Thuật',
+    description: 'Cập nhật tin tức, thông tin kỹ thuật và công nghệ ô tô mới nhất',
+  },
+  'tuyen-dung': {
+    label: 'Tuyển Dụng',
+    description: 'Thông tin tuyển dụng và cơ hội nghề nghiệp tại An Phát Industry',
   },
 }
 
@@ -60,13 +68,13 @@ export default async function BlogSlugPage({ params }: Props) {
 
     return (
       <>
-        <section className="bg-dark-1 border-b border-white/5 section-pt pb-12">
+        <section className="bg-dark-1 border-b border-border section-pt pb-12">
           <div className="site-container">
             <Breadcrumb items={[{ label: 'Thư Viện', href: '/thu-vien' }, { label: blogCat.label }]} />
-            <h1 className="font-heading font-bold text-white text-3xl lg:text-5xl mt-5 mb-3">
+            <h1 className="font-heading font-bold text-heading text-3xl lg:text-5xl mt-5 mb-3">
               {blogCat.label}
             </h1>
-            <p className="text-white/60 text-lg max-w-2xl">{blogCat.description}</p>
+            <p className="text-body text-lg max-w-2xl">{blogCat.description}</p>
           </div>
         </section>
 
@@ -80,7 +88,7 @@ export default async function BlogSlugPage({ params }: Props) {
               </div>
             ) : (
               <div className="text-center py-20">
-                <p className="text-white/40 mb-4">Chưa có bài viết trong chuyên mục này.</p>
+                <p className="text-muted mb-4">Chưa có bài viết trong chuyên mục này.</p>
                 <Link href="/thu-vien" className="btn-main inline-flex">Xem Tất Cả Bài Viết</Link>
               </div>
             )}
@@ -108,7 +116,7 @@ export default async function BlogSlugPage({ params }: Props) {
 
   return (
     <>
-      <section className="bg-dark-1 border-b border-white/5 section-pt pb-12">
+      <section className="bg-dark-1 border-b border-border section-pt pb-12">
         <div className="site-container">
           <Breadcrumb
             items={[
@@ -117,10 +125,10 @@ export default async function BlogSlugPage({ params }: Props) {
               { label: post.title },
             ]}
           />
-          <h1 className="font-heading font-bold text-white text-3xl lg:text-5xl mt-5 mb-4 max-w-3xl">
+          <h1 className="font-heading font-bold text-heading text-3xl lg:text-5xl mt-5 mb-4 max-w-3xl">
             {post.title}
           </h1>
-          <div className="flex flex-wrap items-center gap-4 text-white/40 text-sm">
+          <div className="flex flex-wrap items-center gap-4 text-muted text-sm">
             <span className="flex items-center gap-1.5"><User size={14} />{post.author}</span>
             <span className="flex items-center gap-1.5"><Calendar size={14} />{formatDate(post.publishedAt)}</span>
             <span className="flex items-center gap-1.5"><Clock size={14} />{post.readingTime} phút đọc</span>
@@ -144,15 +152,15 @@ export default async function BlogSlugPage({ params }: Props) {
                   />
                 </div>
               )}
-              <p className="text-white/55 text-lg leading-relaxed mb-6 italic">{post.excerpt}</p>
+              <p className="text-body text-lg leading-relaxed mb-6 italic">{post.excerpt}</p>
               <div
                 className="prose prose-invert prose-lg max-w-none prose-headings:font-heading prose-a:text-primary"
                 dangerouslySetInnerHTML={{ __html: post.content }}
               />
               {post.tags.length > 0 && (
-                <div className="mt-10 pt-6 border-t border-white/10 flex flex-wrap gap-2">
+                <div className="mt-10 pt-6 border-t border-border flex flex-wrap gap-2">
                   {post.tags.map((tag) => (
-                    <span key={tag} className="text-xs bg-white/10 text-white/60 px-3 py-1 rounded-full">
+                    <span key={tag} className="text-xs bg-dark-2 text-body px-3 py-1 rounded-full">
                       #{tag}
                     </span>
                   ))}
@@ -162,8 +170,8 @@ export default async function BlogSlugPage({ params }: Props) {
 
             <aside className="lg:col-span-1">
               <div className="sticky top-24 space-y-6">
-                <div className="bg-dark-1 border border-white/10 rounded-card p-6">
-                  <h3 className="font-heading font-bold text-white text-base mb-4">Bài Viết Liên Quan</h3>
+                <div className="bg-dark-1 border border-border rounded-card p-6">
+                  <h3 className="font-heading font-bold text-heading text-base mb-4">Bài Viết Liên Quan</h3>
                   {related.length > 0 ? (
                     <div className="space-y-4">
                       {related.map((r) => (
@@ -172,20 +180,20 @@ export default async function BlogSlugPage({ params }: Props) {
                             <Image src={r.image} alt={r.title} fill className="object-cover group-hover:scale-105 transition-transform" sizes="80px" />
                           </div>
                           <div>
-                            <p className="text-white/80 text-sm font-medium group-hover:text-primary transition-colors line-clamp-2">{r.title}</p>
-                            <p className="text-white/40 text-xs mt-1">{formatDate(r.publishedAt)}</p>
+                            <p className="text-body text-sm font-medium group-hover:text-primary transition-colors line-clamp-2">{r.title}</p>
+                            <p className="text-muted text-xs mt-1">{formatDate(r.publishedAt)}</p>
                           </div>
                         </Link>
                       ))}
                     </div>
                   ) : (
-                    <p className="text-white/40 text-sm">Chưa có bài viết liên quan.</p>
+                    <p className="text-muted text-sm">Chưa có bài viết liên quan.</p>
                   )}
                 </div>
 
-                <div className="bg-primary/10 border border-primary/30 rounded-card p-6 text-white">
+                <div className="bg-primary/10 border border-primary/30 rounded-card p-6 text-heading">
                   <h3 className="font-heading font-bold text-lg mb-2">Cần Tư Vấn?</h3>
-                  <p className="text-white/55 text-sm mb-4">Liên hệ đội ngũ chuyên gia An Phát Industry để được hỗ trợ ngay.</p>
+                  <p className="text-body text-sm mb-4">Liên hệ đội ngũ chuyên gia An Phát Industry để được hỗ trợ ngay.</p>
                   <Link href="/lien-he" className="btn-main inline-flex w-full justify-center">Liên Hệ Ngay</Link>
                 </div>
               </div>

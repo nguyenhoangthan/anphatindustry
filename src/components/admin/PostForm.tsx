@@ -5,9 +5,10 @@ import { useRouter } from 'next/navigation'
 import { Loader2 } from 'lucide-react'
 
 const CATEGORIES = [
-  { value: 'kinh-nghiem', label: 'Kinh Nghiệm' },
-  { value: 'tin-tuc', label: 'Tin Tức' },
-  { value: 'huong-dan', label: 'Hướng Dẫn' },
+  { value: 'kinh-nghiem', label: 'Chia Sẻ Kinh Nghiệm' },
+  { value: 'video', label: 'Video Clip Phổ Biến' },
+  { value: 'bang-tin', label: 'Bảng Tin Kỹ Thuật' },
+  { value: 'tuyen-dung', label: 'Tuyển Dụng' },
 ]
 
 interface PostFormData {

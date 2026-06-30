@@ -46,10 +46,10 @@ function StatItem({ stat, active }: { stat: Stat; active: boolean }) {
       {stat.icon && (
         <div className="text-2xl mb-2 text-primary">{stat.icon}</div>
       )}
-      <div className="font-heading font-bold text-white text-3xl lg:text-4xl leading-none mb-1">
+      <div className="font-heading font-bold text-heading text-3xl lg:text-4xl leading-none mb-1">
         {count.toLocaleString()}{stat.suffix ?? ''}
       </div>
-      <div className="text-white/45 text-xs font-medium">{stat.label}</div>
+      <div className="text-muted text-xs font-medium">{stat.label}</div>
     </div>
   )
 }
@@ -60,7 +60,7 @@ export default function StatsCounter({ stats }: Omit<Props, 'season'>) {
   return (
     <div
       ref={ref}
-      className="grid grid-cols-2 sm:grid-cols-4 gap-2 rounded-card bg-dark-2 border border-white/5"
+      className="grid grid-cols-2 sm:grid-cols-4 gap-2 rounded-card bg-dark-2 border border-border"
     >
       {stats.map((stat, i) => (
         <StatItem key={i} stat={stat} active={inView} />

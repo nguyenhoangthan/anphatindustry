@@ -64,15 +64,15 @@ export default function AboutSection({ data = defaultAboutSection }: Omit<Props,
           {/* â”€â”€ Content column â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
           <div>
             <div className="section-subtitle">{badge}</div>
-            <h2 className="text-white font-heading font-bold leading-tight mb-4">{title}</h2>
-            <p className="text-white/55 text-sm lg:text-base leading-relaxed mb-3">{subtitle}</p>
-            <p className="text-white/45 text-sm leading-relaxed mb-7">{body}</p>
+            <h2 className="text-heading font-heading font-bold leading-tight mb-4">{title}</h2>
+            <p className="text-body text-sm lg:text-base leading-relaxed mb-3">{subtitle}</p>
+            <p className="text-muted text-sm leading-relaxed mb-7">{body}</p>
 
             <ul className="space-y-3 mb-8">
               {highlights.map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <CheckCircle2 size={16} className="text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-white/55 text-[13px] leading-relaxed">{item}</span>
+                  <span className="text-body text-[13px] leading-relaxed">{item}</span>
                 </li>
               ))}
             </ul>

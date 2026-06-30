@@ -1,15 +1,21 @@
 # Deployment Guide — An Phát Industry
 
+> 📖 Tài liệu vận hành tổng hợp (giám sát, xử lý sự cố, tên miền, nproc): xem [OPERATIONS.md](./OPERATIONS.md).
+> File này tập trung vào **cơ chế deploy**.
+
 ## Môi trường
 
 | Thành phần | Giá trị |
 |---|---|
 | Framework | Next.js 14.2 (App Router) |
 | Database | SQLite via Prisma 5.22 |
-| Hosting | Matbao Plesk shared hosting — `sg-premium7.cloudnetwork.vn` |
-| Node.js trên server | v24 (nodenv) tại `/opt/plesk/node/24/bin/node` |
-| Startup file (Plesk) | `server.js` |
+| Hosting | Matbao shared hosting (panel Plesk) — `sg-premium7.cloudnetwork.vn`, IP `172.236.153.33` |
+| Web server | **LiteSpeed**; app Node chạy qua **lsnode** (LiteSpeed Node SAPI) — KHÔNG phải Passenger |
+| Node.js trên server | v24 tại `/opt/plesk/node/24/bin/node` |
+| Startup file (Node app) | `server.js` |
 | Port | 3001 |
+| Domain | anphatindustry.com (mua tại Mật Bão; NS: `ns1.matbao.com` / `ns2.matbao.com`) |
+| Hợp đồng | 069653/2026-MBHD — gói Premium Cloud Hosting Essential |
 | GitHub repo | https://github.com/nguyenhoangthan/anphatindustry |
 
 ---
@@ -107,7 +113,7 @@ Gói shared hosting có trần ~100 process. App động hoàn toàn nằm gọn
 hành đúng**. Vài quy tắc bắt buộc:
 
 1. **KHÔNG bao giờ gõ tay `npm start` / `npm restart`** trong tab "Run Node.js commands"
-   của Plesk. Passenger đã chạy `server.js`; gõ `npm start` sẽ dựng **server thứ hai**
+   của Plesk. LiteSpeed (lsnode) đã chạy `server.js`; gõ `npm start` sẽ dựng **server thứ hai**
    chồng lên, tranh port và đẻ process rác. Muốn khởi động lại → chỉ dùng nút
    **Restart App** ở tab Dashboard.
 
@@ -155,11 +161,11 @@ Package script `postinstall: prisma generate` cũng bị xóa khỏi `package.js
 
 ### 9. Chạm giới hạn process (nproc) — "reached the processes number limit" / `fork: Resource temporarily unavailable`
 **Nguyên nhân (gốc rễ):** `server.js` cũ **không ngắt kết nối Prisma khi bị restart**.
-Mỗi lần Passenger restart (sau deploy/crash) gửi `SIGTERM` → Node chết nhưng **tiến trình
+Mỗi lần LiteSpeed (lsnode) restart (sau deploy/crash) gửi `SIGTERM` → Node chết nhưng **tiến trình
 Prisma Query Engine con bị bỏ rơi (orphan)**. Qua nhiều lần restart, các engine zombie
 tích tụ → leo tới trần 100 process. Cộng thêm: vòng `process.exit(1)` trong request handler
 gây crash→respawn, và việc gõ tay `npm start`/`npm restart` (chạy `next start` chồng lên
-`server.js` của Passenger) → đẻ thêm process xung đột.
+`server.js` mà lsnode đang chạy) → đẻ thêm process xung đột.
 **Giải pháp (đã áp dụng):**
 - `server.js`: bắt `SIGTERM`/`SIGINT` → đóng HTTP server + `prisma.$disconnect()` (kill
   engine con) rồi exit. Không còn `process.exit(1)` ở tầng request. `uncaughtException`
@@ -167,7 +173,7 @@ gây crash→respawn, và việc gõ tay `npm start`/`npm restart` (chạy `next
 - `src/lib/prisma.ts`: cache client lên `globalThis` ở **mọi môi trường** để (a) dev không
   tạo client mới mỗi lần HMR, (b) `server.js` với tới được client để disconnect lúc shutdown.
 - `package.json`: bỏ `prestart`/kill-port, đổi `start` thành `node server.js` (thống nhất
-  một entry point duy nhất với Passenger).
+  một entry point duy nhất với lsnode).
 - `UV_THREADPOOL_SIZE=2` đặt ở đầu `server.js` để giảm số OS thread tính vào nproc.
 
 > Một app cấu hình đúng chỉ tiêu ~5–15 process. Nếu sau khi vá vẫn thấy process tăng dần,

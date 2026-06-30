@@ -28,13 +28,13 @@ export default async function PricingPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-dark-1 border-b border-white/5 section-pt pb-12">
+      <section className="bg-dark-1 border-b border-border section-pt pb-12">
         <div className="site-container">
           <Breadcrumb items={[{ label: 'Báo Giá' }]} />
-          <h1 className="font-heading font-bold text-white text-3xl lg:text-5xl mt-5 mb-3">
+          <h1 className="font-heading font-bold text-heading text-3xl lg:text-5xl mt-5 mb-3">
             Báo Giá Dịch Vụ
           </h1>
-          <p className="text-white/60 text-lg max-w-2xl">
+          <p className="text-body text-lg max-w-2xl">
             Minh bạch – không phát sinh. Xem giá tham khảo các gói dịch vụ phổ biến tại An Phát
             Industry.
           </p>
@@ -53,7 +53,7 @@ export default async function PricingPage() {
                 className={`relative rounded-card p-6 lg:p-8 flex flex-col border ${
                   pkg.highlight
                     ? 'bg-primary/10 border-primary/40 scale-[1.02]'
-                    : 'bg-dark-1 border-white/5'
+                    : 'bg-dark-1 border-border'
                 }`}
               >
                 {pkg.badge && (
@@ -63,10 +63,10 @@ export default async function PricingPage() {
                   </span>
                 )}
 
-                <h3 className="font-heading font-bold text-white text-xl mb-1 mt-2">
+                <h3 className="font-heading font-bold text-heading text-xl mb-1 mt-2">
                   {pkg.name}
                 </h3>
-                <p className="text-white/45 text-sm mb-5">{pkg.description}</p>
+                <p className="text-muted text-sm mb-5">{pkg.description}</p>
 
                 <div className="font-heading font-black text-3xl text-primary mb-6">
                   {pkg.price}
@@ -76,7 +76,7 @@ export default async function PricingPage() {
                   {pkg.items.map((item) => (
                     <li key={item} className="flex items-start gap-2.5">
                       <CheckCircle size={16} className="text-primary flex-shrink-0 mt-0.5" />
-                      <span className="text-white/60 text-sm">{item}</span>
+                      <span className="text-body text-sm">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -86,7 +86,7 @@ export default async function PricingPage() {
                   className={`flex items-center justify-center gap-2 font-bold py-3.5 rounded-lg transition-all duration-200 ${
                     pkg.highlight
                       ? 'bg-primary hover:bg-primary/85 text-white'
-                      : 'bg-white/10 hover:bg-white/20 text-white border border-white/10'
+                      : 'bg-dark-2 hover:bg-dark-2 text-heading border border-border'
                   }`}
                 >
                   <CalendarCheck size={16} />
@@ -97,13 +97,13 @@ export default async function PricingPage() {
           </div>
 
           {/* Notes */}
-          <div className="mt-12 bg-dark-1 rounded-card p-6 border border-white/5 max-w-2xl mx-auto">
-            <h3 className="font-heading font-bold text-white mb-4 text-lg">
+          <div className="mt-12 bg-dark-1 rounded-card p-6 border border-border max-w-2xl mx-auto">
+            <h3 className="font-heading font-bold text-heading mb-4 text-lg">
               Lưu Ý Quan Trọng
             </h3>
             <ul className="space-y-2.5">
               {notes.map((note) => (
-                <li key={note} className="flex items-start gap-2.5 text-sm text-white/50">
+                <li key={note} className="flex items-start gap-2.5 text-sm text-body">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 mt-1.5" />
                   {note}
                 </li>
@@ -116,7 +116,7 @@ export default async function PricingPage() {
       {/* Guarantee Banner */}
       <section className="section-py bg-dark-1">
         <div className="site-container text-center">
-          <h2 className="font-heading font-black text-white text-2xl lg:text-3xl mb-3">
+          <h2 className="font-heading font-black text-heading text-2xl lg:text-3xl mb-3">
             CAM KẾT VÀNG
           </h2>
           <p className="text-primary text-lg font-bold mb-6">

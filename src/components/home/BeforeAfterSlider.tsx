@@ -56,15 +56,15 @@ export default function BeforeAfterSlider({
           {/* Text */}
           <div>
             <div className="section-subtitle">Kết Quả Thực Tế</div>
-            <h2 className="text-white font-heading font-bold leading-tight mb-4">
+            <h2 className="text-heading font-heading font-bold leading-tight mb-4">
               Trước &amp; Sau: Sự Biến Đổi Hoàn Toàn
             </h2>
-            <p className="text-white/50 text-sm leading-relaxed mb-6">
+            <p className="text-body text-sm leading-relaxed mb-6">
               Chứng kiến sự khác biệt rõ rệt mà đội ngũ An Phát Industry mang lại — từ việc phục hồi độ bóng sơn xe, làm mới nội thất đến xử lý vết trầy xước sâu, thân xe méo.
             </p>
             <ul className="space-y-3">
               {['Phục hồi độ bóng sơn xe', 'Xử lý vết trầy – lõm thân xe', 'Đánh bóng & phủ nano bảo vệ', 'Vệ sinh khoang máy chuyên sâu'].map((item) => (
-                <li key={item} className="flex items-center gap-3 text-white/55 text-[13px]">
+                <li key={item} className="flex items-center gap-3 text-body text-[13px]">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
                   {item}
                 </li>
@@ -106,7 +106,7 @@ export default function BeforeAfterSlider({
             </div>
 
             {/* Labels */}
-            <span className="absolute top-4 left-4 bg-dark-1/70 text-white text-xs font-semibold px-3 py-1 rounded-full backdrop-blur-sm z-10">
+            <span className="absolute top-4 left-4 bg-black/60 text-white text-xs font-semibold px-3 py-1 rounded-full backdrop-blur-sm z-10">
               Trước
             </span>
             <span className="absolute top-4 right-4 bg-primary/90 text-white text-xs font-semibold px-3 py-1 rounded-full z-10">

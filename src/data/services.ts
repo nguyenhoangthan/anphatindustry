@@ -1,4 +1,16 @@
-import type { Service } from '@/types'
+import type { Service, ServiceCategory } from '@/types'
+
+// Map legacy category slugs (from older DB records / seeds) onto the current
+// category structure so existing data keeps grouping correctly.
+const CATEGORY_ALIASES: Record<string, ServiceCategory> = {
+  'sua-chua-chung': 'bao-duong-sua-chua',
+  'cham-soc-xe': 'cham-soc-lam-dep',
+  'sua-chua-luu-dong': 'ho-tro',
+}
+
+export function normalizeCategory(category: string): ServiceCategory {
+  return CATEGORY_ALIASES[category] ?? (category as ServiceCategory)
+}
 
 export const services: Service[] = [
   // ── SỬA CHỮA CHUNG ──────────────────────────────────────────────────────────
@@ -9,8 +21,8 @@ export const services: Service[] = [
     shortDescription: '4 cấp độ bảo dưỡng tổng quát định kỳ (5 – 200 ngàn km)',
     description:
       'Dịch vụ bảo dưỡng định kỳ tại An Phát Industry giúp xe luôn vận hành ổn định, kéo dài tuổi thọ và đảm bảo an toàn khi di chuyển. Chúng tôi áp dụng 4 cấp độ bảo dưỡng chuẩn từ 5.000 đến 200.000 km theo khuyến nghị của nhà sản xuất.',
-    category: 'sua-chua-chung',
-    categoryLabel: 'Sửa Chữa Chung',
+    category: 'bao-duong-sua-chua',
+    categoryLabel: 'Bảo Dưỡng & Sửa Chữa',
     icon: 'wrench',
     image: 'https://images.unsplash.com/photo-1632823469850-2f77dd9c7f93?w=800&q=80',
     highlights: [
@@ -27,8 +39,8 @@ export const services: Service[] = [
     shortDescription: 'Kiểm tra giàn lạnh, vệ sinh bảo dưỡng hệ thống điều hòa',
     description:
       'Đội ngũ kỹ thuật viên điện – điện lạnh chuyên nghiệp của An Phát Industry xử lý mọi vấn đề từ hệ thống điện ô tô đến điều hòa, đảm bảo xe luôn mát lạnh và an toàn.',
-    category: 'sua-chua-chung',
-    categoryLabel: 'Sửa Chữa Chung',
+    category: 'bao-duong-sua-chua',
+    categoryLabel: 'Bảo Dưỡng & Sửa Chữa',
     icon: 'zap',
     image: 'https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=800&q=80',
     highlights: [
@@ -45,8 +57,8 @@ export const services: Service[] = [
     shortDescription: 'Chuyên tiểu tu, trung tu, đại tu máy & gầm ô tô',
     description:
       'An Phát Industry chuyên sửa chữa máy và gầm xe từ đơn giản đến phức tạp, từ tiểu tu đến đại tu động cơ, hộp số, hệ thống truyền động và toàn bộ gầm xe.',
-    category: 'sua-chua-chung',
-    categoryLabel: 'Sửa Chữa Chung',
+    category: 'bao-duong-sua-chua',
+    categoryLabel: 'Bảo Dưỡng & Sửa Chữa',
     icon: 'settings',
     image: 'https://images.unsplash.com/photo-1615906655593-ad0386982a0f?w=800&q=80',
     highlights: [
@@ -63,8 +75,8 @@ export const services: Service[] = [
     shortDescription: 'Chuẩn 12 bước quy trình dịch vụ sửa chữa, bảo dưỡng',
     description:
       'Quy trình dịch vụ 12 bước chuẩn tại An Phát Industry đảm bảo minh bạch, chính xác từ khi tiếp nhận xe đến khi bàn giao – giúp quý khách hoàn toàn yên tâm.',
-    category: 'sua-chua-chung',
-    categoryLabel: 'Sửa Chữa Chung',
+    category: 'bao-duong-sua-chua',
+    categoryLabel: 'Bảo Dưỡng & Sửa Chữa',
     icon: 'clipboard-list',
     image: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=800&q=80',
     highlights: [
@@ -83,8 +95,8 @@ export const services: Service[] = [
     shortDescription: 'Bảo dưỡng & vệ sinh nội thất ô tô chuyên sâu, khử mùi hiệu quả',
     description:
       'Dịch vụ chăm sóc nội thất toàn diện tại An Phát Industry giúp xe luôn sạch sẽ, thơm tho và bảo vệ các vật liệu nội thất khỏi ẩm mốc, bụi bẩn theo thời gian.',
-    category: 'cham-soc-xe',
-    categoryLabel: 'Chăm Sóc Xe Hơi',
+    category: 'cham-soc-lam-dep',
+    categoryLabel: 'Chăm Sóc & Làm Đẹp Xe',
     icon: 'sofa',
     image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
     highlights: [
@@ -101,8 +113,8 @@ export const services: Service[] = [
     shortDescription: 'Tránh xuống cấp màu sắc và chất lượng vật liệu bên ngoài xe',
     description:
       'Dịch vụ chăm sóc ngoại thất chuyên nghiệp giúp sơn xe luôn bóng mượt, bảo vệ lớp sơn gốc, chống trầy xước và duy trì vẻ đẹp nguyên bản của xe.',
-    category: 'cham-soc-xe',
-    categoryLabel: 'Chăm Sóc Xe Hơi',
+    category: 'cham-soc-lam-dep',
+    categoryLabel: 'Chăm Sóc & Làm Đẹp Xe',
     icon: 'sparkles',
     image: 'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=800&q=80',
     highlights: [
@@ -119,8 +131,8 @@ export const services: Service[] = [
     shortDescription: 'Bôi trơn – làm sạch – kiểm tra ống dẫn dầu – bảo dưỡng toàn diện',
     description:
       'Hệ thống phanh là yếu tố an toàn tối quan trọng. An Phát Industry thực hiện vệ sinh và bảo dưỡng phanh theo đúng quy trình kỹ thuật, đảm bảo an toàn tối đa.',
-    category: 'cham-soc-xe',
-    categoryLabel: 'Chăm Sóc Xe Hơi',
+    category: 'cham-soc-lam-dep',
+    categoryLabel: 'Chăm Sóc & Làm Đẹp Xe',
     icon: 'shield-check',
     image: 'https://images.unsplash.com/photo-1600861194942-f883de0dfe96?w=800&q=80',
     highlights: [
@@ -176,8 +188,8 @@ export const services: Service[] = [
     shortDescription: 'Dịch vụ cứu hộ xe 24/7, hỗ trợ kéo xe nhanh chóng tại TP.HCM',
     description:
       'An Phát Industry cung cấp dịch vụ cứu hộ xe và kéo xe khẩn cấp 24/7 trong toàn bộ khu vực TP. Hồ Chí Minh và các tỉnh lân cận. Đội ngũ kỹ thuật viên lưu động được trang bị xe cứu hộ chuyên dụng, phản ứng nhanh khi xe gặp sự cố trên đường.',
-    category: 'sua-chua-luu-dong',
-    categoryLabel: 'Sửa Chữa Lưu Động',
+    category: 'ho-tro',
+    categoryLabel: 'Hỗ Trợ',
     icon: 'truck',
     image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
     highlights: [
@@ -194,8 +206,8 @@ export const services: Service[] = [
     shortDescription: 'Kỹ thuật viên đến tận nơi sửa chữa các hỏng hóc nhỏ, thay dầu nhanh',
     description:
       'Không cần mang xe ra xưởng, đội kỹ thuật viên lưu động An Phát Industry sẽ đến tận nơi để thực hiện các công việc bảo dưỡng và sửa chữa nhỏ. Tiết kiệm thời gian, thuận tiện tối đa cho khách hàng bận rộn.',
-    category: 'sua-chua-luu-dong',
-    categoryLabel: 'Sửa Chữa Lưu Động',
+    category: 'ho-tro',
+    categoryLabel: 'Hỗ Trợ',
     icon: 'wrench',
     image: 'https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=800&q=80',
     highlights: [
@@ -212,8 +224,8 @@ export const services: Service[] = [
     shortDescription: 'Dịch vụ thay lốp, vá lốp, bơm lốp di động tại bất kỳ đâu',
     description:
       'Bị xịt lốp giữa đường? Đội kỹ thuật viên lưu động An Phát Industry phản ứng nhanh mang theo đầy đủ dụng cụ thay lốp, vá lốp và bơm lốp đến tận nơi, giúp bạn tiếp tục hành trình an toàn trong thời gian ngắn nhất.',
-    category: 'sua-chua-luu-dong',
-    categoryLabel: 'Sửa Chữa Lưu Động',
+    category: 'ho-tro',
+    categoryLabel: 'Hỗ Trợ',
     icon: 'circle',
     image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&q=80',
     highlights: [
@@ -227,27 +239,33 @@ export const services: Service[] = [
 
 export const serviceCategories = [
   {
-    id: 'sua-chua-chung',
-    label: 'Sửa Chữa Chung',
-    description: 'Bảo dưỡng định kỳ, sửa chữa điện, máy và gầm xe',
+    id: 'bao-duong-sua-chua',
+    label: 'Bảo Dưỡng & Sửa Chữa',
+    description: 'Bảo dưỡng định kỳ, sửa chữa máy gầm, điện lạnh và chẩn đoán ECU/ABS',
     icon: 'wrench',
-  },
-  {
-    id: 'cham-soc-xe',
-    label: 'Chăm Sóc Xe Hơi',
-    description: 'Chăm sóc nội thất, ngoại thất, khoang máy toàn diện',
-    icon: 'car',
   },
   {
     id: 'dong-son',
     label: 'Đồng Sơn',
-    description: 'Sơn dặm vá, sửa chữa đồng và phục hồi thân vỏ xe',
+    description: 'Sơn dặm vá ô tô, sửa chữa và phục hồi đồng thân vỏ xe',
     icon: 'paintbrush',
   },
   {
-    id: 'sua-chua-luu-dong',
-    label: 'Sửa Chữa Lưu Động',
-    description: 'Cứu hộ xe, sửa chữa tại chỗ và dịch vụ lưu động 24/7',
+    id: 'cham-soc-lam-dep',
+    label: 'Chăm Sóc & Làm Đẹp Xe',
+    description: 'Chăm sóc nội – ngoại thất, vệ sinh khoang máy và các gói chăm sóc ô tô',
+    icon: 'sparkles',
+  },
+  {
+    id: 'ho-tro',
+    label: 'Hỗ Trợ',
+    description: 'Cứu hộ 24/7, phụ tùng & phụ kiện, sản phẩm chăm sóc và sửa chữa lưu động',
     icon: 'truck',
+  },
+  {
+    id: 'xe-dien',
+    label: 'Xe Điện',
+    description: 'Bảo dưỡng định kỳ và sửa chữa các lỗi hệ thống cho xe điện',
+    icon: 'zap',
   },
 ]

@@ -21,7 +21,7 @@ export default function PartnersSection({ data = defaultPartnersSection }: Props
   )
 
   return (
-    <section className="py-10 bg-dark-2 border-y border-white/5">
+    <section className="py-10 bg-dark-2 border-y border-border">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex gap-8 items-center">
           {/* Duplicate for seamless loop */}
@@ -32,10 +32,10 @@ export default function PartnersSection({ data = defaultPartnersSection }: Props
               style={{ minWidth: '120px' }}
             >
               <div className="flex flex-col items-center gap-1.5">
-                <div className="w-10 h-10 rounded-card bg-dark-3 flex items-center justify-center text-white font-bold text-sm">
+                <div className="w-10 h-10 rounded-card bg-accent flex items-center justify-center text-white font-bold text-sm">
                   {partner.abbr}
                 </div>
-                <span className="text-white/50 text-[11px] font-medium text-center whitespace-nowrap">
+                <span className="text-body text-[11px] font-medium text-center whitespace-nowrap">
                   {partner.name}
                 </span>
               </div>
