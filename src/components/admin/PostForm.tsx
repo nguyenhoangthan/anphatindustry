@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Loader2 } from 'lucide-react'
 import ImageUpload from './ImageUpload'
+import RichTextEditor from './RichTextEditor'
 
 // Lưu ý: "Tuyển Dụng" không còn là category bài viết — trang
 // /thu-vien/tuyen-dung giờ hiển thị poster tuyển dụng riêng
@@ -186,12 +187,9 @@ export default function PostForm({ initialData, mode }: Props) {
           <label className="block text-sm font-semibold text-gray-700 mb-1.5">
             Nội Dung Bài Viết
           </label>
-          <textarea
+          <RichTextEditor
             value={form.content}
-            onChange={(e) => setForm((prev) => ({ ...prev, content: e.target.value }))}
-            rows={12}
-            className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#0B2447]/30 focus:border-[#0B2447] resize-y font-mono"
-            placeholder="Nội dung bài viết (hỗ trợ HTML)..."
+            onChange={(html) => setForm((prev) => ({ ...prev, content: html }))}
           />
         </div>
 
