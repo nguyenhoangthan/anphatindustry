@@ -144,7 +144,11 @@ export default async function BlogSlugPage({ params }: Props) {
           <div className="site-container">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               {RECRUITMENT_POSTERS.map((p) => (
-                <div key={p.src} className="overflow-hidden rounded-card border border-border bg-dark-3 shadow-md">
+                <Link
+                  key={p.slug}
+                  href={`/tuyen-dung/${p.slug}`}
+                  className="group overflow-hidden rounded-card border border-border bg-dark-3 shadow-md hover:shadow-lg transition-all duration-200"
+                >
                   <div className="relative w-full">
                     <Image
                       src={p.src}
@@ -152,13 +156,13 @@ export default async function BlogSlugPage({ params }: Props) {
                       width={1414}
                       height={2000}
                       sizes="(max-width: 768px) 100vw, 500px"
-                      className="w-full h-auto"
+                      className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-300"
                     />
                   </div>
                   <div className="p-4 text-center">
                     <h2 className="font-heading font-bold text-heading text-base">{p.title}</h2>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
             <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-4 justify-center text-center sm:text-left">

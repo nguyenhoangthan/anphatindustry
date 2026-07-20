@@ -31,8 +31,8 @@ export default function RecruitmentSection() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-2xl mx-auto">
             {RECRUITMENT_POSTERS.map((p) => (
               <Link
-                key={p.src}
-                href="/tuyen-dung"
+                key={p.slug}
+                href={`/tuyen-dung/${p.slug}`}
                 className="group block overflow-hidden rounded-card border border-border bg-dark-3 shadow-md hover:shadow-lg transition-all duration-200"
                 aria-label={p.alt}
               >
