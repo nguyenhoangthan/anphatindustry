@@ -21,6 +21,7 @@
     "check-posts-format": "node scripts/check-posts-format.js",
     "fix-post-content": "node scripts/fix-post-content.js",
     "fix-all-posts": "node scripts/fix-all-posts.js",
+    "strip-li-bullets": "node scripts/strip-li-bullets.js",
     "restore-db": "node scripts/restore-db.js"
   },
   "prisma": {
