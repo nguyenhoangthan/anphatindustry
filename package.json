@@ -20,6 +20,7 @@
     "get-all-posts": "node scripts/get-all-posts.js",
     "check-posts-format": "node scripts/check-posts-format.js",
     "fix-post-content": "node scripts/fix-post-content.js",
+    "fix-all-posts": "node scripts/fix-all-posts.js",
     "restore-db": "node scripts/restore-db.js"
   },
   "prisma": {
