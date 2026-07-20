@@ -17,6 +17,7 @@
     "env-check": "node scripts/env-check.js",
     "db-check": "node scripts/db-check.js",
     "get-post": "node scripts/get-post.js",
+    "check-posts-format": "node scripts/check-posts-format.js",
     "fix-post-content": "node scripts/fix-post-content.js",
     "restore-db": "node scripts/restore-db.js"
   },
