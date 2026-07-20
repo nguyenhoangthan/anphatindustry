@@ -1,4 +1,4 @@
-// File: /Users/firegroup/Documents/anphatindustry/src/app/api/admin/upload/route.ts
+// File: /Users/thannguyen/Documents/anphatindustry/src/app/api/admin/upload/route.ts
 import * as entry from '../../../../../../src/app/api/admin/upload/route.js'
 import type { NextRequest } from 'next/server.js'
 

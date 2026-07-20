@@ -12,6 +12,8 @@ import { defaultContactCTA } from '@/lib/defaultContent'
 import { serviceCategories, services as staticServices, normalizeCategory } from '@/data/services'
 import type { Service } from '@/types'
 
+export const dynamic = 'force-dynamic'
+
 interface Props {
   params: { slug: string }
 }

@@ -6,6 +6,7 @@ import WhyChooseUs from '@/components/home/WhyChooseUs'
 import ProcessSection from '@/components/home/ProcessSection'
 import PartnersSection from '@/components/home/PartnersSection'
 import BlogSection from '@/components/home/BlogSection'
+import RecruitmentSection from '@/components/home/RecruitmentSection'
 import ContactCTA from '@/components/home/ContactCTA'
 import { siteConfig } from '@/lib/constants'
 import { prisma } from '@/lib/prisma'
@@ -16,6 +17,8 @@ import {
   defaultHeroSlides, defaultAboutSection, defaultWhyChooseUs,
   defaultProcessSteps, defaultPartnersSection, defaultContactCTA,
 } from '@/lib/defaultContent'
+
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: `${siteConfig.name} – ${siteConfig.tagline}`,
@@ -69,6 +72,7 @@ export default async function HomePage() {
       <ProcessSection data={processData} />
       <PartnersSection data={partnersData} />
       <BlogSection posts={posts} />
+      <RecruitmentSection />
       <ContactCTA data={ctaData} />
     </>
   )

@@ -8,6 +8,8 @@ import { prisma } from '@/lib/prisma'
 import { defaultContactCTA } from '@/lib/defaultContent'
 import type { Service } from '@/types'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Dịch Vụ | An Phát Industry',
   description:

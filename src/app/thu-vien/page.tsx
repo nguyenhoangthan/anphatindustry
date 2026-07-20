@@ -6,6 +6,8 @@ import BlogCard from '@/components/ui/BlogCard'
 import { prisma } from '@/lib/prisma'
 import type { BlogPost } from '@/types'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Thư Viện – Chia Sẻ Kinh Nghiệm | An Phát Industry',
   description:

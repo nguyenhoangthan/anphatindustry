@@ -12,6 +12,8 @@ import { defaultContactCTA, defaultVideos } from '@/lib/defaultContent'
 import { parseVideo } from '@/lib/video'
 import type { BlogPost } from '@/types'
 
+export const dynamic = 'force-dynamic'
+
 interface Props {
   params: { slug: string }
 }
