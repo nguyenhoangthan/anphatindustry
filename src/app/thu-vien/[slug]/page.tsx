@@ -9,6 +9,7 @@ import ContactCTA from '@/components/home/ContactCTA'
 import { prisma } from '@/lib/prisma'
 import { getSection } from '@/lib/content'
 import { formatDate, safeJsonArray } from '@/lib/utils'
+import { sanitizeContent } from '@/lib/sanitize'
 import { defaultContactCTA, defaultVideos } from '@/lib/defaultContent'
 import { parseVideo } from '@/lib/video'
 import {
@@ -282,7 +283,7 @@ export default async function BlogSlugPage({ params }: Props) {
               <p className="text-body text-lg leading-relaxed mb-6 italic">{post.excerpt}</p>
               <div
                 className="prose prose-invert prose-lg max-w-none prose-headings:font-heading prose-a:text-primary"
-                dangerouslySetInnerHTML={{ __html: post.content }}
+                dangerouslySetInnerHTML={{ __html: sanitizeContent(post.content) }}
               />
               {post.tags.length > 0 && (
                 <div className="mt-10 pt-6 border-t border-border flex flex-wrap gap-2">

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { getSection } from '@/lib/content'
 
 const ALLOWED_KEYS = [
   'section_hero',
@@ -30,8 +31,8 @@ export async function GET(_req: Request, { params }: { params: { key: string } }
     return NextResponse.json({ error: 'Invalid key' }, { status: 400 })
   }
 
-  const setting = await prisma.siteSetting.findUnique({ where: { key: params.key } })
-  return NextResponse.json(setting ? JSON.parse(setting.value) : null)
+  const setting = await getSection<Record<string, unknown> | null>(params.key, null)
+  return NextResponse.json(setting)
 }
 
 export async function PUT(req: Request, { params }: { params: { key: string } }) {

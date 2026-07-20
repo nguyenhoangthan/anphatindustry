@@ -5,11 +5,14 @@ import { useRouter } from 'next/navigation'
 import { Loader2 } from 'lucide-react'
 import ImageUpload from './ImageUpload'
 
+// Lưu ý: "Tuyển Dụng" không còn là category bài viết — trang
+// /thu-vien/tuyen-dung giờ hiển thị poster tuyển dụng riêng
+// (xem RECRUITMENT VIEW trong src/app/thu-vien/[slug]/page.tsx),
+// bài viết category này sẽ không bao giờ hiển thị nếu tạo ra.
 const CATEGORIES = [
   { value: 'kinh-nghiem', label: 'Chia Sẻ Kinh Nghiệm' },
   { value: 'video', label: 'Video Clip Phổ Biến' },
   { value: 'bang-tin', label: 'Bảng Tin Kỹ Thuật' },
-  { value: 'tuyen-dung', label: 'Tuyển Dụng' },
 ]
 
 interface PostFormData {

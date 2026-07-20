@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { getSection } from '@/lib/content'
 
 function unauthorized() {
   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -11,8 +12,8 @@ export async function GET() {
   const session = await getServerSession(authOptions)
   if (!session) return unauthorized()
 
-  const setting = await prisma.siteSetting.findUnique({ where: { key: 'siteConfig' } })
-  return NextResponse.json(setting ? JSON.parse(setting.value) : null)
+  const setting = await getSection<Record<string, unknown> | null>('siteConfig', null)
+  return NextResponse.json(setting)
 }
 
 export async function PUT(req: Request) {

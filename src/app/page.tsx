@@ -14,6 +14,7 @@ import { getActiveSeason } from '@/lib/season'
 import type { Service, BlogPost } from '@/types'
 import { normalizeCategory } from '@/data/services'
 import { safeJsonArray } from '@/lib/utils'
+import { getSection } from '@/lib/content'
 import {
   defaultHeroSlides, defaultAboutSection, defaultWhyChooseUs,
   defaultProcessSteps, defaultPartnersSection, defaultContactCTA,
@@ -39,13 +40,6 @@ function toPost(p: {
   author: string; publishedAt: Date; category: string; image: string; tags: string; readingTime: number
 }): BlogPost {
   return { ...p, publishedAt: p.publishedAt.toISOString().substring(0, 10), tags: safeJsonArray(p.tags) }
-}
-
-async function getSection<T>(key: string, fallback: T): Promise<T> {
-  try {
-    const s = await prisma.siteSetting.findUnique({ where: { key } })
-    return s ? (JSON.parse(s.value) as T) : fallback
-  } catch { return fallback }
 }
 
 export default async function HomePage() {

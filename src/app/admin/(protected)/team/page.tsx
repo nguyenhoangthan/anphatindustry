@@ -5,7 +5,10 @@ import TeamForm from '@/components/admin/TeamForm'
 export const dynamic = 'force-dynamic'
 
 export default async function TeamAdminPage() {
-  const data = await getSection('section_team', defaultTeamSection)
+  const raw = await getSection('section_team', defaultTeamSection)
+  // getSection chỉ merge nông — intro là object lồng nên cần merge riêng để
+  // intro.stats không bị undefined nếu dữ liệu cũ lưu trước khi field này có.
+  const data = { ...raw, intro: { ...defaultTeamSection.intro, ...raw.intro } }
 
   return (
     <div className="p-8 max-w-4xl">

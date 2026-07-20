@@ -11,7 +11,8 @@ export async function GET() {
   const session = await getServerSession(authOptions)
   if (!session) return unauthorized()
 
-  const posts = await prisma.blogPost.findMany({ orderBy: { publishedAt: 'desc' } })
+  const posts = await prisma.blogPost.findMany({ orderBy: { publishedAt: 'desc' } }).catch(() => null)
+  if (posts === null) return NextResponse.json({ error: 'Lỗi đọc dữ liệu' }, { status: 500 })
   return NextResponse.json(posts)
 }
 

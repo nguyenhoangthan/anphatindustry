@@ -12,8 +12,18 @@ function slugify(text: string) {
     .replace(/đ/g, 'd').replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-')
 }
 
+// Dữ liệu cũ trong DB có thể thiếu field groups/items nếu được lưu trước khi
+// shape này tồn tại — chuẩn hoá 1 lần lúc khởi tạo để .map()/.filter() phía
+// dưới luôn an toàn, không cần rải ?? [] khắp nơi.
+function normalize(data: ModelCategory[]): ModelCategory[] {
+  return (data ?? []).map((c) => ({
+    ...c,
+    groups: (c.groups ?? []).map((g) => ({ ...g, items: g.items ?? [] })),
+  }))
+}
+
 export default function ModelsForm({ initialData }: { initialData: ModelCategory[] }) {
-  const [cats, setCats] = useState<ModelCategory[]>(initialData)
+  const [cats, setCats] = useState<ModelCategory[]>(() => normalize(initialData))
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')

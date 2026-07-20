@@ -21,8 +21,14 @@ export default function DeleteButton({ id, type, name }: Props) {
     const url = type === 'service' ? `/api/admin/services/${id}` : `/api/admin/posts/${id}`
 
     try {
-      await fetch(url, { method: 'DELETE' })
+      const res = await fetch(url, { method: 'DELETE' })
+      if (!res.ok) {
+        alert('Xóa thất bại, vui lòng thử lại.')
+        return
+      }
       router.refresh()
+    } catch {
+      alert('Lỗi kết nối, vui lòng thử lại.')
     } finally {
       setLoading(false)
     }
