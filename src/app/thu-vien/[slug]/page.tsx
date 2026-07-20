@@ -155,7 +155,7 @@ export default async function BlogSlugPage({ params }: Props) {
                       alt={p.alt}
                       width={1414}
                       height={2000}
-                      sizes="(max-width: 768px) 100vw, 500px"
+                      unoptimized
                       className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-300"
                     />
                   </div>

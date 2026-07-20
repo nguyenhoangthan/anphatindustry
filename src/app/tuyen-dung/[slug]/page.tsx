@@ -63,7 +63,7 @@ export default function RecruitmentJobPage({ params }: Props) {
                   alt={job.alt}
                   width={1414}
                   height={2000}
-                  sizes="(max-width: 1024px) 100vw, 66vw"
+                  unoptimized
                   className="w-full h-auto"
                   priority
                 />
@@ -94,7 +94,7 @@ export default function RecruitmentJobPage({ params }: Props) {
                       {otherJobs.map((j) => (
                         <Link key={j.slug} href={`/tuyen-dung/${j.slug}`} className="flex gap-3 group">
                           <div className="relative w-16 h-20 flex-shrink-0 rounded overflow-hidden">
-                            <Image src={j.src} alt={j.alt} fill className="object-cover group-hover:scale-105 transition-transform" sizes="64px" />
+                            <Image src={j.src} alt={j.alt} fill unoptimized className="object-cover group-hover:scale-105 transition-transform" />
                           </div>
                           <div>
                             <p className="text-body text-sm font-medium group-hover:text-primary transition-colors">{j.title}</p>

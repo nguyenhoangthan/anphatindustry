@@ -41,7 +41,7 @@ export default function RecruitmentSection() {
                   alt={p.alt}
                   width={1414}
                   height={2000}
-                  sizes="(max-width: 640px) 100vw, 400px"
+                  unoptimized
                   className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-300"
                 />
                 <span className="block text-center text-body text-xs py-2.5 border-t border-border">

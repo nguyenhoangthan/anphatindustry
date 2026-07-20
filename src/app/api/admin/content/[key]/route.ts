@@ -44,11 +44,15 @@ export async function PUT(req: Request, { params }: { params: { key: string } })
 
   const body = await req.json()
 
-  await prisma.siteSetting.upsert({
-    where: { key: params.key },
-    create: { key: params.key, value: JSON.stringify(body) },
-    update: { value: JSON.stringify(body) },
-  })
-
-  return NextResponse.json({ success: true })
+  try {
+    await prisma.siteSetting.upsert({
+      where: { key: params.key },
+      create: { key: params.key, value: JSON.stringify(body) },
+      update: { value: JSON.stringify(body) },
+    })
+    return NextResponse.json({ success: true })
+  } catch (err) {
+    console.error(`[api/admin/content/${params.key}] upsert failed:`, err)
+    return NextResponse.json({ error: 'Không lưu được vào cơ sở dữ liệu' }, { status: 500 })
+  }
 }
