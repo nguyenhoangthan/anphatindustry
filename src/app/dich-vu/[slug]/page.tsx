@@ -7,8 +7,10 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import ContactCTA from '@/components/home/ContactCTA'
 import ServiceCard from '@/components/ui/ServiceCard'
 import { prisma } from '@/lib/prisma'
+import { getSection } from '@/lib/content'
 import { PHONE_LINK, PHONE_DISPLAY } from '@/lib/constants'
 import { defaultContactCTA } from '@/lib/defaultContent'
+import { safeJsonArray } from '@/lib/utils'
 import { serviceCategories, services as staticServices, normalizeCategory } from '@/data/services'
 import type { Service } from '@/types'
 
@@ -22,7 +24,7 @@ function toService(s: {
   id: string; slug: string; title: string; shortDescription: string
   description: string; category: string; categoryLabel: string; image: string; highlights: string
 }): Service {
-  return { ...s, category: normalizeCategory(s.category), icon: '', highlights: JSON.parse(s.highlights) as string[] }
+  return { ...s, category: normalizeCategory(s.category), icon: '', highlights: safeJsonArray(s.highlights) }
 }
 
 const CATEGORY_IDS = serviceCategories.map((c) => c.id)
@@ -46,8 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ServiceSlugPage({ params }: Props) {
-  const ctaRaw = await prisma.siteSetting.findUnique({ where: { key: 'section_contact_cta' } }).catch(() => null)
-  const ctaData = ctaRaw ? JSON.parse(ctaRaw.value) as typeof defaultContactCTA : defaultContactCTA
+  const ctaData = await getSection('section_contact_cta', defaultContactCTA)
 
   // ── CATEGORY VIEW ─────────────────────────────────────────────────────────
   if (CATEGORY_IDS.includes(params.slug)) {

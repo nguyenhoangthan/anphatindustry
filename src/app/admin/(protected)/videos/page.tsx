@@ -1,13 +1,12 @@
 import { Video } from 'lucide-react'
-import { prisma } from '@/lib/prisma'
+import { getSection } from '@/lib/content'
 import VideosForm from '@/components/admin/VideosForm'
 import { defaultVideos } from '@/lib/defaultContent'
 
 export const dynamic = 'force-dynamic'
 
 export default async function VideosAdminPage() {
-  const setting = await prisma.siteSetting.findUnique({ where: { key: 'section_videos' } }).catch(() => null)
-  const data = setting ? JSON.parse(setting.value) : defaultVideos
+  const data = await getSection('section_videos', defaultVideos)
 
   return (
     <div className="p-8">

@@ -5,7 +5,9 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import ContactCTA from '@/components/home/ContactCTA'
 import { serviceCategories, normalizeCategory } from '@/data/services'
 import { prisma } from '@/lib/prisma'
+import { getSection } from '@/lib/content'
 import { defaultContactCTA } from '@/lib/defaultContent'
+import { safeJsonArray } from '@/lib/utils'
 import type { Service } from '@/types'
 
 export const dynamic = 'force-dynamic'
@@ -17,17 +19,16 @@ export const metadata: Metadata = {
 }
 
 export default async function ServicesPage() {
-  const [dbServices, ctaRaw] = await Promise.all([
+  const [dbServices, ctaData] = await Promise.all([
     prisma.service.findMany({ orderBy: { sortOrder: 'asc' } }).catch(() => []),
-    prisma.siteSetting.findUnique({ where: { key: 'section_contact_cta' } }).catch(() => null),
+    getSection('section_contact_cta', defaultContactCTA),
   ])
   const services: Service[] = dbServices.map((s) => ({
     ...s,
     category: normalizeCategory(s.category),
     icon: '',
-    highlights: JSON.parse(s.highlights) as string[],
+    highlights: safeJsonArray(s.highlights),
   }))
-  const ctaData = ctaRaw ? JSON.parse(ctaRaw.value) as typeof defaultContactCTA : defaultContactCTA
 
   return (
     <>

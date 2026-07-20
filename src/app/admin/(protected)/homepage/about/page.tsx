@@ -1,12 +1,11 @@
-﻿import { prisma } from '@/lib/prisma'
+﻿import { getSection } from '@/lib/content'
 import { defaultAboutSection } from '@/lib/defaultContent'
 import AboutHomepageForm from '@/components/admin/AboutHomepageForm'
 
 export const dynamic = 'force-dynamic'
 
 export default async function AboutAdminPage() {
-  const setting = await prisma.siteSetting.findUnique({ where: { key: 'section_about_home' } })
-  const data = setting ? JSON.parse(setting.value) : defaultAboutSection
+  const data = await getSection('section_about_home', defaultAboutSection)
 
   return (
     <div className="p-8 max-w-4xl">

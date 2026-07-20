@@ -13,7 +13,8 @@ export default async function EditPostPage({ params }: Props) {
   const post = await prisma.blogPost.findUnique({ where: { id: params.id } })
   if (!post) notFound()
 
-  const tags = JSON.parse(post.tags) as string[]
+  let tags: string[] = []
+  try { tags = JSON.parse(post.tags) as string[] } catch { /* dữ liệu cũ không hợp lệ */ }
 
   return (
     <div className="p-8">

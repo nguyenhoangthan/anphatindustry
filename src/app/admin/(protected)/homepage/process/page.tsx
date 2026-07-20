@@ -1,12 +1,11 @@
-﻿import { prisma } from '@/lib/prisma'
+﻿import { getSection } from '@/lib/content'
 import { defaultProcessSteps } from '@/lib/defaultContent'
 import ProcessForm from '@/components/admin/ProcessForm'
 
 export const dynamic = 'force-dynamic'
 
 export default async function ProcessAdminPage() {
-  const setting = await prisma.siteSetting.findUnique({ where: { key: 'section_process' } })
-  const data = setting ? JSON.parse(setting.value) : defaultProcessSteps
+  const data = await getSection('section_process', defaultProcessSteps)
 
   return (
     <div className="p-8 max-w-4xl">

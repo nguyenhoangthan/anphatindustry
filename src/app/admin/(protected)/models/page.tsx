@@ -1,13 +1,12 @@
 import { GraduationCap } from 'lucide-react'
-import { prisma } from '@/lib/prisma'
+import { getSection } from '@/lib/content'
 import ModelsForm from '@/components/admin/ModelsForm'
 import { modelCategories } from '@/data/models'
 
 export const dynamic = 'force-dynamic'
 
 export default async function ModelsAdminPage() {
-  const setting = await prisma.siteSetting.findUnique({ where: { key: 'section_models' } }).catch(() => null)
-  const data = setting ? JSON.parse(setting.value) : modelCategories
+  const data = await getSection('section_models', modelCategories)
 
   return (
     <div className="p-8">

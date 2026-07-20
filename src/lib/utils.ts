@@ -28,3 +28,14 @@ export function truncate(text: string, maxLength: number): string {
   if (text.length <= maxLength) return text
   return text.slice(0, maxLength).trim() + '...'
 }
+
+// Parse mảng string lưu dạng JSON trong DB (highlights, tags...). Dữ liệu cũ/lỗi
+// không được để sập cả trang — trả về [] thay vì throw.
+export function safeJsonArray(value: string): string[] {
+  try {
+    const parsed = JSON.parse(value)
+    return Array.isArray(parsed) ? parsed : []
+  } catch {
+    return []
+  }
+}

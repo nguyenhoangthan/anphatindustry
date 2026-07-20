@@ -7,7 +7,8 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import BlogCard from '@/components/ui/BlogCard'
 import ContactCTA from '@/components/home/ContactCTA'
 import { prisma } from '@/lib/prisma'
-import { formatDate } from '@/lib/utils'
+import { getSection } from '@/lib/content'
+import { formatDate, safeJsonArray } from '@/lib/utils'
 import { defaultContactCTA, defaultVideos } from '@/lib/defaultContent'
 import { parseVideo } from '@/lib/video'
 import type { BlogPost } from '@/types'
@@ -41,7 +42,7 @@ function toPost(p: {
   id: string; slug: string; title: string; excerpt: string; content: string
   author: string; publishedAt: Date; category: string; image: string; tags: string; readingTime: number; featured: boolean
 }): BlogPost {
-  return { ...p, publishedAt: p.publishedAt.toISOString().substring(0, 10), tags: JSON.parse(p.tags) as string[] }
+  return { ...p, publishedAt: p.publishedAt.toISOString().substring(0, 10), tags: safeJsonArray(p.tags) }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -58,13 +59,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogSlugPage({ params }: Props) {
-  const ctaRaw = await prisma.siteSetting.findUnique({ where: { key: 'section_contact_cta' } }).catch(() => null)
-  const ctaData = ctaRaw ? JSON.parse(ctaRaw.value) as typeof defaultContactCTA : defaultContactCTA
+  const ctaData = await getSection('section_contact_cta', defaultContactCTA)
 
   // VIDEO LIBRARY VIEW
   if (params.slug === 'video') {
-    const vidRaw = await prisma.siteSetting.findUnique({ where: { key: 'section_videos' } }).catch(() => null)
-    const vid = (vidRaw ? JSON.parse(vidRaw.value) : defaultVideos) as typeof defaultVideos
+    const vid = await getSection('section_videos', defaultVideos)
     const items = (vid.items ?? []).filter((v) => v.url)
     return (
       <>

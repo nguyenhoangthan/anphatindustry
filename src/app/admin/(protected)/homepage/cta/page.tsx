@@ -1,12 +1,11 @@
-﻿import { prisma } from '@/lib/prisma'
+﻿import { getSection } from '@/lib/content'
 import { defaultContactCTA } from '@/lib/defaultContent'
 import CTAForm from '@/components/admin/CTAForm'
 
 export const dynamic = 'force-dynamic'
 
 export default async function CTAAdminPage() {
-  const setting = await prisma.siteSetting.findUnique({ where: { key: 'section_contact_cta' } })
-  const data = setting ? JSON.parse(setting.value) : defaultContactCTA
+  const data = await getSection('section_contact_cta', defaultContactCTA)
 
   return (
     <div className="p-8 max-w-4xl">

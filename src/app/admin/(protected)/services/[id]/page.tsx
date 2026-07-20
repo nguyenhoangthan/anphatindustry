@@ -13,7 +13,8 @@ export default async function EditServicePage({ params }: Props) {
   const service = await prisma.service.findUnique({ where: { id: params.id } })
   if (!service) notFound()
 
-  const highlights = JSON.parse(service.highlights) as string[]
+  let highlights: string[] = []
+  try { highlights = JSON.parse(service.highlights) as string[] } catch { /* dữ liệu cũ không hợp lệ */ }
 
   return (
     <div className="p-8">

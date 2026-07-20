@@ -1,12 +1,11 @@
-﻿import { prisma } from '@/lib/prisma'
+﻿import { getSection } from '@/lib/content'
 import { defaultWhyChooseUs } from '@/lib/defaultContent'
 import WhyUsForm from '@/components/admin/WhyUsForm'
 
 export const dynamic = 'force-dynamic'
 
 export default async function WhyUsAdminPage() {
-  const setting = await prisma.siteSetting.findUnique({ where: { key: 'section_why_us' } })
-  const data = setting ? JSON.parse(setting.value) : defaultWhyChooseUs
+  const data = await getSection('section_why_us', defaultWhyChooseUs)
 
   return (
     <div className="p-8 max-w-4xl">

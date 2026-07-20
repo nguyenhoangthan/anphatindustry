@@ -1,5 +1,5 @@
 import { Settings } from 'lucide-react'
-import { prisma } from '@/lib/prisma'
+import { getSection } from '@/lib/content'
 import SettingsForm from '@/components/admin/SettingsForm'
 import { siteConfig } from '@/lib/constants'
 
@@ -7,8 +7,7 @@ export const dynamic = 'force-dynamic'
 
 export default async function SettingsAdminPage() {
   // Load from DB, merge over constants (đảm bảo luôn đủ field kể cả khi DB cũ thiếu)
-  const setting = await prisma.siteSetting.findUnique({ where: { key: 'siteConfig' } }).catch(() => null)
-  const db = setting ? JSON.parse(setting.value) : {}
+  const db = await getSection<Record<string, any>>('siteConfig', {})
   const currentConfig = {
     name: db.name ?? siteConfig.name,
     shortName: db.shortName ?? siteConfig.shortName,

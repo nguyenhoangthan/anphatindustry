@@ -1,12 +1,11 @@
-﻿import { prisma } from '@/lib/prisma'
+﻿import { getSection } from '@/lib/content'
 import { defaultTeamSection } from '@/lib/defaultContent'
 import TeamForm from '@/components/admin/TeamForm'
 
 export const dynamic = 'force-dynamic'
 
 export default async function TeamAdminPage() {
-  const setting = await prisma.siteSetting.findUnique({ where: { key: 'section_team' } })
-  const data = setting ? JSON.parse(setting.value) : defaultTeamSection
+  const data = await getSection('section_team', defaultTeamSection)
 
   return (
     <div className="p-8 max-w-4xl">

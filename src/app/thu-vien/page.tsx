@@ -4,6 +4,7 @@ import { Search } from 'lucide-react'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import BlogCard from '@/components/ui/BlogCard'
 import { prisma } from '@/lib/prisma'
+import { safeJsonArray } from '@/lib/utils'
 import type { BlogPost } from '@/types'
 
 export const dynamic = 'force-dynamic'
@@ -27,7 +28,7 @@ export default async function BlogPage() {
   const blogPosts: BlogPost[] = dbPosts.map((p) => ({
     ...p,
     publishedAt: p.publishedAt.toISOString().substring(0, 10),
-    tags: JSON.parse(p.tags) as string[],
+    tags: safeJsonArray(p.tags),
   }))
 
   return (

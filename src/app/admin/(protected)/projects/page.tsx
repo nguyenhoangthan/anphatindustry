@@ -1,13 +1,12 @@
 import { Building2 } from 'lucide-react'
-import { prisma } from '@/lib/prisma'
+import { getSection } from '@/lib/content'
 import ProjectsForm from '@/components/admin/ProjectsForm'
 import { defaultProjects } from '@/lib/defaultContent'
 
 export const dynamic = 'force-dynamic'
 
 export default async function ProjectsAdminPage() {
-  const setting = await prisma.siteSetting.findUnique({ where: { key: 'section_projects' } }).catch(() => null)
-  const data = setting ? JSON.parse(setting.value) : defaultProjects
+  const data = await getSection('section_projects', defaultProjects)
 
   return (
     <div className="p-8">

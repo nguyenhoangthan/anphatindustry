@@ -13,6 +13,7 @@ import { prisma } from '@/lib/prisma'
 import { getActiveSeason } from '@/lib/season'
 import type { Service, BlogPost } from '@/types'
 import { normalizeCategory } from '@/data/services'
+import { safeJsonArray } from '@/lib/utils'
 import {
   defaultHeroSlides, defaultAboutSection, defaultWhyChooseUs,
   defaultProcessSteps, defaultPartnersSection, defaultContactCTA,
@@ -30,14 +31,14 @@ function toService(s: {
   id: string; slug: string; title: string; shortDescription: string
   description: string; category: string; categoryLabel: string; image: string; highlights: string
 }): Service {
-  return { ...s, category: normalizeCategory(s.category), icon: '', highlights: JSON.parse(s.highlights) as string[] }
+  return { ...s, category: normalizeCategory(s.category), icon: '', highlights: safeJsonArray(s.highlights) }
 }
 
 function toPost(p: {
   id: string; slug: string; title: string; excerpt: string; content: string
   author: string; publishedAt: Date; category: string; image: string; tags: string; readingTime: number
 }): BlogPost {
-  return { ...p, publishedAt: p.publishedAt.toISOString().substring(0, 10), tags: JSON.parse(p.tags) as string[] }
+  return { ...p, publishedAt: p.publishedAt.toISOString().substring(0, 10), tags: safeJsonArray(p.tags) }
 }
 
 async function getSection<T>(key: string, fallback: T): Promise<T> {

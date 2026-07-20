@@ -4,7 +4,7 @@ import { CheckCircle } from 'lucide-react'
 import SectionHeader from '@/components/ui/SectionHeader'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import ContactCTA from '@/components/home/ContactCTA'
-import { prisma } from '@/lib/prisma'
+import { getSection } from '@/lib/content'
 import { defaultTeamSection, defaultContactCTA } from '@/lib/defaultContent'
 
 export const dynamic = 'force-dynamic'
@@ -16,12 +16,10 @@ export const metadata: Metadata = {
 }
 
 export default async function AboutPage() {
-  const [teamRaw, ctaRaw] = await Promise.all([
-    prisma.siteSetting.findUnique({ where: { key: 'section_team' } }).catch(() => null),
-    prisma.siteSetting.findUnique({ where: { key: 'section_contact_cta' } }).catch(() => null),
+  const [td, ctaData] = await Promise.all([
+    getSection('section_team', defaultTeamSection),
+    getSection('section_contact_cta', defaultContactCTA),
   ])
-  const td = teamRaw ? JSON.parse(teamRaw.value) as typeof defaultTeamSection : defaultTeamSection
-  const ctaData = ctaRaw ? JSON.parse(ctaRaw.value) as typeof defaultContactCTA : defaultContactCTA
   const { intro, missions, fields, team } = td
 
   return (

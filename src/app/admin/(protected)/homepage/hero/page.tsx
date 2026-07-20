@@ -1,12 +1,11 @@
-﻿import { prisma } from '@/lib/prisma'
+﻿import { getSection } from '@/lib/content'
 import { defaultHeroSlides } from '@/lib/defaultContent'
 import HeroForm from '@/components/admin/HeroForm'
 
 export const dynamic = 'force-dynamic'
 
 export default async function HeroAdminPage() {
-  const setting = await prisma.siteSetting.findUnique({ where: { key: 'section_hero' } })
-  const data = setting ? JSON.parse(setting.value) : defaultHeroSlides
+  const data = await getSection('section_hero', defaultHeroSlides)
 
   return (
     <div className="p-8 max-w-4xl">
