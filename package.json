@@ -15,7 +15,8 @@
     "db:studio": "prisma studio",
     "db:reset": "prisma migrate reset --force && tsx prisma/seed.ts",
     "env-check": "node scripts/env-check.js",
-    "db-check": "node scripts/db-check.js"
+    "db-check": "node scripts/db-check.js",
+    "restore-db": "node scripts/restore-db.js"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
