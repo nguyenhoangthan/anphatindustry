@@ -282,7 +282,7 @@ export default async function BlogSlugPage({ params }: Props) {
               )}
               <p className="text-body text-lg leading-relaxed mb-6 italic">{post.excerpt}</p>
               <div
-                className="prose prose-invert prose-lg max-w-none prose-headings:font-heading prose-a:text-primary"
+                className="prose prose-lg max-w-none prose-headings:font-heading"
                 dangerouslySetInnerHTML={{ __html: sanitizeContent(post.content) }}
               />
               {post.tags.length > 0 && (

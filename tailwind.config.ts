@@ -178,6 +178,31 @@ const config: Config = {
         'card-hover': '0 12px 40px 0 rgba(46,42,143,0.16)',
         'primary':    '0 4px 20px 0 rgb(var(--color-primary) / 0.35)',
       },
+
+      // ── Typography plugin (`prose`) — theo đúng biến màu season của site
+      // thay vì bảng màu mặc định, để nội dung bài viết/trang tĩnh luôn khớp
+      // theme hiện tại (kể cả khi đổi season Tết/Noël).
+      typography: {
+        DEFAULT: {
+          css: {
+            '--tw-prose-body':       'var(--color-body-text)',
+            '--tw-prose-headings':   'var(--color-heading)',
+            '--tw-prose-lead':       'var(--color-body-text)',
+            '--tw-prose-links':      'rgb(var(--color-primary))',
+            '--tw-prose-bold':       'var(--color-heading)',
+            '--tw-prose-counters':   'rgb(var(--color-primary))',
+            '--tw-prose-bullets':    'rgb(var(--color-primary))',
+            '--tw-prose-hr':         'var(--color-border)',
+            '--tw-prose-quotes':     'var(--color-heading)',
+            '--tw-prose-quote-borders': 'rgb(var(--color-primary))',
+            '--tw-prose-captions':   'var(--color-body-text)',
+            '--tw-prose-code':       'var(--color-heading)',
+            '--tw-prose-th-borders': 'var(--color-border)',
+            '--tw-prose-td-borders': 'var(--color-border)',
+            maxWidth: 'none',
+          },
+        },
+      },
     },
   },
   plugins: [require('@tailwindcss/typography')],
