@@ -6,7 +6,7 @@ import sanitizeHtml from 'sanitize-html'
 export function sanitizeContent(html: string): string {
   return sanitizeHtml(html, {
     allowedTags: [
-      'h2', 'h3', 'h4', 'p', 'br', 'strong', 'b', 'em', 'i', 'u',
+      'h2', 'h3', 'h4', 'p', 'br', 'hr', 'strong', 'b', 'em', 'i', 'u',
       'ul', 'ol', 'li', 'a', 'img', 'blockquote', 'code', 'pre',
       'table', 'thead', 'tbody', 'tr', 'th', 'td', 'figure', 'figcaption',
     ],
