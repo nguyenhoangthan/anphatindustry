@@ -1,13 +1,12 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { Briefcase, Phone, MapPin } from 'lucide-react'
-
-const POSTERS = [
-  { src: '/images/tuyen-dung/tuyen-dung-1.jpg', alt: 'Tuyển dụng Kỹ Thuật Viên chuyên nghiệp – Xưởng Dịch Vụ An Phát' },
-  { src: '/images/tuyen-dung/tuyen-dung-2.jpg', alt: 'Tuyển dụng Kỹ Thuật Viên tập sự – Xưởng Dịch Vụ An Phát' },
-]
-
-const RECRUIT_PHONE_DISPLAY = '0938 413 830'
-const RECRUIT_PHONE_LINK = 'tel:+84938413830'
+import {
+  RECRUITMENT_POSTERS,
+  RECRUIT_PHONE_DISPLAY,
+  RECRUIT_PHONE_LINK,
+  RECRUIT_ADDRESS,
+} from '@/data/recruitment'
 
 export default function RecruitmentSection() {
   return (
@@ -30,12 +29,10 @@ export default function RecruitmentSection() {
 
           {/* 2 poster cạnh nhau */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-2xl mx-auto">
-            {POSTERS.map((p) => (
-              <a
+            {RECRUITMENT_POSTERS.map((p) => (
+              <Link
                 key={p.src}
-                href={p.src}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/tuyen-dung"
                 className="group block overflow-hidden rounded-card border border-border bg-dark-3 shadow-md hover:shadow-lg transition-all duration-200"
                 aria-label={p.alt}
               >
@@ -48,9 +45,9 @@ export default function RecruitmentSection() {
                   className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-300"
                 />
                 <span className="block text-center text-body text-xs py-2.5 border-t border-border">
-                  Bấm để xem ảnh lớn
+                  Xem chi tiết
                 </span>
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -65,7 +62,7 @@ export default function RecruitmentSection() {
             </a>
             <span className="inline-flex items-center justify-center gap-1.5 text-body text-sm">
               <MapPin size={16} className="text-primary shrink-0" />
-              08 Nguyễn Ảnh Thủ, P. Trung Mỹ Tây, TP. Hồ Chí Minh
+              {RECRUIT_ADDRESS}
             </span>
           </div>
         </div>
